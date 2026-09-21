@@ -4,7 +4,7 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbP
 export function PageHeader({ title, description, parent, actions }: { title: string; description?: string; parent?: string; actions?: React.ReactNode }) {
   return <header className="page-header">
     <Breadcrumb><BreadcrumbList>
-      <BreadcrumbItem><BreadcrumbLink asChild><Link href="/admin/foundation">PRPDN</Link></BreadcrumbLink></BreadcrumbItem>
+      <BreadcrumbItem><BreadcrumbLink asChild><Link href="/admin/dashboard">PRPDN</Link></BreadcrumbLink></BreadcrumbItem>
       <BreadcrumbSeparator />
       {parent ? <><BreadcrumbItem><span>{parent}</span></BreadcrumbItem><BreadcrumbSeparator /></> : null}
       <BreadcrumbItem><BreadcrumbPage>{title}</BreadcrumbPage></BreadcrumbItem>

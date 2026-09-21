@@ -4,6 +4,7 @@ const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+  env: { NEXT_PUBLIC_BASE_PATH: isGitHubPages ? "/prpdn" : "" },
 
   output: "export",
   trailingSlash: true,

@@ -15,7 +15,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
   const pathname = usePathname();
   const itemLink = (item: NavigationItem) => <Link key={item.slug} href={`/admin/${item.slug}`} onClick={onNavigate}
-    aria-current={pathname === `/admin/${item.slug}` ? "page" : undefined} title={collapsed ? item.label : undefined} className="nav-item">
+    aria-current={pathname.replace(/\/$/, "") === `/admin/${item.slug}` ? "page" : undefined} title={collapsed ? item.label : undefined} className="nav-item">
     <item.icon aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>{item.label}</span>
   </Link>;
   return <nav aria-label="Navigasi utama" className="navigation">
@@ -23,7 +23,7 @@ function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; on
       {group.label !== "Ringkasan" ? <p className={collapsed ? "sr-only" : "nav-group-label"}>{group.label}</p> : null}
       {group.items.map(itemLink)}
     </div>)}</div>
-    <div className="navigation-bottom">{itemLink(foundationItem)}{!collapsed ? <p className="sidebar-footnote">Prototipe antarmuka · Fase 1</p> : null}</div>
+    <div className="navigation-bottom">{itemLink(foundationItem)}{!collapsed ? <p className="sidebar-footnote">Prototipe antarmuka · Fase 2</p> : null}</div>
   </nav>;
 }
 
@@ -33,7 +33,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return <div className={cn("app-shell", collapsed && "sidebar-collapsed")}>
     <a href="#main-content" className="skip-link">Lewati ke konten utama</a>
     <aside className="desktop-sidebar">
-      <Link href="/admin/foundation" className="brand" aria-label="PRPDN, fondasi antarmuka"><strong>{collapsed ? "P" : "PRPDN"}<span className="brand-accent" /></strong>{!collapsed ? <span>Data pembangunan daerah</span> : null}</Link>
+      <Link href="/admin/dashboard" className="brand" aria-label="PRPDN, dashboard"><strong>{collapsed ? "P" : "PRPDN"}<span className="brand-accent" /></strong>{!collapsed ? <span>Data pembangunan daerah</span> : null}</Link>
       <Navigation collapsed={collapsed} />
     </aside>
     <div className="workspace">
@@ -55,7 +55,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Dialog>
         </div>
       </header>
-      <main id="main-content" tabIndex={-1} className="main-content">{children}<footer className="page-footer"><span>PRPDN</span><span>Fondasi antarmuka · Fase 1</span></footer></main>
+      <main id="main-content" tabIndex={-1} className="main-content">{children}<footer className="page-footer"><span>PRPDN</span><span>Prototipe frontend · Fase 2</span></footer></main>
     </div>
   </div>;
 }
