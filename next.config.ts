@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
 
   basePath: isGitHubPages ? "/prpdn" : "",
-  assetPrefix: isGitHubPages ? "/prpdn/" : "",
+  assetPrefix: isGitHubPages ? "/prpdn" : "",
 
   images: {
     unoptimized: true,
