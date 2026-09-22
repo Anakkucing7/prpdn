@@ -3,7 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
-import { ArrowDownWideNarrow, ArrowUpRight, BookOpen, CircleHelp, RotateCcw } from "lucide-react";
+import { ArrowDownWideNarrow, ArrowUpRight, BookOpen, ChevronDown, CircleHelp, RotateCcw, SlidersHorizontal } from "lucide-react";
 import type { EChartsOption } from "echarts";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,7 @@ function Panel({ title, description, action, children, className = "" }: { title
 function Methodology() {
   return <Dialog><DialogTrigger asChild><Button variant="outline"><BookOpen />Sumber & metodologi</Button></DialogTrigger>
     <DialogContent className="methodology-dialog"><DialogHeader><DialogTitle>Sumber & metodologi</DialogTitle><DialogDescription>Ringkasan analitis dari {data.workbook}. Sumber tidak mencantumkan waktu pembaruan.</DialogDescription></DialogHeader>
-      <div className="methodology-content">
+      <div className="methodology-content" tabIndex={0} role="region" aria-label="Penjelasan sumber dan metodologi">
         <h3>Cakupan dan agregasi</h3><p>Dashboard menampilkan 38 provinsi pada master wilayah saat ini, untuk tahun 2022–2024. Kabupaten/kota belum disertakan karena duplikasi dan anomali pada data sumber.</p>
         <p>Rata-rata adalah rerata sederhana provinsi dengan nilai numerik, tanpa bobot penduduk. Angka ini bukan indeks nasional atau persentase kemiskinan nasional. Nilai kosong tidak dianggap nol. Peringkat mengikuti nilai numerik, bukan penilaian kinerja lintas indikator.</p>
         <h3>Tren dan pilar</h3><p>Garis pembanding IDSD memakai {data.regions.filter(r => data.years.every(y => observation("idsd", y, r.code, "Maret")?.value != null)).length} kode provinsi yang memiliki nilai pada ketiga tahun. Pemekaran Papua tetap membatasi keterbandingan wilayah dari waktu ke waktu. Profil pilar memakai provinsi yang tersedia pada tahun terpilih, pada skala 0–5.</p>
@@ -51,6 +51,7 @@ export default function Dashboard() {
   const [showAll, setShowAll] = useState(false);
   const [ascending, setAscending] = useState(false);
   const [query, setQuery] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   function setFilter(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     params.set(key, value);
@@ -103,7 +104,8 @@ export default function Dashboard() {
 
   return <div className="dashboard">
     <PageHeader title="Dashboard" description="Pantau indikator pembangunan dan ketersediaan data provinsi." parent="Ringkasan" actions={<Methodology />} />
-    <div className="dashboard-filters" aria-label="Filter dashboard">
+    <div className="mobile-filter-bar"><Button variant="outline" aria-expanded={filtersOpen} aria-controls="dashboard-filters" onClick={() => setFiltersOpen(!filtersOpen)}><SlidersHorizontal />Filter dashboard<ChevronDown className={filtersOpen ? "rotate-180" : ""} /></Button><span>{year} · {definition.label} · {selected?.label ?? "Semua provinsi"}</span></div>
+    <div id="dashboard-filters" className="dashboard-filters" data-open={filtersOpen} aria-label="Filter dashboard">
       <SelectField label="Tahun" value={String(year)} onValueChange={v => setFilter("year", v)} options={[...data.years].reverse().map(y => ({ value: String(y), label: String(y) }))} />
       <SelectField label="Indikator peta & peringkat" value={metric} onValueChange={v => setFilter("indicator", v)} options={metricKeys.map(k => ({ value: k, label: metrics[k].label }))} />
       <SelectField label="Provinsi" value={code} onValueChange={v => setFilter("province", v)} options={[{ value: "all", label: "Semua provinsi" }, ...data.regions.map(r => ({ value: r.code, label: r.name }))]} />
@@ -126,7 +128,7 @@ export default function Dashboard() {
       </Panel>
       <Panel title="Peringkat provinsi" description={`${definition.label} · ${ascending ? "Nilai terendah dahulu" : "Nilai tertinggi dahulu"}`} action={<Button variant="ghost" size="icon" aria-label={ascending ? "Urutkan nilai tertinggi" : "Urutkan nilai terendah"} title="Ubah urutan nilai" onClick={() => setAscending(!ascending)}><ArrowDownWideNarrow /></Button>}>
         <div className="ranking-toolbar"><div className="segment-control" aria-label="Jumlah peringkat"><button aria-pressed={!showAll} onClick={() => { setShowAll(false); setQuery(""); }}>5 provinsi</button><button aria-pressed={showAll} onClick={() => setShowAll(true)}>Semua (38)</button></div>{showAll && <Input aria-label="Cari provinsi di peringkat" placeholder="Cari provinsi…" value={query} onChange={e => setQuery(e.target.value)} />}</div>
-        <div className="ranking-list" tabIndex={0} aria-label="Daftar peringkat, pilih provinsi"><table><thead><tr><th scope="col">#</th><th scope="col">Provinsi</th><th scope="col">{definition.unit}</th></tr></thead><tbody>{ranked.map(r => <tr key={r.code} data-selected={r.code === code}><td>{rankOf(r.value)}</td><td><button onClick={() => setFilter("province", r.code)} aria-pressed={r.code === code}>{r.label}</button><span className="rank-track" aria-hidden="true"><i style={{ width: `${r.value == null || max === 0 ? 0 : Math.max(0, r.value / max * 100)}%` }} /></span></td><td>{format(r.value)}</td></tr>)}</tbody></table>{!ranked.length && <p className="chart-empty">Tidak ada provinsi yang cocok.</p>}</div>
+        <div className="ranking-list" data-expanded={showAll} tabIndex={0} aria-label="Daftar peringkat, pilih provinsi"><table><thead><tr><th scope="col">#</th><th scope="col">Provinsi</th><th scope="col">{definition.unit}</th></tr></thead><tbody>{ranked.map(r => <tr key={r.code} data-selected={r.code === code}><td>{rankOf(r.value)}</td><td><button onClick={() => setFilter("province", r.code)} aria-pressed={r.code === code}>{r.label}</button><span className="rank-track" aria-hidden="true"><i style={{ width: `${r.value == null || max === 0 ? 0 : Math.max(0, r.value / max * 100)}%` }} /></span></td><td>{format(r.value)}</td></tr>)}</tbody></table>{!ranked.length && <p className="chart-empty">Tidak ada provinsi yang cocok.</p>}</div>
         <p className="panel-footnote">{metric === "poverty" ? "Persentase lebih tinggi berarti kemiskinan lebih tinggi." : "Urutan nilai numerik pada tahun terpilih."} Klik nama untuk membuka profil.</p>
       </Panel>
     </div>
@@ -141,7 +143,7 @@ export default function Dashboard() {
         <div className="chart-legend"><span><i />{selected?.label ?? `Rerata ${cohort.length} provinsi`}</span>{selected && <span><i className="secondary-series" />Rerata {cohort.length} provinsi</span>}<span>Skala 0–5</span></div>
         <AnalyticsChart option={trendOption} label={`Tren skor IDSD 2022–2024 untuk ${selected?.label ?? "rerata provinsi"}. Nilai tersedia pada tabel di bawah grafik.`} />
         <p className="panel-footnote">Garis vertikal: tahun {year}. Pemekaran Papua membatasi perbandingan antarwaktu.</p>
-        <details className="chart-data"><summary>Lihat angka tren</summary><table><thead><tr><th>Tahun</th><th>Rerata {cohort.length} provinsi</th>{selected && <th>{selected.label}</th>}</tr></thead><tbody>{trend.map(t => <tr key={t.year}><td>{t.year}</td><td>{format(t.average)}</td>{selected && <td>{format(t.selected)}</td>}</tr>)}</tbody></table></details>
+        <details className="chart-data"><summary>Lihat angka tren</summary><div className="chart-table-scroll" tabIndex={0} role="region" aria-label="Tabel angka tren, dapat digulir horizontal"><table><thead><tr><th>Tahun</th><th>Rerata {cohort.length} provinsi</th>{selected && <th>{selected.label}</th>}</tr></thead><tbody>{trend.map(t => <tr key={t.year}><td>{t.year}</td><td>{format(t.average)}</td>{selected && <td>{format(t.selected)}</td>}</tr>)}</tbody></table></div></details>
       </Panel>
       <Panel title="Profil 12 pilar IDSD" description={`${year} · ${selected?.label ?? "Rerata provinsi yang tersedia"}`} action={<span className="unit-label">Skala 0–5</span>}>
         <div className="pillar-list">{pillarValues.map(p => <div key={p.id} className="pillar-row"><span title={p.group}><small>{p.id}</small>{p.name}</span><span className="pillar-track" aria-hidden="true"><i style={{ width: `${(p.value ?? 0) / 5 * 100}%` }} /></span><strong>{format(p.value)}</strong></div>)}</div>
@@ -154,7 +156,7 @@ export default function Dashboard() {
       <Panel title="KFD dan kemiskinan" description={`${year} · Kemiskinan ${period} · ${scatter.length} pasangan provinsi`} action={<span className="correlation">r = {format(correlation)}</span>}>
         {scatter.length ? <AnalyticsChart option={scatterOption} label={`Sebaran rasio KFD dan persentase kemiskinan ${period} ${year}, ${scatter.length} provinsi, korelasi Pearson ${format(correlation)}. Angka tersedia pada tabel.`} /> : <div className="chart-empty"><strong>Pasangan data belum tersedia</strong><p>Data kemiskinan {period} {year} belum memiliki nilai numerik yang dapat dipasangkan dengan KFD.</p><Button variant="outline" onClick={() => setFilter("period", "Maret")}>Gunakan periode Maret</Button></div>}
         <p className="panel-footnote">Korelasi Pearson dari pasangan lengkap. Hubungan statistik tidak menunjukkan sebab-akibat.</p>
-        {!!scatter.length && <details className="chart-data"><summary>Lihat pasangan data ({scatter.length})</summary><div className="chart-table-scroll"><table><thead><tr><th>Provinsi</th><th>KFD</th><th>Kemiskinan (%)</th></tr></thead><tbody>{scatter.map(r => <tr key={r.code}><td>{r.label}</td><td>{format(r.x)}</td><td>{format(r.y)}</td></tr>)}</tbody></table></div></details>}
+        {!!scatter.length && <details className="chart-data"><summary>Lihat pasangan data ({scatter.length})</summary><div className="chart-table-scroll" tabIndex={0} role="region" aria-label="Tabel pasangan data, dapat digulir horizontal"><table><thead><tr><th>Provinsi</th><th>KFD</th><th>Kemiskinan (%)</th></tr></thead><tbody>{scatter.map(r => <tr key={r.code}><td>{r.label}</td><td>{format(r.x)}</td><td>{format(r.y)}</td></tr>)}</tbody></table></div></details>}
       </Panel>
     </div>
     <p className="dashboard-source">Sumber: {data.workbook} · Fixture lokal · Periode dan ketersediaan mengikuti sheet sumber.</p>

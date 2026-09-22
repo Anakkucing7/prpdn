@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Info } from "lucide-react";
 import { navigation, foundationItem, type NavigationItem } from "@/lib/navigation";
 import { demoUser } from "@/data/fixtures";
@@ -30,6 +30,12 @@ function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; on
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const closeMobileNavigation = (event: MediaQueryListEvent) => { if (event.matches) setMobileOpen(false); };
+    desktop.addEventListener("change", closeMobileNavigation);
+    return () => desktop.removeEventListener("change", closeMobileNavigation);
+  }, []);
   return <div className={cn("app-shell", collapsed && "sidebar-collapsed")}>
     <a href="#main-content" className="skip-link">Lewati ke konten utama</a>
     <aside className="desktop-sidebar">

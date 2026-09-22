@@ -45,7 +45,7 @@ export default function ProvinceMap(props: Props) {
     let map: Map;
     try {
       map = new Map({ container: container.current, attributionControl: false, renderWorldCopies: false,
-        bounds: extent, fitBoundsOptions: { padding: 24 }, minZoom: 2, maxZoom: 10,
+        bounds: extent, fitBoundsOptions: { padding: 24 }, minZoom: 1.5, maxZoom: 10,
         dragRotate: false, pitchWithRotate: false, scrollZoom: false,
         style: { version: 8, sources: {}, layers: [{ id: "water", type: "background", paint: { "background-color": "#f4f8fc" } }] },
         locale: { "Map.Title": "Peta indikator provinsi" },
@@ -85,7 +85,11 @@ export default function ProvinceMap(props: Props) {
       map.getCanvas().addEventListener("mouseleave", () => popup.remove());
     });
     map.on("error", () => setFailed(true));
-    const observer = new ResizeObserver(() => map.resize());
+    // Keep the national overview in frame after sidebar or viewport resizing.
+    const observer = new ResizeObserver(() => {
+      map.resize();
+      map.fitBounds(extent, { padding: { top: 48, bottom: 32, left: 24, right: 24 }, duration: 0 });
+    });
     observer.observe(container.current);
     return () => { observer.disconnect(); popup.remove(); map.remove(); instance.current = null; };
   }, [attempt]);
@@ -93,7 +97,7 @@ export default function ProvinceMap(props: Props) {
   return <div className="province-map">
     <div ref={container} className="map-canvas" aria-label="Peta interaktif. Alternatif keyboard: pilih provinsi pada filter atau daftar peringkat." />
     {failed ? <div className="map-fallback" role="status"><strong>Peta tidak dapat ditampilkan</strong><p>Gunakan filter provinsi atau daftar peringkat untuk menjelajahi data.</p><Button variant="outline" onClick={() => { setFailed(false); setAttempt(attempt + 1); }}>Coba lagi</Button></div> : null}
-    <div className="map-controls" aria-label="Kontrol peta">
+    <div className="map-controls" aria-label="Kontrol peta" hidden={failed}>
       <Button variant="outline" size="icon" aria-label="Perbesar peta" title="Perbesar peta" onClick={() => instance.current?.zoomIn({ duration: 0 })}><Plus /></Button>
       <Button variant="outline" size="icon" aria-label="Perkecil peta" title="Perkecil peta" onClick={() => instance.current?.zoomOut({ duration: 0 })}><Minus /></Button>
       <Button variant="outline" size="icon" aria-label="Tampilkan seluruh Indonesia" title="Tampilkan seluruh Indonesia" onClick={() => instance.current?.fitBounds(extent, { padding: 24, duration: 0 })}><LocateFixed /></Button>
