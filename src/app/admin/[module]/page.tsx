@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
 
 export function generateStaticParams() {
-  return navigation.flatMap(group => group.items.filter(item => item.slug !== "dashboard").map(item => ({ module: item.slug })));
+  return navigation.flatMap(group => group.items.filter(item => !["dashboard", "regions", "idsd"].includes(item.slug)).map(item => ({ module: item.slug })));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ module: string }> }) {
