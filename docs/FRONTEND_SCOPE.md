@@ -7,6 +7,8 @@
 > **Design Guidance:** `docs/DESIGN_DIRECTION.md`  
 > **Primary Data Source:** `data/Dataset Dashboard 040526.xlsx`
 
+> **Arah produksi (Phase 5.5):** Next.js → Backend/API → Prisma → MySQL. Lihat [BACKEND_ARCHITECTURE.md](BACKEND_ARCHITECTURE.md). Phase 1–5 tetap prototipe frontend dengan fixture/state lokal, bukan arsitektur penyimpanan final. UI CRUD yang ada akan dihubungkan ke API/database pada fase backend; implementasi backend belum termasuk scope saat ini.
+
 ---
 
 # 1. Purpose of This Document
@@ -102,7 +104,7 @@ Interaksi harus terasa nyata meskipun belum terhubung ke backend production.
 
 Jangan membangun secara production:
 
-- PostgreSQL database;
+- MySQL production database;
 - Prisma schema/migration;
 - production API persistence;
 - authentication backend;
@@ -734,4 +736,3 @@ Frontend harus terlihat matang bukan karena efek visual yang banyak, tetapi kare
 - interaction predictable;
 - visual consistency;
 - detail yang terkontrol.
-

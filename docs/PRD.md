@@ -7,6 +7,8 @@
 > Platform: `Web Application`  
 > Metode pengembangan: `Vibe Coding / AI-assisted development`  
 > Status: `Draft awal untuk requirement freeze`
+
+> **Pembaruan arsitektur Phase 5.5:** keputusan produksi terbaru adalah Next.js → Backend/API → Prisma → **MySQL**, sebagaimana [BACKEND_ARCHITECTURE.md](BACKEND_ARCHITECTURE.md). Keputusan ini menggantikan seluruh rekomendasi/larangan penggantian PostgreSQL, arah PostGIS, dan angka batas upload pada draft di bawah. Contoh skema/SQL lama adalah referensi konseptual, bukan migrasi MySQL siap pakai. Batas upload produksi akan dikonfigurasi backend. Phase 1–5 tetap frontend prototype; backend belum diimplementasikan.
 >
 > **Catatan desain:** contoh tampilan backend yang diberikan pihak BRIN/atasan digunakan sebagai **referensi arah dan kebutuhan fitur**, bukan template yang wajib disalin 1:1. Tim pengembang bebas melakukan improvisasi selama fungsi, keterbacaan data, konsistensi, aksesibilitas, performa, dan kebutuhan utama pengguna tetap terpenuhi.
 
