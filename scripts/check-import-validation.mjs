@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { statSync } from 'node:fs';
+import { validateRows, fileError } from '../src/lib/import-validation.ts';
+const references = { codes: ['11'], years: [2024], pillarIds: ['1'] };
+const row = { year: '2024', code: '11', indicator: 'IDSD', value: '3,4' };
+const check = (change, expected) => assert.equal(validateRows([{ ...row, ...change }], 'total', references)[0].status, expected);
+check({}, 'valid'); check({ value: '' }, 'empty'); check({ value: 'abc' }, 'error'); check({ value: 'Infinity' }, 'error'); check({ value: '6.12' }, 'error'); check({ value: '0' }, 'error'); check({ year: '24' }, 'error'); check({ year: '2030' }, 'warning'); check({ code: '999' }, 'error'); check({ indicator: 'unknown' }, 'error');
+assert.deepEqual(validateRows([row, { ...row, value: '4' }], 'total', references).map(r => r.status), ['duplicate', 'duplicate']);
+assert.equal(validateRows([{ ...row, indicator: '1', value: '0' }], 'pillar', references)[0].status, 'valid');
+assert.equal(fileError({ name: 'data.XLSX', size: 10 }), '');
+assert.ok(fileError({ name: 'data.csv', size: 0 }));
+assert.ok(fileError({ name: 'data.exe', size: 10 }));
+assert.equal(fileError({ name: 'data.xls', size: 11 * 1024 * 1024 }), '');
+assert.equal(fileError({ name: 'data.csv', size: 100 * 1024 * 1024 }), '');
+assert.equal(fileError({ name: 'Dataset Dashboard 040526.xlsx', size: statSync(new URL('../data/Dataset Dashboard 040526.xlsx', import.meta.url)).size }), '');
+assert.ok(fileError({ name: 'data.sql', size: 100 }));
+console.log('Import validation checks passed');
