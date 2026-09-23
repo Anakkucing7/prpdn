@@ -1,0 +1,50 @@
+{
+  "workbook": "Dataset Dashboard 040526.xlsx",
+  "indicators": [
+    {
+      "id_indikator_rpjmd": 1,
+      "kode_sasaran": "1-1",
+      "nama_sasaran": "Pembangunan manusia",
+      "nama_indikator": "Indeks Modal Manusia",
+      "satuan": "Indeks",
+      "kondisi_awal": 0.62,
+      "target_akhir": 0.7,
+      "nama_periode": "RPJMD Papua 2021-2025",
+      "tahun_mulai": 2021,
+      "tahun_selesai": 2025,
+      "sourceRow": 2
+    }
+  ],
+  "years": [
+    {
+      "id_waktu": 2021,
+      "tahun": 2021,
+      "tahun_ke_rpjmd": 1,
+      "sourceRow": 2
+    },
+    {
+      "id_waktu": 2022,
+      "tahun": 2022,
+      "tahun_ke_rpjmd": 2,
+      "sourceRow": 3
+    },
+    {
+      "id_waktu": 2023,
+      "tahun": 2023,
+      "tahun_ke_rpjmd": 3,
+      "sourceRow": 4
+    },
+    {
+      "id_waktu": 2024,
+      "tahun": 2024,
+      "tahun_ke_rpjmd": 4,
+      "sourceRow": 5
+    },
+    {
+      "id_waktu": 2025,
+      "tahun": 2025,
+      "tahun_ke_rpjmd": 5,
+      "sourceRow": 6
+    }
+  ]
+}

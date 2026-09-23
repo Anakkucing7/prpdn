@@ -38,6 +38,7 @@ for row, r in rows("dim_wilayah"):
     code = str(r[0])
     rings = []
     dropped = 0
+    boundary_issue = None
     try:
         paths = json.loads(r[10] or "null")
         assert isinstance(paths, list) and paths
@@ -48,8 +49,14 @@ for row, r in rows("dim_wilayah"):
             assert path[0] == path[-1]
             assert all(len(p) == 2 and -12 < p[0] < 8 and 90 < p[1] < 145 for p in path)
             rings.append([[[round(p[1], 5), round(p[0], 5)] for p in path]])
-    except (ValueError, AssertionError, TypeError):
+    except json.JSONDecodeError:
+        boundary_issue = "Path geometri pada workbook terpotong atau JSON tidak lengkap."
         rings = []
+    except (ValueError, AssertionError, TypeError):
+        boundary_issue = "Path geometri tidak memiliki susunan koordinat atau ring tertutup yang dapat digunakan."
+        rings = []
+    if not rings and boundary_issue is None:
+        boundary_issue = "Tidak ada ring batas yang dapat digunakan pada sumber."
     if rings:
         features.append({"type": "Feature", "properties": {"code": code}, "geometry": {"type": "MultiPolygon", "coordinates": rings}})
     longitude, latitude = number(r[8]), number(r[9])
@@ -57,7 +64,7 @@ for row, r in rows("dim_wilayah"):
         longitude = latitude = None
     regions.append({"code": code, "name": str(r[1]), "province": str(r[3]), "island": str(r[4]), "level": r[5],
                     "provinceCode": code if r[5] == "PROV" else code[:2], "active": r[7] == 1,
-                    "longitude": longitude, "latitude": latitude, "boundary": bool(rings), "omittedRings": dropped,
+                    "longitude": longitude, "latitude": latitude, "boundary": bool(rings), "boundaryIssue": boundary_issue, "omittedRings": dropped,
                     "sourceRow": row, "legacy": []})
 
 by_code = {r["code"]: r for r in regions}
@@ -126,6 +133,11 @@ assert next(r for r in records if r["id"] == 452)["code"] == "6303"
 assert next(r for r in records if r["id"] == 452)["value"] == 0
 assert all(r["code"] == "31" for r in records if r["sourceCode"] == "31")
 assert len({f["properties"]["code"] for f in features}) == len(features)
+assert {f["properties"]["code"] for f in features} == {r["code"] for r in regions if r["boundary"]}
+# Regression: these source paths are truncated; never close or fabricate rings.
+for code in ("15", "72", "75", "82", "96", "92", "94"):
+    assert not by_code[code]["boundary"] and by_code[code]["boundaryIssue"]
+    assert by_code[code]["longitude"] is not None and by_code[code]["latitude"] is not None
 
 def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)

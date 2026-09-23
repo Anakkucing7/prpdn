@@ -1,0 +1,33 @@
+.master-filters { display: grid; grid-template-columns: minmax(200px,1.4fr) minmax(180px,1fr) minmax(180px,1fr) auto; align-items: end; gap: 16px; }
+.master-feedback { color: #187047; font-size: 13px; overflow-wrap: anywhere; }
+.master-feedback:not(:empty) { margin-bottom: 16px; }
+.master-indicator-table { min-width: 960px; }
+.master-indicator-table td:nth-child(2) { min-width: 240px; max-width: 360px; overflow-wrap: anywhere; }
+.master-indicator-table td:nth-child(4) { min-width: 170px; max-width: 240px; overflow-wrap: anywhere; }
+.master-year-table { min-width: 680px; }
+.master-row-actions { display: flex; gap: 14px; align-items: center; }
+.master-row-actions .master-delete { color: #b42332; }
+.master-table-footer { border-top: 1px solid #e4e8f0; padding: 16px 20px; font-size: 12px; color: #58667b; }
+[data-slot="dialog-content"].master-dialog { max-width: min(600px, calc(100vw - 32px)); display: flex; flex-direction: column; overflow: hidden; }
+.master-dialog [data-slot="dialog-header"] { flex-shrink: 0; }
+.master-form { display: flex; flex-direction: column; min-height: 0; gap: 20px; }
+.master-form-fields { display: flex; flex-direction: column; gap: 18px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px; margin: -4px; }
+.master-form-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.master-form [data-slot="dialog-footer"] { flex-shrink: 0; padding-top: 16px; border-top: 1px solid #e4e8f0; }
+@media (max-width: 1279px) {
+  .master-filters { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .master-filters > .ui-button { justify-self: end; }
+}
+@media (max-width: 767px) {
+  .master-filters { padding: 16px; gap: 16px; }
+  .master-filters > [data-slot="field"]:first-child { grid-column: 1 / -1; }
+  .master-filters > .ui-button { grid-column: 1 / -1; }
+  .master-form-pair { grid-template-columns: 1fr; }
+  .master-dialog { padding: 20px; }
+  .master-form { gap: 16px; }
+}
+@media (max-height: 540px) {
+  .master-dialog [data-slot="dialog-description"] { font-size: 12px; }
+  .master-form { gap: 12px; }
+  .master-form [data-slot="dialog-footer"] { flex-direction: row; }
+}
