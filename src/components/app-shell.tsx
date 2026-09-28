@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Info } from "lucide-react";
-import { navigation, foundationItem, type NavigationItem } from "@/lib/navigation";
+import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Info, Globe } from "lucide-react";
+import { navigation, type NavigationItem } from "@/lib/navigation";
 import { demoUser } from "@/data/fixtures";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; on
       {group.label !== "Ringkasan" ? <p className={collapsed ? "sr-only" : "nav-group-label"}>{group.label}</p> : null}
       {group.items.map(itemLink)}
     </div>)}</div>
-    <div className="navigation-bottom">{itemLink(foundationItem)}{!collapsed ? <p className="sidebar-footnote">Prototipe antarmuka · Fase 2</p> : null}</div>
+    <div className="navigation-bottom"><Link href="/" onClick={onNavigate} className="nav-item" title={collapsed ? "Lihat Situs Publik" : undefined}><Globe aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>Lihat Situs Publik</span></Link>{!collapsed ? <p className="sidebar-footnote">Prototipe antarmuka</p> : null}</div>
   </nav>;
 }
 
@@ -61,7 +61,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Dialog>
         </div>
       </header>
-      <main id="main-content" tabIndex={-1} className="main-content">{children}<footer className="page-footer"><span>PRPDN</span><span>Prototipe frontend · Fase 2</span></footer></main>
+      <main id="main-content" tabIndex={-1} className="main-content">{children}<footer className="page-footer"><span>PRPDN</span><span>Ruang kerja administrasi</span></footer></main>
     </div>
   </div>;
 }

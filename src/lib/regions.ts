@@ -1,4 +1,12 @@
-import regions from "@/data/regions.json";
+import workbookRegions from "@/data/regions.json";
+import spatialReference from "@/data/spatial-reference.json";
+
+const officialByCode = new Map(spatialReference.regions.map(r => [r.code, r]));
+const regions = workbookRegions.map(region => {
+  const official = officialByCode.get(region.code);
+  return { ...region, name: official?.name ?? region.name, boundary: official?.boundary ?? false, boundaryIssue: official?.boundaryIssue ?? (official?.boundary ? null : 'Batas resmi belum tersedia.'), omittedRings: 0 };
+});
+export { spatialReference };
 
 export { regions };
 export type RegionRecord = typeof regions[number];

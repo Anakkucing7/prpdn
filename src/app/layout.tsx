@@ -3,7 +3,7 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "PRPDN · Fondasi antarmuka", template: "%s · PRPDN" },
+  title: { default: "PRPDN · Data pembangunan daerah", template: "%s · PRPDN" },
   description: "Prototipe antarmuka platform analisis pembangunan daerah.",
   robots: { index: false, follow: false },
 };

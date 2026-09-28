@@ -1,0 +1,253 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model User {
+  id              String    @id @default(cuid()) @db.VarChar(191)
+  name            String    @db.VarChar(100)
+  email           String    @unique @db.VarChar(191)
+  emailVerified   Boolean   @default(false)
+  image           String?   @db.Text
+  username        String?   @unique @db.VarChar(40)
+  displayUsername String?   @db.VarChar(40)
+  workUnit        String    @default("") @db.VarChar(120)
+  active          Boolean   @default(true)
+  roleId          String    @default("public-viewer") @db.VarChar(40)
+  role            Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  lastLogin       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+  activities      AuditLog[]
+  batches         ImportBatch[]
+}
+
+model Session {
+  id        String   @id @db.VarChar(191)
+  token     String   @unique @db.VarChar(191)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?  @db.VarChar(191)
+  userAgent String?  @db.Text
+  userId    String   @db.VarChar(191)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Account {
+  id                     String    @id @db.VarChar(191)
+  accountId              String    @db.VarChar(191)
+  providerId             String    @db.VarChar(191)
+  userId                 String    @db.VarChar(191)
+  user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken            String?   @db.Text
+  refreshToken           String?   @db.Text
+  idToken                String?   @db.Text
+  accessTokenExpiresAt   DateTime?
+  refreshTokenExpiresAt  DateTime?
+  scope                  String?   @db.Text
+  password               String?   @db.Text
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  @@unique([providerId, accountId])
+  @@index([userId])
+}
+
+model Verification {
+  id         String   @id @db.VarChar(191)
+  identifier String   @db.VarChar(191)
+  value      String   @db.Text
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([identifier])
+}
+
+model RateLimit {
+  id          String @id @default(cuid()) @db.VarChar(191)
+  key         String @unique @db.VarChar(191)
+  count       Int
+  lastRequest BigInt
+}
+
+model Role {
+  id          String @id @db.VarChar(40)
+  name        String @unique @db.VarChar(80)
+  permissions Json
+  version     Int    @default(1)
+  updatedAt   DateTime @updatedAt
+  users       User[]
+}
+
+model AuditLog {
+  id        String   @id @default(cuid()) @db.VarChar(191)
+  actorId   String?  @db.VarChar(191)
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorName String   @db.VarChar(100)
+  action    String   @db.VarChar(80)
+  module    String   @db.VarChar(80)
+  entity    String   @db.VarChar(191)
+  result    String   @default("Berhasil") @db.VarChar(40)
+  before    Json?
+  after     Json?
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+  @@index([actorId, createdAt])
+  @@index([module, action])
+}
+
+model SystemSetting {
+  id          String   @id @default("general") @db.VarChar(40)
+  name        String   @default("PRPDN") @db.VarChar(80)
+  description String   @default("Data pembangunan daerah") @db.VarChar(200)
+  year        Int      @default(2024)
+  province    String   @default("all") @db.VarChar(10)
+  pageSize    Int      @default(15)
+  version     Int      @default(1)
+  updatedAt   DateTime @updatedAt
+}
+
+model Year {
+  id           Int      @id @default(autoincrement())
+  year         Int      @unique
+  sequence     Int?
+  sourceRow    Int?
+  provenance   String?  @db.VarChar(191)
+  version      Int      @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  observations Observation[]
+}
+
+model Indicator {
+  id         Int      @id
+  name       String   @db.VarChar(500)
+  groupCode  String?  @db.VarChar(80)
+  groupName  String?  @db.VarChar(500)
+  unit       String?  @db.VarChar(100)
+  baseline   Decimal? @db.Decimal(24, 10)
+  target     Decimal? @db.Decimal(24, 10)
+  period     String?  @db.VarChar(191)
+  start      Int?
+  end        Int?
+  sourceRow  Int?
+  provenance String?  @db.VarChar(191)
+  version    Int      @default(1)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Region {
+  code          String   @id @db.VarChar(10)
+  name          String   @db.VarChar(191)
+  level         String   @db.VarChar(12)
+  provinceCode  String   @db.VarChar(10)
+  parentCode    String?  @db.VarChar(10)
+  parent        Region?  @relation("RegionParent", fields: [parentCode], references: [code], onDelete: Restrict)
+  children      Region[] @relation("RegionParent")
+  island        String?  @db.VarChar(80)
+  active        Boolean  @default(true)
+  longitude     Float?
+  latitude      Float?
+  geometry      Json?
+  metadata      Json
+  sourceRow     Int?
+  version       Int      @default(1)
+  updatedAt     DateTime @updatedAt
+  observations  Observation[]
+  @@index([level, provinceCode])
+}
+
+model Pillar {
+  id           Int    @id
+  name         String @db.VarChar(191)
+  groupName    String @db.VarChar(191)
+  observations Observation[]
+}
+
+model DatasetMetadata {
+  key       String @id @db.VarChar(80)
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model Observation {
+  id           String   @id @default(cuid()) @db.VarChar(191)
+  dataset      String   @db.VarChar(24)
+  sourceSheet  String   @db.VarChar(80)
+  sourceRow    Int?
+  sourceFile   String   @db.VarChar(191)
+  sourceCode   String?  @db.VarChar(40)
+  regionCode   String?  @db.VarChar(10)
+  region       Region?  @relation(fields: [regionCode], references: [code], onDelete: Restrict)
+  sourceName   String   @db.VarChar(191)
+  year         Int?
+  yearId       Int?
+  yearMaster   Year?    @relation(fields: [yearId], references: [id], onDelete: Restrict)
+  period       String?  @db.VarChar(30)
+  pillarId     Int?
+  pillar       Pillar?  @relation(fields: [pillarId], references: [id], onDelete: Restrict)
+  indicator    String?  @db.VarChar(191)
+  unit         String?  @db.VarChar(100)
+  value        Decimal? @db.Decimal(24, 10)
+  endValue     Decimal? @db.Decimal(24, 10)
+  category     String?  @db.VarChar(100)
+  raw          Json
+  issues       Json
+  metadata     Json
+  importKey    String?  @unique @db.VarChar(64)
+  batchId      String?  @db.VarChar(191)
+  batch        ImportBatch? @relation(fields: [batchId], references: [id], onDelete: Restrict)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  @@index([dataset, year, regionCode])
+  @@index([sourceSheet, sourceRow])
+}
+
+model ImportBatch {
+  id           String   @id @default(cuid()) @db.VarChar(191)
+  filename     String   @db.VarChar(191)
+  sha256       String   @db.VarChar(64)
+  size         Int
+  dataset      String   @db.VarChar(24)
+  sheet        String   @db.VarChar(80)
+  columns      Json
+  mapping      Json
+  status       String   @default("PREVIEW") @db.VarChar(24)
+  version      Int      @default(1)
+  creatorId    String   @db.VarChar(191)
+  creator      User     @relation(fields: [creatorId], references: [id], onDelete: Restrict)
+  approvedBy   String?  @db.VarChar(191)
+  approvedAt   DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  rows         ImportRow[]
+  observations Observation[]
+  @@index([status, createdAt])
+}
+
+model ImportRow {
+  id          String   @id @default(cuid()) @db.VarChar(191)
+  batchId     String   @db.VarChar(191)
+  batch       ImportBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+  rowNumber   Int
+  original    Json
+  corrected   Json?
+  normalized  Json?
+  findings    Json
+  status      String   @default("PENDING") @db.VarChar(24)
+  decision    String   @default("PENDING") @db.VarChar(24)
+  reviewNote  String?  @db.Text
+  reviewedBy  String?  @db.VarChar(191)
+  reviewedAt  DateTime?
+  version     Int      @default(1)
+  @@unique([batchId, rowNumber])
+  @@index([batchId, status, decision])
+}

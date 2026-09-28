@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+.region-level { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin:20px 0; }
+.region-level > span { font-size:13px; font-weight:600; }
+.region-level .segment-control { display:flex; border:1px solid #c8d1df; border-radius:6px; padding:3px; background:white; }
+.region-level button { padding:10px 16px; min-height:44px; font-size:13px; border-radius:3px; cursor:pointer; }
+.region-level button[aria-pressed="true"] { background:#0b2743; color:white; }
+.region-level button:focus-visible { outline:3px solid #1769c2; outline-offset:3px; }
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -127,12 +134,12 @@
 .mobile-menu { display: none; }
 .main-content { max-width: 1664px; margin-inline: auto; padding: 28px 32px 20px; min-width: 0; }
 .main-content:focus { outline: none; }
-.page-header { margin-bottom: 22px; }
+.page-header { margin-bottom: 24px; padding-bottom: 22px; border-bottom: 1px solid #dce4ed; }
 .page-header [data-slot="breadcrumb-list"] { font-size: 12px; gap: 9px; }
 .page-heading-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 12px; }
 .page-heading-row > div, [data-slot="breadcrumb-item"] { min-width: 0; overflow-wrap: anywhere; }
 .page-heading-row h1 { font-size: 28px; line-height: 1.25; font-weight: 700; letter-spacing: -.8px; margin: 0; }
-.page-heading-row p { margin-top: 7px; color: #58667b; font-size: 13px; }
+.page-heading-row p { margin-top: 7px; color: #58667b; font-size: 13px; line-height: 1.65; max-width: 76ch; }
 .page-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0; max-width: 100%; }
 .page-tabs { gap: 0; }
 .page-tabs > [data-slot="tabs-list"] { width: 100%; height: auto; min-height: 52px; justify-content: flex-start; overflow-x: auto; overflow-y: hidden; border-bottom: 1px solid #dce3ed; padding: 4px; gap: 16px; margin-bottom: 18px; border-radius: 0; }
@@ -260,6 +267,7 @@
   .detail-sheet [data-slot="sheet-footer"] { padding: 16px 20px max(16px, env(safe-area-inset-bottom)); }
   .page-heading-row h1 { overflow-wrap: anywhere; }
 }
+.trend-delta { display: block; color: #58667b; font-size: 12px; line-height: 1.6; margin-top: 6px; font-weight: 450; font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

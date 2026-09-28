@@ -1,0 +1,39 @@
+Copyright (c) 2026. All Rights Reserved.
+
+PRPDN PROJECT — SOURCE CODE LICENSE
+
+Developed by: Refitz Al Fathul Akbar and team
+Year: 2026
+
+This repository and all source code, documentation, database structures, designs, assets, and related materials contained within it are provided for academic, evaluation, development, and review purposes only.
+
+Permission is granted to authorized lecturers, supervisors, project stakeholders, and collaborators to access and review this repository for evaluation, supervision, development, and project-related purposes.
+
+Unless explicit written permission is provided by the copyright holder, you may not:
+
+1. Copy or reproduce substantial portions of this source code.
+2. Redistribute, publish, sublicense, or sell this project or any substantial part of it.
+3. Use this source code, in whole or in part, for commercial purposes.
+4. Claim this project or its source code as your own work.
+5. Create or distribute derivative projects based substantially on this repository outside the authorized scope of the PRPDN project.
+6. Remove or alter copyright, attribution, or license notices contained in this repository.
+
+Authorized contributors may modify the source code only within the scope of the development, maintenance, evaluation, or continuation of the PRPDN project.
+
+No rights are granted to use the PRPDN name, branding, logos, institutional identity, datasets, or other protected assets except where separately authorized by their respective owners.
+
+THIRD-PARTY COMPONENTS
+
+This project may contain third-party libraries, frameworks, packages, fonts, icons, or other dependencies. Such components remain subject to their respective licenses and are not covered by the restrictions of this license where those licenses apply.
+
+DATA AND CREDENTIALS
+
+Any datasets, API keys, credentials, environment variables, personal information, confidential information, or institutional data contained in or associated with this project must not be redistributed or used outside their authorized purpose.
+
+DISCLAIMER
+
+This software is provided "AS IS", without warranty of any kind, express or implied. The copyright holder and contributors shall not be liable for any claim, damages, data loss, or other liability arising from the use of this software.
+
+This license does not transfer ownership of any institutional intellectual property, datasets, trademarks, or other materials belonging to third parties or organizations associated with the PRPDN project.
+
+For permission beyond the scope of this license, authorization from the relevant copyright holder or project owner is required.

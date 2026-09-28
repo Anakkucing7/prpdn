@@ -1,0 +1,8389 @@
+{
+  "service": "https://geoservices.big.go.id/rbi/rest/services/BATASWILAYAH/BATAS_KABKOTA_AR/MapServer",
+  "edition": "Geodatabase data batas wilayah administrasi nasional edisi Juni 2026",
+  "retrieved": "2026-09-23",
+  "generalizationDegrees": 0.002,
+  "codeSystem": "Kemendagri/PUM (dots removed)",
+  "counts": {
+    "PROV": 38,
+    "KAB": 416,
+    "KOTA": 98
+  },
+  "excluded": [
+    {
+      "id": 1210,
+      "name": "Kalimantan Timur",
+      "code": ""
+    },
+    {
+      "id": 1231,
+      "name": "Kepulauan Riau",
+      "code": " "
+    },
+    {
+      "id": 1535,
+      "name": "Sulawesi Selatan",
+      "code": " "
+    },
+    {
+      "id": 1536,
+      "name": "Sulawesi Utara",
+      "code": " "
+    },
+    {
+      "id": 1537,
+      "name": "Sumatera Utara",
+      "code": " "
+    },
+    {
+      "id": 1595,
+      "name": "Maluku Utara",
+      "code": " "
+    },
+    {
+      "id": 1597,
+      "name": "Maluku Utara",
+      "code": " "
+    },
+    {
+      "id": 1598,
+      "name": "Maluku Utara",
+      "code": " "
+    },
+    {
+      "id": 1600,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1601,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1602,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1603,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1604,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1605,
+      "name": "Maluku",
+      "code": " "
+    },
+    {
+      "id": 1606,
+      "name": "Sumatera Barat",
+      "code": " "
+    },
+    {
+      "id": 1607,
+      "name": "Sumatera Barat",
+      "code": " "
+    },
+    {
+      "id": 1608,
+      "name": "Sumatera Barat",
+      "code": " "
+    },
+    {
+      "id": 1609,
+      "name": "Jawa Timur",
+      "code": " "
+    },
+    {
+      "id": 1610,
+      "name": "Jawa Timur",
+      "code": " "
+    },
+    {
+      "id": 1611,
+      "name": "Jawa Timur",
+      "code": " "
+    },
+    {
+      "id": 4062,
+      "name": "Maluku Utara",
+      "code": " "
+    }
+  ],
+  "regions": [
+    {
+      "code": "11",
+      "name": "Aceh",
+      "level": "PROV",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1077,
+        1078,
+        1080,
+        1081,
+        1082,
+        1083,
+        1084,
+        1085,
+        1086,
+        1087,
+        1125,
+        1135,
+        1181,
+        1256,
+        1288,
+        1289,
+        1319,
+        1329,
+        1433,
+        1477,
+        1478,
+        1520,
+        1747
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1101",
+      "name": "Kabupaten Aceh Selatan",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1081
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1102",
+      "name": "Kabupaten Aceh Tenggara",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1085
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1103",
+      "name": "Kabupaten Aceh Timur",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1086
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1104",
+      "name": "Kabupaten Aceh Tengah",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1084
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1105",
+      "name": "Kabupaten Aceh Barat",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1077
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1106",
+      "name": "Kabupaten Aceh Besar",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1747
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1107",
+      "name": "Kabupaten Pidie",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1477
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1108",
+      "name": "Kabupaten Aceh Utara",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1087
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1109",
+      "name": "Kabupaten Simeulue",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1520
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1110",
+      "name": "Kabupaten Aceh Singkil",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1082
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1111",
+      "name": "Kabupaten Bireuen",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1135
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1112",
+      "name": "Kabupaten Aceh Barat Daya",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1078
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1113",
+      "name": "Kabupaten Gayo Lues",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1181
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1114",
+      "name": "Kabupaten Aceh Jaya",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1080
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1115",
+      "name": "Kabupaten Nagan Raya",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1433
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1116",
+      "name": "Kabupaten Aceh Tamiang",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1083
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1117",
+      "name": "Kabupaten Bener Meriah",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1125
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1118",
+      "name": "Kabupaten Pidie Jaya",
+      "level": "KAB",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1478
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1171",
+      "name": "Kota Banda Aceh",
+      "level": "KOTA",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1256
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1172",
+      "name": "Kota Sabang",
+      "level": "KOTA",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1319
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1173",
+      "name": "Kota Lhokseumawe",
+      "level": "KOTA",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1289
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1174",
+      "name": "Kota Langsa",
+      "level": "KOTA",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1288
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1175",
+      "name": "Kota Subulussalam",
+      "level": "KOTA",
+      "provinceCode": "11",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1329
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "12",
+      "name": "Sumatera Utara",
+      "level": "PROV",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1091,
+        1120,
+        1167,
+        1169,
+        1197,
+        1218,
+        1268,
+        1281,
+        1297,
+        1302,
+        1315,
+        1325,
+        1337,
+        1340,
+        1358,
+        1359,
+        1360,
+        1370,
+        1401,
+        1440,
+        1441,
+        1442,
+        1443,
+        1451,
+        1452,
+        1454,
+        1500,
+        1511,
+        1519,
+        1560,
+        1561,
+        1562,
+        1572
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1201",
+      "name": "Kabupaten Tapanuli Tengah",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1561
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1202",
+      "name": "Kabupaten Tapanuli Utara",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1562
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1203",
+      "name": "Kabupaten Tapanuli Selatan",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1560
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1204",
+      "name": "Kabupaten Nias",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1440
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1205",
+      "name": "Kabupaten Langkat",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1370
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1206",
+      "name": "Kabupaten Karo",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1218
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1207",
+      "name": "Kabupaten Deli Serdang",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1169
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1208",
+      "name": "Kabupaten Simalungun",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1519
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1209",
+      "name": "Kabupaten Asahan",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1091
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1210",
+      "name": "Kabupaten Labuhanbatu",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1358
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1211",
+      "name": "Kabupaten Dairi",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1167
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1212",
+      "name": "Kabupaten Toba",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1572
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1213",
+      "name": "Kabupaten Mandailing Natal",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1401
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1214",
+      "name": "Kabupaten Nias Selatan",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1442
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1215",
+      "name": "Kabupaten Pakpak Bharat",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1454
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1216",
+      "name": "Kabupaten Humbang Hasundutan",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1197
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1217",
+      "name": "Kabupaten Samosir",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1500
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1218",
+      "name": "Kabupaten Serdang Bedagai",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1511
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1219",
+      "name": "Kabupaten Batu Bara",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1120
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1220",
+      "name": "Kabupaten Padang Lawas Utara",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1452
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1221",
+      "name": "Kabupaten Padang Lawas",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1451
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1222",
+      "name": "Kabupaten Labuhanbatu Selatan",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1359
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1223",
+      "name": "Kabupaten Labuhanbatu Utara",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1360
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1224",
+      "name": "Kabupaten Nias Utara",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1443
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1225",
+      "name": "Kabupaten Nias Barat",
+      "level": "KAB",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1441
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1271",
+      "name": "Kota Medan",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1297
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1272",
+      "name": "Kota Pematangsiantar",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1315
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1273",
+      "name": "Kota Sibolga",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1325
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1274",
+      "name": "Kota Tanjungbalai",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1337
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1275",
+      "name": "Kota Binjai",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1268
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1276",
+      "name": "Kota Tebing Tinggi",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1340
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1277",
+      "name": "Kota Padangsidimpuan",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1302
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1278",
+      "name": "Kota Gunungsitoli",
+      "level": "KOTA",
+      "provinceCode": "12",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1281
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "13",
+      "name": "Sumatera Barat",
+      "level": "PROV",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1089,
+        1171,
+        1229,
+        1273,
+        1300,
+        1301,
+        1310,
+        1312,
+        1322,
+        1327,
+        1375,
+        1461,
+        1462,
+        1476,
+        1517,
+        1525,
+        1526,
+        1554,
+        3499
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1301",
+      "name": "Kabupaten Pesisir Selatan",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1476
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1302",
+      "name": "Kabupaten Solok",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1525
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1303",
+      "name": "Kabupaten Sijunjung",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1517
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1304",
+      "name": "Kabupaten Tanah Datar",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1554
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1305",
+      "name": "Kabupaten Padang Pariaman",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        3499
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1306",
+      "name": "Kabupaten Agam",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1089
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1307",
+      "name": "Kabupaten Lima Puluh Kota",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1375
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1308",
+      "name": "Kabupaten Pasaman",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1461
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1309",
+      "name": "Kabupaten Kepulauan Mentawai",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1229
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1310",
+      "name": "Kabupaten Dharmasraya",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1171
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1311",
+      "name": "Kabupaten Solok Selatan",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1526
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1312",
+      "name": "Kabupaten Pasaman Barat",
+      "level": "KAB",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1462
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1371",
+      "name": "Kota Padang",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1300
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1372",
+      "name": "Kota Solok",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1327
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1373",
+      "name": "Kota Sawahlunto",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1322
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1374",
+      "name": "Kota Padang Panjang",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1301
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1375",
+      "name": "Kota Bukittinggi",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1273
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1376",
+      "name": "Kota Payakumbuh",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1312
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1377",
+      "name": "Kota Pariaman",
+      "level": "KOTA",
+      "provinceCode": "13",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1310
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "14",
+      "name": "Riau",
+      "level": "PROV",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1126,
+        1198,
+        1199,
+        1211,
+        1230,
+        1279,
+        1314,
+        1350,
+        1470,
+        1497,
+        1498,
+        1513
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1401",
+      "name": "Kabupaten Kampar",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1211
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1402",
+      "name": "Kabupaten Indragiri Hulu",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1199
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1403",
+      "name": "Kabupaten Bengkalis",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1126
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1404",
+      "name": "Kabupaten Indragiri Hilir",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1198
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1405",
+      "name": "Kabupaten Pelalawan",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1470
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1406",
+      "name": "Kabupaten Rokan Hulu",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1498
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1407",
+      "name": "Kabupaten Rokan Hilir",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1497
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1408",
+      "name": "Kabupaten Siak",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1513
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1409",
+      "name": "Kabupaten Kuantan Singingi",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1350
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1410",
+      "name": "Kabupaten Kepulauan Meranti",
+      "level": "KAB",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1230
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1471",
+      "name": "Kota Pekanbaru",
+      "level": "KOTA",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1314
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1472",
+      "name": "Kota Dumai",
+      "level": "KOTA",
+      "provinceCode": "14",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1279
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "15",
+      "name": "Jambi",
+      "level": "PROV",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1119,
+        1155,
+        1238,
+        1282,
+        1331,
+        1412,
+        1424,
+        1504,
+        1558,
+        1559,
+        1565
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1501",
+      "name": "Kabupaten Kerinci",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1238
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1502",
+      "name": "Kabupaten Merangin",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1412
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1503",
+      "name": "Kabupaten Sarolangun",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1504
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1504",
+      "name": "Kabupaten Batanghari",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1119
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1505",
+      "name": "Kabupaten Muaro Jambi",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1424
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1506",
+      "name": "Kabupaten Tanjung Jabung Barat",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1558
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1507",
+      "name": "Kabupaten Tanjung Jabung Timur",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1559
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1508",
+      "name": "Kabupaten Bungo",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1155
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1509",
+      "name": "Kabupaten Tebo",
+      "level": "KAB",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1565
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1571",
+      "name": "Kota Jambi",
+      "level": "KOTA",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1282
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1572",
+      "name": "Kota Sungai Penuh",
+      "level": "KOTA",
+      "provinceCode": "15",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1331
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "16",
+      "name": "Sumatera Selatan",
+      "level": "PROV",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1110,
+        1175,
+        1290,
+        1303,
+        1305,
+        1317,
+        1361,
+        1423,
+        1429,
+        1430,
+        1431,
+        1445,
+        1446,
+        1447,
+        1448,
+        1449,
+        1473
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1601",
+      "name": "Kabupaten Ogan Komering Ulu",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1447
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1602",
+      "name": "Kabupaten Ogan Komering Ilir",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1446
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1603",
+      "name": "Kabupaten Muara Enim",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1423
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1604",
+      "name": "Kabupaten Lahat",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1361
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1605",
+      "name": "Kabupaten Musi Rawas",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1430
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1606",
+      "name": "Kabupaten Musi Banyuasin",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1429
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1607",
+      "name": "Kabupaten Banyuasin",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1110
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1608",
+      "name": "Kabupaten Ogan Komering Ulu Timur",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1449
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1609",
+      "name": "Kabupaten Ogan Komering Ulu Selatan",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1448
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1610",
+      "name": "Kabupaten Ogan Ilir",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1445
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1611",
+      "name": "Kabupaten Empat Lawang",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1175
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1612",
+      "name": "Kabupaten Penukal Abab Lematang Ilir",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1473
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1613",
+      "name": "Kabupaten Musi Rawas Utara",
+      "level": "KAB",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1431
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1671",
+      "name": "Kota Palembang",
+      "level": "KOTA",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1305
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1672",
+      "name": "Kota Pagar Alam",
+      "level": "KOTA",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1303
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1673",
+      "name": "Kota Lubuk Linggau",
+      "level": "KOTA",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1290
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1674",
+      "name": "Kota Prabumulih",
+      "level": "KOTA",
+      "provinceCode": "16",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1317
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "17",
+      "name": "Bengkulu",
+      "level": "PROV",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1128,
+        1129,
+        1130,
+        1220,
+        1226,
+        1266,
+        1373,
+        1425,
+        1495,
+        1506
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1701",
+      "name": "Kabupaten Bengkulu Selatan",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1128
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1702",
+      "name": "Kabupaten Rejang Lebong",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1495
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1703",
+      "name": "Kabupaten Bengkulu Utara",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1130
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1704",
+      "name": "Kabupaten Kaur",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1220
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1705",
+      "name": "Kabupaten Seluma",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1506
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1706",
+      "name": "Kabupaten Mukomuko",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1425
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1707",
+      "name": "Kabupaten Lebong",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1373
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1708",
+      "name": "Kabupaten Kepahiang",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1226
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1709",
+      "name": "Kabupaten Bengkulu Tengah",
+      "level": "KAB",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1129
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1771",
+      "name": "Kota Bengkulu",
+      "level": "KOTA",
+      "provinceCode": "17",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1266
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "18",
+      "name": "Lampung",
+      "level": "PROV",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1257,
+        1298,
+        1364,
+        1365,
+        1366,
+        1367,
+        1368,
+        1414,
+        1474,
+        1475,
+        1484,
+        1557,
+        1579,
+        1580,
+        1585
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1801",
+      "name": "Kabupaten Lampung Selatan",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1365
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1802",
+      "name": "Kabupaten Lampung Tengah",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1366
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1803",
+      "name": "Kabupaten Lampung Utara",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1368
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1804",
+      "name": "Kabupaten Lampung Barat",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1364
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1805",
+      "name": "Kabupaten Tulang Bawang",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1579
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1806",
+      "name": "Kabupaten Tanggamus",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1557
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1807",
+      "name": "Kabupaten Lampung Timur",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1367
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1808",
+      "name": "Kabupaten Way Kanan",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1585
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1809",
+      "name": "Kabupaten Pesawaran",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1474
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1810",
+      "name": "Kabupaten Pringsewu",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1484
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1811",
+      "name": "Kabupaten Mesuji",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1414
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "1812",
+      "name": "Kabupaten Tulang Bawang Barat",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1580
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "1813",
+      "name": "Kabupaten Pesisir Barat",
+      "level": "KAB",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1475
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1871",
+      "name": "Kota Bandar Lampung",
+      "level": "KOTA",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1257
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1872",
+      "name": "Kota Metro",
+      "level": "KOTA",
+      "provinceCode": "18",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1298
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "19",
+      "name": "Kepulauan Bangka Belitung",
+      "level": "PROV",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1100,
+        1101,
+        1102,
+        1103,
+        1122,
+        1123,
+        1308
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1901",
+      "name": "Kabupaten Bangka",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1100
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1902",
+      "name": "Kabupaten Belitung",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1122
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1903",
+      "name": "Kabupaten Bangka Selatan",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1102
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1904",
+      "name": "Kabupaten Bangka Tengah",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1103
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1905",
+      "name": "Kabupaten Bangka Barat",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1101
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1906",
+      "name": "Kabupaten Belitung Timur",
+      "level": "KAB",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1123
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "1971",
+      "name": "Kota Pangkal Pinang",
+      "level": "KOTA",
+      "provinceCode": "19",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1308
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "21",
+      "name": "Kepulauan Riau",
+      "level": "PROV",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1134,
+        1217,
+        1227,
+        1262,
+        1336,
+        1376,
+        1435
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2101",
+      "name": "Kabupaten Bintan",
+      "level": "KAB",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1134
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2102",
+      "name": "Kabupaten Karimun",
+      "level": "KAB",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1217
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2103",
+      "name": "Kabupaten Natuna",
+      "level": "KAB",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1435
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2104",
+      "name": "Kabupaten Lingga",
+      "level": "KAB",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1376
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2105",
+      "name": "Kabupaten Kepulauan Anambas",
+      "level": "KAB",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1227
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2171",
+      "name": "Kota Batam",
+      "level": "KOTA",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1262
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "2172",
+      "name": "Kota Tanjung Pinang",
+      "level": "KOTA",
+      "provinceCode": "21",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1336
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "31",
+      "name": "Daerah Khusus Ibukota Jakarta",
+      "level": "PROV",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1088,
+        1249,
+        1250,
+        1251,
+        1252,
+        1253
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3101",
+      "name": "Kabupaten Administrasi Kepulauan Seribu",
+      "level": "KAB",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1088
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3171",
+      "name": "Kota Administrasi Jakarta Pusat",
+      "level": "KOTA",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1250
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3172",
+      "name": "Kota Administrasi Jakarta Utara",
+      "level": "KOTA",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1253
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3173",
+      "name": "Kota Administrasi Jakarta Barat",
+      "level": "KOTA",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1249
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3174",
+      "name": "Kota Administrasi Jakarta Selatan",
+      "level": "KOTA",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1251
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3175",
+      "name": "Kota Administrasi Jakarta Timur",
+      "level": "KOTA",
+      "provinceCode": "31",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1252
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "32",
+      "name": "Jawa Barat",
+      "level": "PROV",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1095,
+        1096,
+        1121,
+        1139,
+        1163,
+        1164,
+        1166,
+        1180,
+        1200,
+        1216,
+        1258,
+        1259,
+        1265,
+        1271,
+        1275,
+        1276,
+        1278,
+        1330,
+        1339,
+        1353,
+        1389,
+        1457,
+        1492,
+        1531,
+        1532,
+        1544,
+        1564
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3201",
+      "name": "Kabupaten Bogor",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1139
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3202",
+      "name": "Kabupaten Sukabumi",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1532
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3203",
+      "name": "Kabupaten Cianjur",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1164
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3204",
+      "name": "Kabupaten Bandung",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1095
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3205",
+      "name": "Kabupaten Garut",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1180
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3206",
+      "name": "Kabupaten Tasikmalaya",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1564
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3207",
+      "name": "Kabupaten Ciamis",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1163
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3208",
+      "name": "Kabupaten Kuningan",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1353
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3209",
+      "name": "Kabupaten Cirebon",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1166
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3210",
+      "name": "Kabupaten Majalengka",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1389
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3211",
+      "name": "Kabupaten Sumedang",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1544
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3212",
+      "name": "Kabupaten Indramayu",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1200
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3213",
+      "name": "Kabupaten Subang",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1531
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3214",
+      "name": "Kabupaten Purwakarta",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1492
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3215",
+      "name": "Kabupaten Karawang",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1216
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3216",
+      "name": "Kabupaten Bekasi",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1121
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3217",
+      "name": "Kabupaten Bandung Barat",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1096
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3218",
+      "name": "Kabupaten Pangandaran",
+      "level": "KAB",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1457
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3271",
+      "name": "Kota Bogor",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1271
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3272",
+      "name": "Kota Sukabumi",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1330
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3273",
+      "name": "Kota Bandung",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1258
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3274",
+      "name": "Kota Cirebon",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1276
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3275",
+      "name": "Kota Bekasi",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1265
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3276",
+      "name": "Kota Depok",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1278
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3277",
+      "name": "Kota Cimahi",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1275
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3278",
+      "name": "Kota Tasikmalaya",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1339
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3279",
+      "name": "Kota Banjar",
+      "level": "KOTA",
+      "provinceCode": "32",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1259
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "33",
+      "name": "Jawa Tengah",
+      "level": "PROV",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1107,
+        1111,
+        1118,
+        1137,
+        1150,
+        1151,
+        1165,
+        1170,
+        1187,
+        1207,
+        1214,
+        1221,
+        1224,
+        1240,
+        1292,
+        1313,
+        1320,
+        1323,
+        1333,
+        1341,
+        1351,
+        1386,
+        1466,
+        1469,
+        1471,
+        1491,
+        1493,
+        1496,
+        1507,
+        1530,
+        1534,
+        1566,
+        1569,
+        1586,
+        1587
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3301",
+      "name": "Kabupaten Cilacap",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1165
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3302",
+      "name": "Kabupaten Banyumas",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1111
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3303",
+      "name": "Kabupaten Purbalingga",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1491
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3304",
+      "name": "Kabupaten Banjarnegara",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1107
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3305",
+      "name": "Kabupaten Kebumen",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1221
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3306",
+      "name": "Kabupaten Purworejo",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1493
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3307",
+      "name": "Kabupaten Wonosobo",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1587
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3308",
+      "name": "Kabupaten Magelang",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1386
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3309",
+      "name": "Kabupaten Boyolali",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1150
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3310",
+      "name": "Kabupaten Klaten",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1240
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3311",
+      "name": "Kabupaten Sukoharjo",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1534
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3312",
+      "name": "Kabupaten Wonogiri",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1586
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3313",
+      "name": "Kabupaten Karanganyar",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1214
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3314",
+      "name": "Kabupaten Sragen",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1530
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3315",
+      "name": "Kabupaten Grobogan",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1187
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3316",
+      "name": "Kabupaten Blora",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1137
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3317",
+      "name": "Kabupaten Rembang",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1496
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3318",
+      "name": "Kabupaten Pati",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1466
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3319",
+      "name": "Kabupaten Kudus",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1351
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3320",
+      "name": "Kabupaten Jepara",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1207
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3321",
+      "name": "Kabupaten Demak",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1170
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3322",
+      "name": "Kabupaten Semarang",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1507
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3323",
+      "name": "Kabupaten Temanggung",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1569
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3324",
+      "name": "Kabupaten Kendal",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1224
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3325",
+      "name": "Kabupaten Batang",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1118
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3326",
+      "name": "Kabupaten Pekalongan",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1469
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3327",
+      "name": "Kabupaten Pemalang",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1471
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3328",
+      "name": "Kabupaten Tegal",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1566
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3329",
+      "name": "Kabupaten Brebes",
+      "level": "KAB",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1151
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3371",
+      "name": "Kota Magelang",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1292
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3372",
+      "name": "Kota Surakarta",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1333
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3373",
+      "name": "Kota Salatiga",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1320
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3374",
+      "name": "Kota Semarang",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1323
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3375",
+      "name": "Kota Pekalongan",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1313
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3376",
+      "name": "Kota Tegal",
+      "level": "KOTA",
+      "provinceCode": "33",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1341
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "34",
+      "name": "Daerah Istimewa Yogyakarta",
+      "level": "PROV",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1109,
+        1189,
+        1346,
+        1352,
+        1524
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3401",
+      "name": "Kabupaten Kulon Progo",
+      "level": "KAB",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1352
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3402",
+      "name": "Kabupaten Bantul",
+      "level": "KAB",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1109
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3403",
+      "name": "Kabupaten Gunungkidul",
+      "level": "KAB",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1189
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3404",
+      "name": "Kabupaten Sleman",
+      "level": "KAB",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1524
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3471",
+      "name": "Kota Yogyakarta",
+      "level": "KOTA",
+      "provinceCode": "34",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1346
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "35",
+      "name": "Jawa Timur",
+      "level": "PROV",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1104,
+        1112,
+        1136,
+        1140,
+        1146,
+        1186,
+        1204,
+        1208,
+        1222,
+        1263,
+        1270,
+        1284,
+        1291,
+        1294,
+        1299,
+        1311,
+        1318,
+        1332,
+        1363,
+        1381,
+        1385,
+        1387,
+        1391,
+        1420,
+        1438,
+        1439,
+        1450,
+        1455,
+        1465,
+        1482,
+        1485,
+        1501,
+        1515,
+        1523,
+        1545,
+        1577,
+        1578,
+        1581
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020230907KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3501",
+      "name": "Kabupaten Pacitan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1450
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3502",
+      "name": "Kabupaten Ponorogo",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1482
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3503",
+      "name": "Kabupaten Trenggalek",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1577
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3504",
+      "name": "Kabupaten Tulungagung",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1581
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3505",
+      "name": "Kabupaten Blitar",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1136
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3506",
+      "name": "Kabupaten Kediri",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1222
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "3507",
+      "name": "Kabupaten Malang",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1391
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3508",
+      "name": "Kabupaten Lumajang",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1381
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3509",
+      "name": "Kabupaten Jember",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1204
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3510",
+      "name": "Kabupaten Banyuwangi",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1112
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3511",
+      "name": "Kabupaten Bondowoso",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1146
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3512",
+      "name": "Kabupaten Situbondo",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1523
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3513",
+      "name": "Kabupaten Probolinggo",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1485
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3514",
+      "name": "Kabupaten Pasuruan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1465
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3515",
+      "name": "Kabupaten Sidoarjo",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1515
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3516",
+      "name": "Kabupaten Mojokerto",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1420
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3517",
+      "name": "Kabupaten Jombang",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1208
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3518",
+      "name": "Kabupaten Nganjuk",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1438
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3519",
+      "name": "Kabupaten Madiun",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1385
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3520",
+      "name": "Kabupaten Magetan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1387
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3521",
+      "name": "Kabupaten Ngawi",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1439
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3522",
+      "name": "Kabupaten Bojonegoro",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1140
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3523",
+      "name": "Kabupaten Tuban",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1578
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3524",
+      "name": "Kabupaten Lamongan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1363
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3525",
+      "name": "Kabupaten Gresik",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1186
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3526",
+      "name": "Kabupaten Bangkalan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1104
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3527",
+      "name": "Kabupaten Sampang",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1501
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3528",
+      "name": "Kabupaten Pamekasan",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1455
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3529",
+      "name": "Kabupaten Sumenep",
+      "level": "KAB",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1545
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3571",
+      "name": "Kota Kediri",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1284
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3572",
+      "name": "Kota Blitar",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1270
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3573",
+      "name": "Kota Malang",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1294
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3574",
+      "name": "Kota Probolinggo",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1318
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3575",
+      "name": "Kota Pasuruan",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1311
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3576",
+      "name": "Kota Mojokerto",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1299
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "3577",
+      "name": "Kota Madiun",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1291
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3578",
+      "name": "Kota Surabaya",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1332
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3579",
+      "name": "Kota Batu",
+      "level": "KOTA",
+      "provinceCode": "35",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1263
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "36",
+      "name": "Banten",
+      "level": "PROV",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1274,
+        1324,
+        1334,
+        1335,
+        1372,
+        1456,
+        1510,
+        1556
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3601",
+      "name": "Kabupaten Pandeglang",
+      "level": "KAB",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1456
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3602",
+      "name": "Kabupaten Lebak",
+      "level": "KAB",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1372
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3603",
+      "name": "Kabupaten Tangerang",
+      "level": "KAB",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1556
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3604",
+      "name": "Kabupaten Serang",
+      "level": "KAB",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1510
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3671",
+      "name": "Kota Tangerang",
+      "level": "KOTA",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1334
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "3672",
+      "name": "Kota Cilegon",
+      "level": "KOTA",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1274
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3673",
+      "name": "Kota Serang",
+      "level": "KOTA",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1324
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "3674",
+      "name": "Kota Tangerang Selatan",
+      "level": "KOTA",
+      "provinceCode": "36",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1335
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "51",
+      "name": "Bali",
+      "level": "PROV",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1093,
+        1105,
+        1152,
+        1182,
+        1205,
+        1215,
+        1241,
+        1277,
+        1548
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "5101",
+      "name": "Kabupaten Jembrana",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1205
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5102",
+      "name": "Kabupaten Tabanan",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1548
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5103",
+      "name": "Kabupaten Badung",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1093
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5104",
+      "name": "Kabupaten Gianyar",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1182
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5105",
+      "name": "Kabupaten Klungkung",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1241
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5106",
+      "name": "Kabupaten Bangli",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1105
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "5107",
+      "name": "Kabupaten Karangasem",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1215
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5108",
+      "name": "Kabupaten Buleleng",
+      "level": "KAB",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1152
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5171",
+      "name": "Kota Denpasar",
+      "level": "KOTA",
+      "provinceCode": "51",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1277
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "52",
+      "name": "Nusa Tenggara Barat",
+      "level": "PROV",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1133,
+        1173,
+        1267,
+        1296,
+        1377,
+        1378,
+        1379,
+        1380,
+        1543,
+        3424
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5201",
+      "name": "Kabupaten Lombok Barat",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1377
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5202",
+      "name": "Kabupaten Lombok Tengah",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1378
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5203",
+      "name": "Kabupaten Lombok Timur",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1379
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5204",
+      "name": "Kabupaten Sumbawa",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        3424
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5205",
+      "name": "Kabupaten Dompu",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1173
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5206",
+      "name": "Kabupaten Bima",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1133
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5207",
+      "name": "Kabupaten Sumbawa Barat",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1543
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5208",
+      "name": "Kabupaten Lombok Utara",
+      "level": "KAB",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1380
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5271",
+      "name": "Kota Mataram",
+      "level": "KOTA",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1296
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5272",
+      "name": "Kota Bima",
+      "level": "KOTA",
+      "provinceCode": "52",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1267
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "53",
+      "name": "Nusa Tenggara Timur",
+      "level": "PROV",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1090,
+        1124,
+        1176,
+        1179,
+        1287,
+        1354,
+        1374,
+        1390,
+        1402,
+        1403,
+        1404,
+        1434,
+        1437,
+        1518,
+        1538,
+        1539,
+        1540,
+        1541,
+        1570,
+        1571,
+        1593,
+        1594
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5301",
+      "name": "Kabupaten Kupang",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1354
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5302",
+      "name": "Kabupaten Timor Tengah Selatan",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1570
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5303",
+      "name": "Kabupaten Timor Tengah Utara",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1571
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5304",
+      "name": "Kabupaten Belu",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1124
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5305",
+      "name": "Kabupaten Alor",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1090
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5306",
+      "name": "Kabupaten Flores Timur",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1179
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5307",
+      "name": "Kabupaten Sikka",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1518
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5308",
+      "name": "Kabupaten Ende",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1176
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5309",
+      "name": "Kabupaten Ngada",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1437
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5310",
+      "name": "Kabupaten Manggarai",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1402
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5311",
+      "name": "Kabupaten Sumba Timur",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1541
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5312",
+      "name": "Kabupaten Sumba Barat",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1538
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5313",
+      "name": "Kabupaten Lembata",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1374
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5314",
+      "name": "Kabupaten Rote Ndao",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1593
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5315",
+      "name": "Kabupaten Manggarai Barat",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1403
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5316",
+      "name": "Kabupaten Nagekeo",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1434
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5317",
+      "name": "Kabupaten Sumba Tengah",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1540
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5318",
+      "name": "Kabupaten Sumba Barat Daya",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1539
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5319",
+      "name": "Kabupaten Manggarai Timur",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1404
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5320",
+      "name": "Kabupaten Sabu Raijua",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1594
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5321",
+      "name": "Kabupaten Malaka",
+      "level": "KAB",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1390
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "5371",
+      "name": "Kota Kupang",
+      "level": "KOTA",
+      "provinceCode": "53",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1287
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "61",
+      "name": "Kalimantan Barat",
+      "level": "PROV",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1127,
+        1213,
+        1239,
+        1316,
+        1326,
+        1369,
+        1410,
+        1411,
+        1499,
+        1502,
+        1505,
+        1522,
+        1591,
+        1592
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6101",
+      "name": "Kabupaten Sambas",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1499
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6102",
+      "name": "Kabupaten Mempawah",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1411
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6103",
+      "name": "Kabupaten Sanggau",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1502
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6104",
+      "name": "Kabupaten Ketapang",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1239
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6105",
+      "name": "Kabupaten Sintang",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1522
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6106",
+      "name": "Kabupaten Kapuas Hulu",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1213
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6107",
+      "name": "Kabupaten Bengkayang",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1127
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6108",
+      "name": "Kabupaten Landak",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1369
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6109",
+      "name": "Kabupaten Sekadau",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1505
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6110",
+      "name": "Kabupaten Melawi",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1410
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6111",
+      "name": "Kabupaten Kayong Utara",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1591
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6112",
+      "name": "Kabupaten Kubu Raya",
+      "level": "KAB",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1592
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6171",
+      "name": "Kota Pontianak",
+      "level": "KOTA",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1316
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6172",
+      "name": "Kota Singkawang",
+      "level": "KOTA",
+      "provinceCode": "61",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1326
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "62",
+      "name": "Kalimantan Tengah",
+      "level": "PROV",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1114,
+        1115,
+        1116,
+        1188,
+        1212,
+        1219,
+        1304,
+        1348,
+        1349,
+        1362,
+        1428,
+        1486,
+        1512,
+        1533
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020230907KABKOTA",
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "6201",
+      "name": "Kabupaten Kotawaringin Barat",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1348
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6202",
+      "name": "Kabupaten Kotawaringin Timur",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1349
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6203",
+      "name": "Kabupaten Kapuas",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1212
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6204",
+      "name": "Kabupaten Barito Selatan",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1114
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6205",
+      "name": "Kabupaten Barito Utara",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1116
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6206",
+      "name": "Kabupaten Katingan",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1219
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6207",
+      "name": "Kabupaten Seruyan",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1512
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6208",
+      "name": "Kabupaten Sukamara",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1533
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6209",
+      "name": "Kabupaten Lamandau",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1362
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "6210",
+      "name": "Kabupaten Gunung Mas",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1188
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6211",
+      "name": "Kabupaten Pulang Pisau",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1486
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6212",
+      "name": "Kabupaten Murung Raya",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1428
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6213",
+      "name": "Kabupaten Barito Timur",
+      "level": "KAB",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1115
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6271",
+      "name": "Kota Palangkaraya",
+      "level": "KOTA",
+      "provinceCode": "62",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1304
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "63",
+      "name": "Kalimantan Selatan",
+      "level": "PROV",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1094,
+        1106,
+        1113,
+        1194,
+        1195,
+        1196,
+        1260,
+        1261,
+        1347,
+        1547,
+        1553,
+        1555,
+        1563
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6301",
+      "name": "Kabupaten Tanah Laut",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1555
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6302",
+      "name": "Kabupaten Kotabaru",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1347
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6303",
+      "name": "Kabupaten Banjar",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1106
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6304",
+      "name": "Kabupaten Barito Kuala",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1113
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6305",
+      "name": "Kabupaten Tapin",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1563
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6306",
+      "name": "Kabupaten Hulu Sungai Selatan",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1194
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6307",
+      "name": "Kabupaten Hulu Sungai Tengah",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1195
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6308",
+      "name": "Kabupaten Hulu Sungai Utara",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1196
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6309",
+      "name": "Kabupaten Tabalong",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1547
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6310",
+      "name": "Kabupaten Tanah Bumbu",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1553
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6311",
+      "name": "Kabupaten Balangan",
+      "level": "KAB",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1094
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6371",
+      "name": "Kota Banjarmasin",
+      "level": "KOTA",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1261
+      ],
+      "metadata": [
+        "TASWIL5000020230907KABKOTA"
+      ]
+    },
+    {
+      "code": "6372",
+      "name": "Kota Banjarbaru",
+      "level": "KOTA",
+      "provinceCode": "63",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1260
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "64",
+      "name": "Kalimantan Timur",
+      "level": "PROV",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1131,
+        1255,
+        1321,
+        1355,
+        1356,
+        1357,
+        1388,
+        1464,
+        1472,
+        1615
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "6401",
+      "name": "Kabupaten Paser",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1464
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6402",
+      "name": "Kabupaten Kutai Kartanegara",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1356
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6403",
+      "name": "Kabupaten Berau",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1131
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6407",
+      "name": "Kabupaten Kutai Barat",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1355
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "6408",
+      "name": "Kabupaten Kutai Timur",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1357
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6409",
+      "name": "Kabupaten Penajam Paser Utara",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1472
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6411",
+      "name": "Kabupaten Mahakam Ulu",
+      "level": "KAB",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1388
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "6471",
+      "name": "Kota Balikpapan",
+      "level": "KOTA",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1255
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6472",
+      "name": "Kota Samarinda",
+      "level": "KOTA",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1321
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6474",
+      "name": "Kota Bontang",
+      "level": "KOTA",
+      "provinceCode": "64",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1615
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "65",
+      "name": "Kalimantan Utara",
+      "level": "PROV",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1154,
+        1338,
+        1392,
+        1444,
+        1551
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "6501",
+      "name": "Kabupaten Bulungan",
+      "level": "KAB",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1154
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6502",
+      "name": "Kabupaten Malinau",
+      "level": "KAB",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1392
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "6503",
+      "name": "Kabupaten Nunukan",
+      "level": "KAB",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1444
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6504",
+      "name": "Kabupaten Tana Tidung",
+      "level": "KAB",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1551
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "6571",
+      "name": "Kota Tarakan",
+      "level": "KOTA",
+      "provinceCode": "65",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1338
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "71",
+      "name": "Sulawesi Utara",
+      "level": "PROV",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1141,
+        1142,
+        1143,
+        1144,
+        1225,
+        1232,
+        1235,
+        1269,
+        1286,
+        1295,
+        1344,
+        1416,
+        1417,
+        1418,
+        1419
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7101",
+      "name": "Kabupaten Bolaang Mongondow",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1141
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7102",
+      "name": "Kabupaten Minahasa",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1416
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7103",
+      "name": "Kabupaten Kepulauan Sangihe",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1232
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7104",
+      "name": "Kabupaten Kepulauan Talaud",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1235
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7105",
+      "name": "Kabupaten Minahasa Selatan",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1417
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7106",
+      "name": "Kabupaten Minahasa Utara",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1419
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7107",
+      "name": "Kabupaten Minahasa Tenggara",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1418
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7108",
+      "name": "Kabupaten Bolaang Mongondow Utara",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1144
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7109",
+      "name": "Kabupaten Kep. Siau Tagulandang Biaro",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1225
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7110",
+      "name": "Kabupaten Bolaang Mongondow Timur",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1143
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7111",
+      "name": "Kabupaten Bolaang Mongondow Selatan",
+      "level": "KAB",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1142
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7171",
+      "name": "Kota Manado",
+      "level": "KOTA",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1295
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7172",
+      "name": "Kota Bitung",
+      "level": "KOTA",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1269
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7173",
+      "name": "Kota Tomohon",
+      "level": "KOTA",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1344
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7174",
+      "name": "Kota Kotamobagu",
+      "level": "KOTA",
+      "provinceCode": "71",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1286
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "72",
+      "name": "Sulawesi Tengah",
+      "level": "PROV",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1099,
+        1174,
+        1307,
+        1422,
+        1460,
+        1483,
+        1516,
+        1950,
+        2901,
+        3347,
+        3500,
+        4024,
+        4234
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7201",
+      "name": "Kabupaten Banggai",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        3347
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7202",
+      "name": "Kabupaten Poso",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1483
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7203",
+      "name": "Kabupaten Donggala",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1174
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7204",
+      "name": "Kabupaten Toli-Toli",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1950
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7205",
+      "name": "Kabupaten Buol",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4024
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7206",
+      "name": "Kabupaten Morowali",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4234
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7207",
+      "name": "Kabupaten Banggai Kepulauan",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        2901
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7208",
+      "name": "Kabupaten Parigi Moutong",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1460
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7209",
+      "name": "Kabupaten Tojo Una Una",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        3500
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7210",
+      "name": "Kabupaten Sigi",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1516
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7211",
+      "name": "Kabupaten Banggai Laut",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1099
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7212",
+      "name": "Kabupaten Morowali Utara",
+      "level": "KAB",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1422
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7271",
+      "name": "Kota Palu",
+      "level": "KOTA",
+      "provinceCode": "72",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1307
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "73",
+      "name": "Sulawesi Selatan",
+      "level": "PROV",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1108,
+        1117,
+        1147,
+        1153,
+        1177,
+        1185,
+        1206,
+        1233,
+        1293,
+        1309,
+        1383,
+        1384,
+        1408,
+        1458,
+        1479,
+        1514,
+        1521,
+        1527,
+        1549,
+        1552,
+        1576,
+        1582,
+        4235,
+        4236
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020250701KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7301",
+      "name": "Kabupaten Kepulauan Selayar",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1233
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7302",
+      "name": "Kabupaten Bulukumba",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1153
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7303",
+      "name": "Kabupaten Bantaeng",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1108
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7304",
+      "name": "Kabupaten Jeneponto",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1206
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7305",
+      "name": "Kabupaten Takalar",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1549
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7306",
+      "name": "Kabupaten Gowa",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1185
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7307",
+      "name": "Kabupaten Sinjai",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1521
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7308",
+      "name": "Kabupaten Bone",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1147
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7309",
+      "name": "Kabupaten Maros",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1408
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7310",
+      "name": "Kabupaten Pangkajene Dan Kepulauan",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1458
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7311",
+      "name": "Kabupaten Barru",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1117
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7312",
+      "name": "Kabupaten Soppeng",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1527
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7313",
+      "name": "Kabupaten Wajo",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1582
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7314",
+      "name": "Kabupaten Sidenreng Rappang",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1514
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7315",
+      "name": "Kabupaten Pinrang",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1479
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7316",
+      "name": "Kabupaten Enrekang",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1177
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "7317",
+      "name": "Kabupaten Luwu",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4236
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7318",
+      "name": "Kabupaten Tana Toraja",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1552
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "7322",
+      "name": "Kabupaten Luwu Utara",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1384
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7324",
+      "name": "Kabupaten Luwu Timur",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1383
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7326",
+      "name": "Kabupaten Toraja Utara",
+      "level": "KAB",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1576
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7371",
+      "name": "Kota Makassar",
+      "level": "KOTA",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1293
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7372",
+      "name": "Kota Parepare",
+      "level": "KOTA",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1309
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7373",
+      "name": "Kota Palopo",
+      "level": "KOTA",
+      "provinceCode": "73",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4235
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "74",
+      "name": "Sulawesi Tenggara",
+      "level": "PROV",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1145,
+        1161,
+        1243,
+        1244,
+        1245,
+        4232,
+        1247,
+        4233,
+        1248,
+        1427,
+        4231,
+        1691,
+        2054,
+        4229,
+        2691,
+        4228,
+        2900,
+        4237,
+        4238,
+        4239,
+        4241,
+        4242,
+        4243
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "7401",
+      "name": "Kabupaten Kolaka",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        2900
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7402",
+      "name": "Kabupaten Konawe",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1245,
+        4232
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "7403",
+      "name": "Kabupaten Muna",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        2054,
+        4229
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7404",
+      "name": "Kabupaten Buton",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4237,
+        4238
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "7405",
+      "name": "Kabupaten Konawe Selatan",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1247,
+        4233
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "7406",
+      "name": "Kabupaten Bombana",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1145
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7407",
+      "name": "Kabupaten Wakatobi",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        2691,
+        4228
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "7408",
+      "name": "Kabupaten Kolaka Utara",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1244
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7409",
+      "name": "Kabupaten Konawe Utara",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1248
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7410",
+      "name": "Kabupaten Buton Utara",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4241
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7411",
+      "name": "Kabupaten Kolaka Timur",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1243
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7412",
+      "name": "Kabupaten Konawe Kepulauan",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4242
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7413",
+      "name": "Kabupaten Muna Barat",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1427,
+        4231
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7414",
+      "name": "Kabupaten Buton Tengah",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1161
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7415",
+      "name": "Kabupaten Buton Selatan",
+      "level": "KAB",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4239
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7471",
+      "name": "Kota Kendari",
+      "level": "KOTA",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1691
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7472",
+      "name": "Kota Bau Bau",
+      "level": "KOTA",
+      "provinceCode": "74",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4243
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "75",
+      "name": "Gorontalo",
+      "level": "PROV",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1138,
+        1183,
+        1184,
+        1280,
+        1480,
+        1849
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7501",
+      "name": "Kabupaten Gorontalo",
+      "level": "KAB",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1183
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7502",
+      "name": "Kabupaten Boalemo",
+      "level": "KAB",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1138
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7503",
+      "name": "Kabupaten Bone Bolango",
+      "level": "KAB",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1849
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7504",
+      "name": "Kabupaten Pohuwato",
+      "level": "KAB",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1480
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7505",
+      "name": "Kabupaten Gorontalo Utara",
+      "level": "KAB",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1184
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7571",
+      "name": "Kota Gorontalo",
+      "level": "KOTA",
+      "provinceCode": "75",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1280
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "76",
+      "name": "Sulawesi Barat",
+      "level": "PROV",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1396,
+        1400,
+        1463,
+        1590,
+        4058,
+        4227
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7601",
+      "name": "Kabupaten Pasangkayu",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1463
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7602",
+      "name": "Kabupaten Mamuju",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4058
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7603",
+      "name": "Kabupaten Mamasa",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1396
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "7604",
+      "name": "Kabupaten Polewali Mandar",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4227
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7605",
+      "name": "Kabupaten Majene",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1590
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "7606",
+      "name": "Kabupaten Mamuju Tengah",
+      "level": "KAB",
+      "provinceCode": "76",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1400
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "81",
+      "name": "Maluku",
+      "level": "PROV",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1157,
+        1158,
+        1228,
+        1236,
+        1254,
+        1345,
+        1393,
+        1394,
+        1395,
+        1508,
+        1509
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8101",
+      "name": "Kabupaten Maluku Tengah",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1394
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8102",
+      "name": "Kabupaten Maluku Tenggara",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1395
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8103",
+      "name": "Kabupaten Kepulauan Tanimbar",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1236
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8104",
+      "name": "Kabupaten Buru",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1157
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8105",
+      "name": "Kabupaten Seram Bagian Timur",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1509
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8106",
+      "name": "Kabupaten Seram Bagian Barat",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1508
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8107",
+      "name": "Kabupaten Kepulauan Aru",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1228
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8108",
+      "name": "Kabupaten Maluku Barat Daya",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1393
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8109",
+      "name": "Kabupaten Buru Selatan",
+      "level": "KAB",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1158
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8171",
+      "name": "Kota Ambon",
+      "level": "KOTA",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1254
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8172",
+      "name": "Kota Tual",
+      "level": "KOTA",
+      "provinceCode": "81",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1345
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "82",
+      "name": "Maluku Utara",
+      "level": "PROV",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1191,
+        1192,
+        1193,
+        1234,
+        1342,
+        1343,
+        1487,
+        1488,
+        1596,
+        4063
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8201",
+      "name": "Kabupaten Halmahera Barat",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        4063
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8202",
+      "name": "Kabupaten Halmahera Tengah",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1192
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8203",
+      "name": "Kabupaten Halmahera Utara",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1596
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8204",
+      "name": "Kabupaten Halmahera Selatan",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1191
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8205",
+      "name": "Kabupaten Kepulauan Sula",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1234
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8206",
+      "name": "Kabupaten Halmahera Timur",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1193
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8207",
+      "name": "Kabupaten Pulau Morotai",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1487
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8208",
+      "name": "Kabupaten Pulau Taliabu",
+      "level": "KAB",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1488
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8271",
+      "name": "Kota Ternate",
+      "level": "KOTA",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1342
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "8272",
+      "name": "Kota Tidore Kepulauan",
+      "level": "KOTA",
+      "provinceCode": "82",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1343
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "91",
+      "name": "Papua",
+      "level": "PROV",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1132,
+        1202,
+        1223,
+        1237,
+        1283,
+        1397,
+        1503,
+        1546,
+        1584
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9103",
+      "name": "Kabupaten Jayapura",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1202
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9105",
+      "name": "Kabupaten Kepulauan Yapen",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1237
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9106",
+      "name": "Kabupaten Biak Numfor",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1132
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9110",
+      "name": "Kabupaten Sarmi",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1503
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9111",
+      "name": "Kabupaten Keerom",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1223
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9115",
+      "name": "Kabupaten Waropen",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1584
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9119",
+      "name": "Kabupaten Supiori",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1546
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9120",
+      "name": "Kabupaten Mamberamo Raya",
+      "level": "KAB",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1397
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9171",
+      "name": "Kota Jayapura",
+      "level": "KOTA",
+      "provinceCode": "91",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1283
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "92",
+      "name": "Papua Barat",
+      "level": "PROV",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1178,
+        1209,
+        1405,
+        1406,
+        1467,
+        1567,
+        1568
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9202",
+      "name": "Kabupaten Manokwari",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1405
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9203",
+      "name": "Kabupaten Fak Fak",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1178
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9206",
+      "name": "Kabupaten Teluk Bintuni",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1567
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9207",
+      "name": "Kabupaten Teluk Wondama",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1568
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9208",
+      "name": "Kabupaten Kaimana",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1209
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9211",
+      "name": "Kabupaten Manokwari Selatan",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1406
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9212",
+      "name": "Kabupaten Pegunungan Arfak",
+      "level": "KAB",
+      "provinceCode": "92",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1467
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "93",
+      "name": "Papua Selatan",
+      "level": "PROV",
+      "provinceCode": "93",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1092,
+        1149,
+        1407,
+        1413
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9301",
+      "name": "Kabupaten Merauke",
+      "level": "KAB",
+      "provinceCode": "93",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1413
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9302",
+      "name": "Kabupaten Boven Digoel",
+      "level": "KAB",
+      "provinceCode": "93",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1149
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9303",
+      "name": "Kabupaten Mappi",
+      "level": "KAB",
+      "provinceCode": "93",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1407
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9304",
+      "name": "Kabupaten Asmat",
+      "level": "KAB",
+      "provinceCode": "93",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1092
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "94",
+      "name": "Papua Tengah",
+      "level": "PROV",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1168,
+        1172,
+        1201,
+        1415,
+        1432,
+        1459,
+        1489,
+        1490
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9401",
+      "name": "Kabupaten Nabire",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1432
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9402",
+      "name": "Kabupaten Puncak Jaya",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1490
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9403",
+      "name": "Kabupaten Paniai",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1459
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9404",
+      "name": "Kabupaten Mimika",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1415
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9405",
+      "name": "Kabupaten Puncak",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1489
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9406",
+      "name": "Kabupaten Dogiyai",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1172
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9407",
+      "name": "Kabupaten Intan Jaya",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1201
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9408",
+      "name": "Kabupaten Deiyai",
+      "level": "KAB",
+      "provinceCode": "94",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1168
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "95",
+      "name": "Papua Pegunungan",
+      "level": "PROV",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1203,
+        1371,
+        1398,
+        1436,
+        1468,
+        1575,
+        1588,
+        1589
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA",
+        "TASWIL5000020240905KABKOTA",
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9501",
+      "name": "Kabupaten Jayawijaya",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1203
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9502",
+      "name": "Kabupaten Pegunungan Bintang",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1468
+      ],
+      "metadata": [
+        "TASWIL5000020250701KABKOTA"
+      ]
+    },
+    {
+      "code": "9503",
+      "name": "Kabupaten Yahukimo",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1588
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9504",
+      "name": "Kabupaten Tolikara",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1575
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "9505",
+      "name": "Kabupaten Mamberamo Tengah",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1398
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "9506",
+      "name": "Kabupaten Yalimo",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1589
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9507",
+      "name": "Kabupaten Lanny Jaya",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1371
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "9508",
+      "name": "Kabupaten Nduga",
+      "level": "KAB",
+      "provinceCode": "95",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1436
+      ],
+      "metadata": [
+        "TASWIL5000020221227KABKOTA"
+      ]
+    },
+    {
+      "code": "96",
+      "name": "Papua Barat Daya",
+      "level": "PROV",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1328,
+        1409,
+        1494,
+        1528,
+        1529,
+        1550
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA",
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "9601",
+      "name": "Kabupaten Sorong",
+      "level": "KAB",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1528
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9602",
+      "name": "Kabupaten Sorong Selatan",
+      "level": "KAB",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1529
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9603",
+      "name": "Kabupaten Raja Ampat",
+      "level": "KAB",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1494
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9604",
+      "name": "Kabupaten Tambrauw",
+      "level": "KAB",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1550
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    },
+    {
+      "code": "9605",
+      "name": "Kabupaten Maybrat",
+      "level": "KAB",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1409
+      ],
+      "metadata": [
+        "TASWIL5000020240905KABKOTA"
+      ]
+    },
+    {
+      "code": "9671",
+      "name": "Kota Sorong",
+      "level": "KOTA",
+      "provinceCode": "96",
+      "boundary": true,
+      "boundaryIssue": null,
+      "objectIds": [
+        1328
+      ],
+      "metadata": [
+        "TASWIL5000020260612KABKOTA"
+      ]
+    }
+  ]
+}

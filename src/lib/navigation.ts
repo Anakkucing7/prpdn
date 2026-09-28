@@ -1,4 +1,4 @@
-import { LayoutDashboard, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, ClipboardCheck, ShieldCheck, History, Settings, PanelsTopLeft, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
 
 export type NavigationItem = { slug: string; label: string; icon: LucideIcon; phase: number };
 export const navigation: { label: string; items: NavigationItem[] }[] = [
@@ -26,5 +26,3 @@ export const navigation: { label: string; items: NavigationItem[] }[] = [
     { slug: "settings", label: "Pengaturan", icon: Settings, phase: 6 },
   ] },
 ];
-
-export const foundationItem: NavigationItem = { slug: "foundation", label: "Fondasi antarmuka", icon: PanelsTopLeft, phase: 1 };

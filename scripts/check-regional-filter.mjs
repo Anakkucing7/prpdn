@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { matchesRegion } from '../src/lib/regional-filter.ts';
+import { changeFromPrevious } from '../src/lib/trend.ts';
+const regions = JSON.parse(fs.readFileSync('src/data/regions.json','utf8'));
+const select = (level,parent='all',kind='all') => regions.filter(r=>matchesRegion(r,level,parent,kind));
+assert.equal(select('PROV').length,38);
+assert.equal(select('KABKOTA').length,514);
+assert.equal(select('KABKOTA','32','KOTA').length,9);
+assert.equal(select('KABKOTA','32','KAB').length,18);
+assert(!select('PROV').some(r=>r.code==='3273'));
+assert(select('KABKOTA','32','KOTA').some(r=>r.code==='3273'));
+assert.equal(changeFromPrevious(4.26,4.09).evaluation,'neutral');
+assert.equal(changeFromPrevious(null,4.09),null);
+assert.equal(changeFromPrevious(0,0).direction,'unchanged');
+console.log('Regional counts, dependent filters, incompatible child selection and neutral delta checks passed.');

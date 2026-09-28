@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Dashboard, { DashboardLoading } from "@/components/dashboard/dashboard";
 import "./dashboard.css";
+import "@/components/data/data-pages.css";
 
 export const metadata = { title: "Dashboard" };
 

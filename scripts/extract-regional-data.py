@@ -145,7 +145,9 @@ def write(path, data):
 
 write(ROOT / "src/data/regions.json", regions)
 write(ROOT / "src/data/idsd.json", {"years": years, "records": records, "pillars": pillar_sets, "definitions": definitions})
-write(ROOT / "public/data/region-boundaries.json", {"type": "FeatureCollection", "features": features})
+# The official BIG snapshot owns the display fixture once installed.
+if not (ROOT / "src/data/spatial-reference.json").exists():
+    write(ROOT / "public/data/region-boundaries.json", {"type": "FeatureCollection", "features": features})
 print(f"{len(regions)} regions; {len(features)} readable boundaries; {len(records)} IDSD observations")
 print(f"Total score joins: {dict(__import__('collections').Counter(r['match'] for r in records))}")
 print(f"Conflicting pillar groups: {sum(p['conflict'] for group in pillar_sets.values() for p in group)}")

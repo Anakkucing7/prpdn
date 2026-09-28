@@ -4,9 +4,9 @@ Keputusan Phase 5.5: database produksi menggunakan **MySQL**, dengan **Prisma OR
 
 ## Batas fase
 
-- **Phase 1–5 saat ini:** prototipe frontend Next.js, fixture lokal, dan state komponen. CRUD, review, dan hasil import bersifat demo. File pilihan hanya digunakan untuk metadata; preview memakai sampel, bukan hasil parsing file.
+- **Phase 1–6B saat ini:** prototipe frontend Next.js, fixture lokal, dan state komponen. CRUD, review, administrasi sistem, dan hasil import bersifat demo. File pilihan hanya digunakan untuk metadata; preview memakai sampel, bukan hasil parsing file.
 - **Fase backend mendatang:** API nyata, Prisma, MySQL, CRUD persisten, parsing spreadsheet, serta validasi dan tinjauan berbasis database.
-- Phase 5.5 hanya menyelaraskan dokumentasi dan batasan UI. Tidak memasang Prisma/MySQL, membuat API, autentikasi, upload nyata, atau migrasi. Tidak memulai Phase 6.
+- Phase 5.5 menyelaraskan arah arsitektur; Phase 6/6B menambah modul analitik dan administrasi sistem frontend. Tidak memasang Prisma/MySQL, membuat API, autentikasi, upload nyata, atau migrasi.
 
 ## Alur dan pemetaan
 
@@ -23,6 +23,13 @@ Frontend tidak mengakses database secara langsung. API bertanggung jawab atas ot
 | Data Wilayah / IDSD | API query → Prisma → MySQL menggantikan fixture statis, termasuk filter dan pagination sesuai kebutuhan |
 | Import Data | Upload → parse → validasi/staging → preview → persetujuan → penyimpanan transaksi ke MySQL melalui Prisma |
 | Validasi Data | Temuan, koreksi, keputusan review, dan jejak sumber disimpan melalui API/Prisma di MySQL |
+| Data KFD / Kemiskinan / EPPD / RPJMD | API query → Prisma → MySQL menggantikan fixture, mempertahankan periode, satuan, kode wilayah, dan provenance baris |
+| Manajemen Pengguna | User/auth API → Prisma → MySQL; identitas, sesi, kredensial dan reset kata sandi ditangani backend/auth |
+| Role & Hak Akses | Roles + permissions API → Prisma → MySQL; enforcement pada backend, sesi, dan setiap operasi API |
+| Log Aktivitas | Audit-log API/database records; aktor, transaksi, waktu dan hasil dicatat backend |
+| Pengaturan | API konfigurasi persisten → Prisma → MySQL, dengan validasi serta otorisasi server |
+
+Identitas dan log pada `src/data/system-demo.ts` adalah contoh fiktif, bukan workbook atau riwayat produksi. Perubahan pengguna, matriks izin, dan pengaturan hanya berlaku selama halaman dibuka; halaman lain tidak ikut berubah. Log demo adalah skenario tetap, bukan rekaman interaksi lokal. Matriks izin berasal dari role/cakupan PRD bagian 6–7; arti “Terbatas” perlu difinalisasi pada fase backend. Matriks frontend tidak menyediakan keamanan atau otorisasi. Pengaturan demo tidak mengubah identitas publik maupun default filter di halaman lain. Tidak ada kata sandi, secret, atau koneksi database dalam prototipe ini.
 
 Pertahankan komponen, formulir, tabel, drawer, dan alur CRUD yang sudah dibangun. Hubungkan operasi state demo ke API pada fase backend; UI tidak perlu dibangun ulang. Tambahkan penanganan loading, error, konflik, serta hasil server pada integrasi tersebut. Validasi frontend membantu pengguna, tetapi keputusan akhir harus ditegakkan server.
 
