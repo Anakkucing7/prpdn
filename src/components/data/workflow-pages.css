@@ -1,4 +1,11 @@
 .workflow-page { min-width: 0; }
+.transfer-field { display: grid; gap: 7px; font-size: 13px; min-width: 0; }
+.transfer-field small { color: #58667b; overflow-wrap: anywhere; }
+.transfer-field textarea { width: 100%; min-height: 80px; border: 1px solid #b6c2d1; border-radius: 5px; padding: 10px; resize: vertical; font: inherit; }
+.transfer-field textarea:focus-visible { outline: 3px solid #86b7ed; outline-offset: 2px; }
+.transfer-json { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; background: #f8fafc; padding: 12px; }
+.workflow-preview td { max-width: 260px; overflow-wrap: anywhere; }
+.workflow-result h2 { overflow-wrap: anywhere; max-width: 100%; }
 .workflow-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); margin: 24px 0; padding: 0; list-style: none; gap: 12px; }
 .workflow-steps li { display: flex; align-items: center; gap: 10px; color: #697386; font-size: 13px; padding-bottom: 14px; border-bottom: 2px solid #dfe5ee; }
 .workflow-steps li[aria-current] { color: #0b2743; font-weight: 600; border-color: #1769c2; }

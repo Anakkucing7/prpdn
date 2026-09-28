@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Info, Globe } from "lucide-react";
+import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Globe } from "lucide-react";
 import { navigation, type NavigationItem } from "@/lib/navigation";
-import { demoUser } from "@/data/fixtures";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import {api} from '@/lib/api-client';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
@@ -23,13 +22,15 @@ function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; on
       {group.label !== "Ringkasan" ? <p className={collapsed ? "sr-only" : "nav-group-label"}>{group.label}</p> : null}
       {group.items.map(itemLink)}
     </div>)}</div>
-    <div className="navigation-bottom"><Link href="/" onClick={onNavigate} className="nav-item" title={collapsed ? "Lihat Situs Publik" : undefined}><Globe aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>Lihat Situs Publik</span></Link>{!collapsed ? <p className="sidebar-footnote">Prototipe antarmuka</p> : null}</div>
+    <div className="navigation-bottom"><Link href="/" onClick={onNavigate} className="nav-item" title={collapsed ? "Lihat Situs Publik" : undefined}><Globe aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>Lihat Situs Publik</span></Link>{!collapsed ? <p className="sidebar-footnote">Data pembangunan daerah</p> : null}</div>
   </nav>;
 }
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children,profile }: { children: React.ReactNode;profile?:{name:string;role:string} }) {
+  const router=useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [accountError,setAccountError]=useState('');
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1280px)");
     const closeMobileNavigation = (event: MediaQueryListEvent) => { if (event.matches) setMobileOpen(false); };
@@ -55,9 +56,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Sheet>
           <span className="workspace-label">Ruang kerja administrasi</span>
         </div>
-        <div className="topbar-end"><Badge variant="outline" className="prototype-badge">Prototipe frontend</Badge>
-          <Dialog><DialogTrigger asChild><Button variant="ghost" className="profile-button" aria-label="Informasi akun demo"><span className="avatar">{demoUser.initials}</span><span className="profile-name">{demoUser.name}</span><ChevronDown data-icon="inline-end" /></Button></DialogTrigger>
-            <DialogContent><DialogHeader><DialogTitle>Akun demonstrasi</DialogTitle><DialogDescription>Identitas ini digunakan untuk pratinjau antarmuka.</DialogDescription></DialogHeader><dl className="facts"><div><dt>Nama</dt><dd>{demoUser.name}</dd></div><div><dt>Peran</dt><dd>{demoUser.role}</dd></div></dl><p className="muted-note"><Info aria-hidden="true" />Belum ada autentikasi atau pengelolaan akun aktif.</p></DialogContent>
+        <div className="topbar-end">
+          <Dialog><DialogTrigger asChild><Button variant="ghost" className="profile-button" aria-label="Informasi akun"><span className="avatar">{profile?.name.slice(0,2).toUpperCase()||'P'}</span><span className="profile-name">{profile?.name||'Belum masuk'}</span><ChevronDown data-icon="inline-end" /></Button></DialogTrigger>
+            <DialogContent><DialogHeader><DialogTitle>Akun PRPDN</DialogTitle><DialogDescription>{profile?'Sesi akun yang sedang aktif.':'Masuk untuk menggunakan layanan administrasi.'}</DialogDescription></DialogHeader>{profile?<><dl className="facts"><div><dt>Nama</dt><dd>{profile.name}</dd></div><div><dt>Peran</dt><dd>{profile.role}</dd></div></dl><Button variant="outline" onClick={async()=>{try{await api('/api/auth/sign-out','POST',{});router.replace('/login/');router.refresh();}catch{setAccountError('Tidak dapat keluar. Coba kembali.');}}}>Keluar</Button>{accountError&&<p role="alert">{accountError}</p>}</>:<Button asChild><Link href="/login/">Masuk</Link></Button>}</DialogContent>
           </Dialog>
         </div>
       </header>

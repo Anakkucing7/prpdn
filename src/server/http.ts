@@ -16,6 +16,11 @@ export function apiError(error:unknown){
 }
 export async function body(request:Request){
   if(!request.headers.get('content-type')?.includes('application/json'))throw new HttpError(415,'Gunakan JSON untuk permintaan ini.');
-  const text=await request.text();if(text.length>1024*1024)throw new HttpError(413,'Payload formulir terlalu besar.');
+  const limit=1024*1024;
+  if(Number(request.headers.get('content-length'))>limit)throw new HttpError(413,'Payload formulir terlalu besar.');
+  const reader=request.body?.getReader();if(!reader)throw new HttpError(400,'Payload kosong.');
+  const chunks:Uint8Array[]=[];let size=0;
+  try{while(true){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.byteLength;if(size>limit){await reader.cancel();throw new HttpError(413,'Payload formulir terlalu besar.');}chunks.push(chunk.value);}}finally{reader.releaseLock();}
+  const text=Buffer.concat(chunks).toString('utf8');
   try{return JSON.parse(text) as unknown;}catch{throw new HttpError(400,'JSON tidak valid.');}
 }

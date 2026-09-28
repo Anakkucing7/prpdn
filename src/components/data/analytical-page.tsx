@@ -11,6 +11,7 @@ import { TrendDelta } from '@/components/trend-delta';
 import { provinces, regionByCode, matchesQuery } from '@/lib/regions';
 import { analyticalModules, analyticalFormat as fmt, seriesValue, sortAnalytical, type AnalyticalData, type AnalyticalModule, type AnalyticalRecord } from '@/lib/analytical';
 import { DataFilters, NoResults, Pagination } from './data-controls';
+import {ExportControl} from './export-control';
 
 const Chart = dynamic(() => import('@/components/dashboard/analytics-chart'), { ssr: false, loading: () => <p role="status">Memuat grafik…</p> });
 const PAGE_SIZE = 15;
@@ -54,7 +55,7 @@ function RecordDetail({ record, records, module }: { record: AnalyticalRecord; r
 export default function AnalyticalPage({ module, data }: { module: AnalyticalModule; data: AnalyticalData }) {
   const config = analyticalModules[module];
   const rp = module === 'rpjmd';
-  const [sheet, setSheet] = useState<string>(config.sheet);
+  const [sheet, setSheet] = useState<string>(rp?config.sheet:'all');
   const [year, setYear] = useState('2024');
   const [period, setPeriod] = useState('Maret');
   const [province, setProvince] = useState('all');
@@ -64,7 +65,7 @@ export default function AnalyticalPage({ module, data }: { module: AnalyticalMod
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('name');
   const [page, setPage] = useState(1);
-  const records = data.records.filter(r => r.sheet === sheet);
+  const records = data.records.filter(r => sheet === 'all' || r.sheet === sheet);
   const years = [...new Set(records.flatMap(r => r.year === null ? [] : [r.year]))].sort((a,b) => b-a);
   const categories = [...new Set(records.flatMap(r => r.category ? [r.category] : []))].sort();
   const indicators = [...new Set(records.flatMap(r => r.indicator ? [r.indicator] : []))].sort();
@@ -76,8 +77,8 @@ export default function AnalyticalPage({ module, data }: { module: AnalyticalMod
   const filled = rows.filter(r => r.value !== null && (!rp || r.end !== null));
   const mapped = new Set(rows.flatMap(r => r.code ? [r.code] : []));
   function change(action: () => void) { action(); setPage(1); }
-  function reset() { setSheet(config.sheet); setYear('2024'); setPeriod('Maret'); setProvince('all'); setIndicator('all'); setCategory('all'); setQuality('all'); setQuery(''); setSort('name'); setPage(1); }
-  return <div className="data-page analytical-page"><PageHeader title={config.title} parent="Kelola Data" description={config.description} />
+  function reset() { setSheet(rp?config.sheet:'all'); setYear('2024'); setPeriod('Maret'); setProvince('all'); setIndicator('all'); setCategory('all'); setQuality('all'); setQuery(''); setSort('name'); setPage(1); }
+  return <div className="data-page analytical-page"><PageHeader title={config.title} parent="Kelola Data" description={config.description} actions={<ExportControl dataset={module} filters={{year,province,indicator,category,quality,q:query,sheet,sort:effectiveSort,...(module==='poverty'?{period}:{})}}/>}/>
     <div className="data-notice"><Info aria-hidden="true" /><p>Data tersedia pada tingkat provinsi. Tidak ada nilai kabupaten/kota pada sheet ini. Filter provinsi hanya memakai kode yang selaras dengan master; baris bermasalah tersedia melalui “Belum dipadankan”.</p></div>
     <DataFilters query={query} onQuery={value => change(() => setQuery(value))} onReset={reset} summary={`${year === 'all' ? 'Semua tahun' : year === 'missing' ? 'Tahun belum terisi' : year}${module === 'poverty' ? ` · ${period}` : ''} · Provinsi · ${rows.length} baris sesuai filter`}>
       {rp && <SelectField label="Sheet sumber" value={sheet} onValueChange={value => change(() => { setSheet(value); setYear('all'); setProvince('all'); setIndicator('all'); setCategory('all'); setSort('name'); })} options={[{value:'fact_rpjmd_prov',label:'Fakta RPJMD provinsi'},{value:'fact_rpjmd_prov_master',label:'Master RPJMD provinsi'}]} />}
@@ -97,6 +98,6 @@ export default function AnalyticalPage({ module, data }: { module: AnalyticalMod
       <Pagination page={currentPage} total={rows.length} size={PAGE_SIZE} onPage={setPage} />
     </section>
     {rp && <details className="analytical-metadata"><summary>Metadata indikator & catatan ekstraksi</summary><p>dim_indikator_rpjmd berisi Indeks Modal Manusia. Tidak tersedia kunci relasi ke indikator pada dua sheet fakta; metadata ini tidak dipaksakan menjadi pasangan.</p>{data.definitions?.map((definition,i)=><dl className="facts" key={i}>{Object.entries(definition).map(([key,value])=><div key={key}><dt>{key}</dt><dd>{value === null ? 'Tidak terisi' : String(value)}</dd></div>)}</dl>)}<p>{data.excluded.length} baris anotasi master dikecualikan dari observasi: {data.excluded.map(r=>r.row).join(', ')}. Baris fakta yang belum lengkap tetap dapat dilihat melalui filter tahun/indikator belum terisi.</p></details>}
-    <p className="data-source">Dataset Dashboard 040526.xlsx · {sheet} · dim_wilayah · dim_waktu{rp ? ' · dim_indikator_rpjmd' : module === 'poverty' ? ' · kemiskinan_raw' : ''}. Tahun mengikuti fakta, termasuk yang belum tercakup pada dim_waktu. Prototipe frontend memakai fixture lokal; operasi database/API belum diterapkan.</p>
+    <p className="data-source">Dataset Dashboard 040526.xlsx · {sheet} · dim_wilayah · dim_waktu{rp ? ' · dim_indikator_rpjmd' : module === 'poverty' ? ' · kemiskinan_raw' : ''}. Tahun mengikuti fakta, termasuk yang belum tercakup pada dim_waktu. Tabel membaca database terkini; hasil import yang telah disetujui tersedia setelah halaman dimuat ulang.</p>
   </div>;
 }

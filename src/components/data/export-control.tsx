@@ -1,0 +1,12 @@
+"use client";
+import {useState} from 'react';
+import {Download} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {SelectField} from '@/components/ui-patterns';
+import {Dialog,DialogTrigger,DialogContent,DialogHeader,DialogTitle,DialogDescription} from '@/components/ui/dialog';
+import {datasets,type TransferDataset} from '@/lib/data-transfer';
+export function ExportControl({dataset,filters}:{dataset:TransferDataset;filters:Record<string,string>}){
+ const [format,setFormat]=useState('xlsx'),[target,setTarget]=useState<TransferDataset>(dataset),[error,setError]=useState(''),[busy,setBusy]=useState(false);
+ async function download(){setBusy(true);setError('');try{const response=await fetch(`/api/admin/export/?${new URLSearchParams({...filters,dataset:target,format})}`,{cache:'no-store'});if(!response.ok){const result=await response.json();throw new Error(result.error||'Ekspor gagal.');}const url=URL.createObjectURL(await response.blob());const anchor=document.createElement('a');anchor.href=url;anchor.download=response.headers.get('content-disposition')?.match(/filename="([^"]+)"/)?.[1]||`prpdn-${dataset}.${format}`;anchor.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}catch(e){setError(e instanceof Error?e.message:'Ekspor gagal.');}finally{setBusy(false);}}
+ return <Dialog><DialogTrigger asChild><Button variant="outline"><Download/>Ekspor data</Button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Ekspor {datasets[dataset]}</DialogTitle><DialogDescription>Data terkini dari database dengan filter halaman ini. Seluruh baris yang sesuai diekspor, bukan hanya halaman tabel yang terlihat.</DialogDescription></DialogHeader>{dataset==="idsd"&&<SelectField label="Isi ekspor" value={target} disabled={busy} onValueChange={v=>setTarget(v as TransferDataset)} options={[{value:"idsd",label:"Skor total IDSD"},{value:"idsd-pillar",label:"Skor 12 pilar IDSD"}]}/>}<SelectField label="Format file" value={format} disabled={busy} onValueChange={setFormat} options={['xlsx','csv','pdf','sql'].map(value=>({value,label:value==='sql'?'SQL PRPDN · khusus Super Admin':value.toUpperCase()}))}/><p className="muted-note">PDF maksimal 2.000 baris; format lain maksimal 100.000 baris per permintaan. SQL berisi data analitis, tanpa akun, sesi, atau kredensial.</p>{error&&<p role="alert">{error}</p>}<Button disabled={busy} onClick={()=>void download()}>{busy?'Menyiapkan file…':'Unduh file'}</Button></DialogContent></Dialog>;
+}

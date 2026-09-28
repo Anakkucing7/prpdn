@@ -1,3 +1,3 @@
-import AuthDemo from '@/components/public/auth-demo';
+import LoginForm from '@/components/public/login-form';
 export const metadata = { title: 'Masuk' };
-export default function Login() { return <AuthDemo />; }
+export default function Login() { return <LoginForm />; }

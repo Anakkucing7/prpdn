@@ -6,6 +6,8 @@ import RolesPage from "@/components/data/roles-page";
 import ActivityPage from "@/components/data/activity-page";
 import SettingsPage from "@/components/data/settings-page";
 import analytical from "@/data/analytical.json";
+import {readAnalytical} from '@/server/services/analytical-read';
+export const dynamic='force-dynamic';
 import { type AnalyticalModule } from "@/lib/analytical";
 import "@/components/data/data-pages.css";
 import "@/components/data/analytical-page.css";
@@ -32,7 +34,7 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
   if (module === 'settings') return <SettingsPage />;
   if (Object.hasOwn(analytical.modules, module)) {
     const key = module as AnalyticalModule;
-    return <AnalyticalPage key={key} module={key} data={analytical.modules[key]} />;
+    return <AnalyticalPage key={key} module={key} data={await readAnalytical(key)} />;
   }
   notFound();
 }
