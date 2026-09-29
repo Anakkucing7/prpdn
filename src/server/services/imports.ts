@@ -108,5 +108,5 @@ export async function finishBatch(id:string,input:unknown,actor:Actor){
   const result=await tx.importBatch.update({where:{id},data:{status:payload.action==='COMMIT'?'COMPLETED':'REJECTED',approvedBy:actor.id,approvedAt:new Date()}});
   await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:payload.action==='COMMIT'?'IMPORT_COMMITTED':'IMPORT_REJECTED',module:'validation',entity:id,after:{status:result.status,accepted:rows.filter(r=>r.decision==='ACCEPT').length,rejected:rows.filter(r=>r.decision==='REJECT').length,note:payload.note}}});
   return {status:result.status};
- },{isolationLevel:'Serializable',timeout:120000});
+ },{isolationLevel:'ReadCommitted',timeout:120000});
 }
