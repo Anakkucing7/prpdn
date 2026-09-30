@@ -11,8 +11,8 @@ const adapter = new PrismaMariaDb({
   connectionLimit: 1,
   minimumIdle: 0,
   connectTimeout: 5000,
-  acquireTimeout: 20000,
-  idleTimeout: 30,
+  acquireTimeout: 30000,
+  idleTimeout: 300,
 
   charset: 'utf8mb4',
 
