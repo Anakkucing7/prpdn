@@ -11,7 +11,14 @@ export function apiError(error:unknown){
     if(['P2025','P2034'].includes(error.code))return json({error:'Data berubah atau tidak ditemukan. Muat ulang sebelum mencoba kembali.'},409);
   }
   // Do not expose SQL, credentials, or request payloads in responses/logs.
-  console.error('PRPDN request failed:',error instanceof Error?error.name:'UnknownError');
+  console.error(
+  'PRPDN request failed:',
+  error instanceof Prisma.PrismaClientKnownRequestError
+    ? `${error.name} ${error.code}`
+    : error instanceof Error
+      ? error.name
+      : 'UnknownError'
+);
   return json({error:'Layanan data belum dapat diakses. Periksa koneksi database atau coba kembali.'},503);
 }
 export async function body(request:Request){
