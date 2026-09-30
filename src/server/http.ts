@@ -11,22 +11,27 @@ export function apiError(error:unknown){
     if(['P2025','P2034'].includes(error.code))return json({error:'Data berubah atau tidak ditemukan. Muat ulang sebelum mencoba kembali.'},409);
   }
   // Do not expose SQL, credentials, or request payloads in responses/logs.
-const errorName =
-  error instanceof Error ? error.name : 'UnknownError';
+const e = error as {
+  name?: unknown;
+  code?: unknown;
+  message?: unknown;
+  cause?: {
+    name?: unknown;
+    code?: unknown;
+    message?: unknown;
+  };
+};
 
-const errorCode =
-  typeof error === 'object' &&
-  error !== null &&
-  'code' in error &&
-  typeof (error as { code?: unknown }).code === 'string'
-    ? (error as { code: string }).code
-    : '';
-
-console.error(
-  'PRPDN request failed:',
-  errorName,
-  errorCode
-);
+console.error('PRPDN request failed:', {
+  name: typeof e?.name === 'string' ? e.name : 'UnknownError',
+  code: typeof e?.code === 'string' ? e.code : null,
+  causeName: typeof e?.cause?.name === 'string' ? e.cause.name : null,
+  causeCode: typeof e?.cause?.code === 'string' ? e.cause.code : null,
+  message:
+    typeof e?.message === 'string'
+      ? e.message.slice(0, 250)
+      : null,
+});
   return json({error:'Layanan data belum dapat diakses. Periksa koneksi database atau coba kembali.'},503);
 }
 export async function body(request:Request){
