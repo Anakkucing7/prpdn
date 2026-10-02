@@ -26,6 +26,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const authPage = ['/login', '/register'].includes(pathname.replace(/\/+$/, ''));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +63,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       </a>
 
       {/* Sticky Navigation: Transparent at Top, Semi-Transparent Navy with Blur on Scroll */}
-      <header className={`public-header ${scrolled ? 'is-scrolled' : 'is-top'}`}>
+      <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
             <span className="public-brand-bar" aria-hidden="true" />
