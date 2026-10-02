@@ -14,7 +14,7 @@ async function bootstrap(){
   const passwordHash=await hashPassword(password);
   await prisma.$transaction(async tx=>{
     const id=randomUUID();
-    const user=await tx.user.create({data:{id,email,name:process.env.BOOTSTRAP_ADMIN_NAME||'Administrator PRPDN',username:'superadmin',displayUsername:'superadmin',roleId:'super-admin',emailVerified:false,accounts:{create:{id:randomUUID(),accountId:id,providerId:'credential',password:passwordHash}}}});
+    const user=await tx.user.create({data:{id,email,name:process.env.BOOTSTRAP_ADMIN_NAME||'Super Admin PRPDN',username:'superadmin',displayUsername:'superadmin',roleId:'super-admin',emailVerified:false,accounts:{create:{id:randomUUID(),accountId:id,providerId:'credential',password:passwordHash}}}});
     await tx.auditLog.create({data:{actorId:id,actorName:user.name,action:'BOOTSTRAP',module:'users',entity:id}});
   });
   console.log('Initial Super Admin created. Credentials remain in the ignored .env file.');
