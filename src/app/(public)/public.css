@@ -130,6 +130,16 @@
   flex-shrink: 0;
 }
 
+.public-brand img {
+  display: block;
+  width: 94px;
+  height: auto;
+  box-sizing: content-box;
+  padding: 3px 6px;
+  background: #fff;
+  border-radius: 3px;
+}
+
 .public-brand-bar {
   width: 4px;
   height: 32px;

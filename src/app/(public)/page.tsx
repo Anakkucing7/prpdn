@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowRight, MapPinned, BookOpen, ChartNoAxesCombined, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PublicExplorer from '@/components/public/public-explorer';
+import { CountUp } from '@/components/public/count-up';
 import { spatialReference } from '@/lib/regions';
 
 export const metadata = {
@@ -63,7 +64,7 @@ export default function Home() {
             <div className="hero-stats-grid" role="region" aria-label="Cakupan administratif Indonesia">
               <div className="hero-stat-col">
                 <div className="stat-num-row">
-                  <strong>{spatialReference.counts.PROV}</strong>
+                  <strong><CountUp value={spatialReference.counts.PROV} /></strong>
                   <span className="stat-unit">Provinsi</span>
                 </div>
                 <span className="stat-note">Termasuk 4 DOB Papua</span>
@@ -71,7 +72,7 @@ export default function Home() {
 
               <div className="hero-stat-col">
                 <div className="stat-num-row">
-                  <strong>{spatialReference.counts.KAB}</strong>
+                  <strong><CountUp value={spatialReference.counts.KAB} /></strong>
                   <span className="stat-unit">Kabupaten</span>
                 </div>
                 <span className="stat-note">Pemerintahan daerah otonom</span>
@@ -79,7 +80,7 @@ export default function Home() {
 
               <div className="hero-stat-col">
                 <div className="stat-num-row">
-                  <strong>{spatialReference.counts.KOTA}</strong>
+                  <strong><CountUp value={spatialReference.counts.KOTA} /></strong>
                   <span className="stat-unit">Kota</span>
                 </div>
                 <span className="stat-note">Kawasan perkotaan otonom</span>
@@ -87,7 +88,7 @@ export default function Home() {
 
               <div className="hero-stat-col stat-col-total">
                 <div className="stat-num-row">
-                  <strong>{spatialReference.counts.KAB + spatialReference.counts.KOTA}</strong>
+                  <strong><CountUp value={spatialReference.counts.KAB + spatialReference.counts.KOTA} /></strong>
                   <span className="stat-unit">Kabupaten / Kota</span>
                 </div>
                 <span className="stat-note">Total cakupan spasial nasional</span>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -66,11 +67,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
-            <span className="public-brand-bar" aria-hidden="true" />
-            <div className="public-brand-copy">
-              <strong>PRPDN</strong>
-              <small>Data Pembangunan Daerah · BRIN</small>
-            </div>
+            <Image src="/brin-logo.svg" alt="Badan Riset dan Inovasi Nasional" width={94} height={36} priority />
           </Link>
 
           <nav className="public-desktop-nav" aria-label="Navigasi publik">
