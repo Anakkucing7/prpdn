@@ -1,4 +1,4 @@
-export const permissionModules = ['dashboard','regions','idsd','kfd','poverty','eppd','rpjmd','indicators','years','import','validation','users','roles','activity','settings'] as const;
+export const permissionModules = ['dashboard','comparison','regions','idsd','kfd','poverty','eppd','rpjmd','indicators','years','import','validation','users','roles','activity','settings'] as const;
 export type PermissionModule = typeof permissionModules[number];
 export type Permission = 'view' | 'manage' | 'approve';
 export type Permissions = Partial<Record<PermissionModule, Permission[]>>;
@@ -8,7 +8,7 @@ export function initialPermissions(role:RoleId):Permissions {
   if(role==='public-viewer') return {};
   const result:Permissions={};
   for(const key of permissionModules) {
-    if(['dashboard','regions','idsd','kfd','poverty','eppd','rpjmd'].includes(key)) result[key]=['view'];
+    if(['dashboard','comparison','regions','idsd','kfd','poverty','eppd','rpjmd'].includes(key)) result[key]=['view'];
     if(['operator','validator','administrator','super-admin'].includes(role)&&['idsd','kfd','poverty','eppd','rpjmd','import'].includes(key)) result[key]=['view','manage'];
     if(['validator','administrator','super-admin'].includes(role)&&key==='validation') result[key]=['view','manage','approve'];
     if(['administrator','super-admin'].includes(role)&&['regions','indicators','years','users','settings'].includes(key)) result[key]=['view','manage'];

@@ -14,7 +14,8 @@ export default function AnalyticsChart({ option, label }: { option: EChartsOptio
   useEffect(() => {
     if (!container.current) return;
     const chart = init(container.current, undefined, { renderer: "svg" });
-    chart.setOption({ animation: false, textStyle: { fontFamily: "Inter Variable, sans-serif", color: "#697386", fontSize: 12 }, ...option });
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    chart.setOption({ animation: !reducedMotion, animationDuration: 700, animationEasing: "cubicOut", animationDurationUpdate: reducedMotion ? 0 : 350, textStyle: { fontFamily: "Inter Variable, sans-serif", color: "#697386", fontSize: 12 }, ...option });
     const observer = new ResizeObserver(() => chart.resize());
     observer.observe(container.current);
     return () => { observer.disconnect(); chart.dispose(); };

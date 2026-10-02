@@ -5,6 +5,8 @@
 .dashboard-context { font-size: 12px; color: #697386; margin: 12px 0 16px; }
 .kpi-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; margin-bottom: 20px; }
 .kpi { background: white; border: 1px solid #e4e8f0; border-radius: 8px; padding: 17px 20px; }
+.kpi { animation: dashboard-arrive .35s ease-out both; }
+.kpi:nth-child(2) { animation-delay: .04s; }.kpi:nth-child(3) { animation-delay: .08s; }.kpi:nth-child(4) { animation-delay: .12s; }
 .kpi p { color: #475569; font-size: 13px; font-weight: 550; }
 .kpi strong { display: block; font-size: 30px; line-height: 1.4; font-weight: 700; letter-spacing: -.7px; margin: 5px 0; font-variant-numeric: tabular-nums; color: #0b2743; }
 .kpi strong span { color: #697386; font-size: 20px; font-weight: 450; }
@@ -53,7 +55,7 @@
 .ranking-list button:hover { color: #1769c2; text-decoration: underline; }
 .ranking-list tr[data-selected="true"] { background: #eaf3fc; }
 .rank-track { height: 3px; background: #edf2f7; display: block; margin-top: 4px; }
-.rank-track i { display: block; height: 100%; background: #6b9fc6; }
+.rank-track i { display: block; height: 100%; background: #6b9fc6; transform-origin: left; animation: dashboard-bar .75s cubic-bezier(.2,.7,.2,1) both; }
 .ranking-list tr[data-selected="true"] .rank-track i { background: #1769c2; }
 .panel-footnote { font-size: 11px; color: #697386; line-height: 1.7; padding: 12px 20px 16px; }
 .province-brief { margin-block: 20px; display: grid; grid-template-columns: minmax(200px,1.1fr) minmax(0,2fr); align-items: center; gap: 20px; padding: 20px; border: 1px solid #e4e8f0; border-radius: 8px; background: white; }
@@ -78,7 +80,7 @@
 .pillar-row small { font-size: 10px; min-width: 14px; color: #697386; }
 .pillar-row strong { font-size: 11px; font-variant-numeric: tabular-nums; font-weight: 550; text-align: right; }
 .pillar-track { height: 6px; background: #edf2f7; }
-.pillar-track i { display: block; height: 100%; background: #5b94bf; }
+.pillar-track i { display: block; height: 100%; background: #5b94bf; transform-origin:left; animation:dashboard-bar .75s cubic-bezier(.2,.7,.2,1) both; }
 .coverage-list { padding: 4px 20px; display: flex; flex-direction: column; gap: 17px; }
 .coverage-list > div > div { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 .coverage-list strong { font-variant-numeric: tabular-nums; font-size: 14px; font-weight: 600; }
@@ -108,6 +110,9 @@
 .map-loading { height: 290px; width: 100%; }
 .dashboard-loading-filters { height: 88px; margin-bottom: 20px; }
 .dashboard-loading-kpi { height: 130px; }
+@keyframes dashboard-bar { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@keyframes dashboard-arrive { from { opacity:.65; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+@media(prefers-reduced-motion:reduce) { .kpi,.rank-track i,.pillar-track i { animation:none!important; } }
 @media (max-width: 1279px) {
   .dashboard-filters { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .dashboard-filters > .ui-button { grid-column: 2; justify-self: end; }

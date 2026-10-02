@@ -1,8 +1,11 @@
-import { LayoutDashboard, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
 
 export type NavigationItem = { slug: string; label: string; icon: LucideIcon; phase: number };
 export const navigation: { label: string; items: NavigationItem[] }[] = [
-  { label: "Ringkasan", items: [{ slug: "dashboard", label: "Dashboard", icon: LayoutDashboard, phase: 2 }] },
+  { label: "Ringkasan", items: [
+    { slug: "dashboard", label: "Dashboard", icon: LayoutDashboard, phase: 2 },
+    { slug: "comparison", label: "Perbandingan Data", icon: ChartNoAxesCombined, phase: 2 },
+  ] },
   { label: "Kelola Data", items: [
     { slug: "regions", label: "Data Wilayah", icon: Map, phase: 3 },
     { slug: "idsd", label: "Data IDSD", icon: FileChartColumn, phase: 3 },

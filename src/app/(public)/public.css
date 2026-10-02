@@ -1452,6 +1452,8 @@
 }
 
 @media (max-width: 640px) {
+  .public-nav-actions { gap: 8px; }
+  .public-nav-actions > .public-signin-link { display: none; }
   .public-container {
     padding-inline: 18px;
   }

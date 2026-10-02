@@ -268,6 +268,9 @@
   .page-heading-row h1 { overflow-wrap: anywhere; }
 }
 .trend-delta { display: block; color: #58667b; font-size: 12px; line-height: 1.6; margin-top: 6px; font-weight: 450; font-variant-numeric: tabular-nums; }
+.trend-delta[data-direction="increased"] { color: #237547; }
+.trend-delta[data-direction="decreased"] { color: #b33b3b; }
+.trend-delta[data-direction="unchanged"] { color: #58667b; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

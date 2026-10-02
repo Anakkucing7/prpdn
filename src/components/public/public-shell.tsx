@@ -86,7 +86,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
             </Link>
             <Button asChild size="sm" className="public-register-btn">
               <Link href="/register">
-                <span>Daftar Demo</span>
+                <span>Daftar</span>
                 <ArrowRight size={14} />
               </Link>
             </Button>
@@ -119,7 +119,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                   </Link>
                   <Button asChild className="mobile-register-btn" onClick={() => setOpen(false)}>
                     <Link href="/register">
-                      <span>Daftar Demo</span>
+                      <span>Daftar</span>
                       <ArrowRight size={14} />
                     </Link>
                   </Button>
@@ -185,8 +185,8 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                     Referensi Wilayah Kemendagri ↗
                   </a>
                 </li>
-                <li><Link href="/login">Simulasi Masuk Admin</Link></li>
-                <li><Link href="/register">Pendaftaran Akun Demo</Link></li>
+                <li><Link href="/login">Masuk Pengelola</Link></li>
+                <li><Link href="/register">Daftar Akun</Link></li>
               </ul>
             </div>
           </div>

@@ -1,4 +1,5 @@
-import { deltaText } from '@/lib/trend';
+import { changeFromPrevious, deltaText } from '@/lib/trend';
 export function TrendDelta({ current, previous, year }: { current: number | null | undefined; previous: number | null | undefined; year: number }) {
-  return <span className="trend-delta" title="Perubahan numerik; bukan penilaian baik/buruk.">{deltaText(current, previous, year - 1)}</span>;
+  const change = changeFromPrevious(current, previous);
+  return <span className="trend-delta" data-direction={change?.direction ?? 'unknown'} title="Warna menunjukkan arah perubahan, bukan penilaian baik/buruk.">{deltaText(current, previous, year - 1)}</span>;
 }
