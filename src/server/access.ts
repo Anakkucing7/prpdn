@@ -8,7 +8,7 @@ export async function sessionUser(requestHeaders?:Headers){
   const session=await auth().api.getSession({headers:requestHeaders??await headers()});
   if(!session)throw new HttpError(401,'Silakan masuk untuk melanjutkan.');
   const user=await db().user.findUnique({where:{id:session.user.id},include:{role:true}});
-  if(!user?.active)throw new HttpError(401,'Akun tidak aktif.');
+  if(!user?.active||user.approvalStatus!=='APPROVED')throw new HttpError(401,'Akun belum aktif atau belum disetujui.');
   return user;
 }
 export async function authorize(module:PermissionModule,permission:Permission='view',requestHeaders?:Headers){

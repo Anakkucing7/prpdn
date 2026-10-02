@@ -1,46 +1,90 @@
 "use client";
-import { useRef, useState } from 'react';
-import { Plus } from 'lucide-react';
+
+import { useEffect, useMemo, useState } from 'react';
+import { Check, Clock3, X } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { SelectField, StatusBadge } from '@/components/ui-patterns';
-import { demoUsers, roles, type DemoUser } from '@/data/system-demo';
-import { validateUser, type UserDraft } from '@/lib/system-validation';
-import { matchesQuery } from '@/lib/regions';
-import { MasterField, MasterForm, focusInvalid } from './master-shared';
 import { DataFilters, NoResults, Pagination } from './data-controls';
-import { SystemNotice, SystemDialog, SystemConfirm, SystemDetail } from './system-shared';
+import { SystemConfirm, SystemDetail } from './system-shared';
+import { api, RequestError } from '@/lib/api-client';
 
-function UserForm({record,records,onSave,onCancel}:{record:DemoUser|null;records:DemoUser[];onSave:(draft:UserDraft)=>void;onCancel:()=>void}) {
-  const [draft,setDraft]=useState<UserDraft>(record ?? {name:'',username:'',email:'',workUnit:'',role:'Internal Viewer'});
-  const [errors,setErrors]=useState<Partial<Record<keyof UserDraft,string>>>({});
-  return <MasterForm onCancel={onCancel} onSubmit={event=>{event.preventDefault();const next=validateUser(draft,records.filter(r=>r.id!==record?.id));setErrors(next);const first=Object.keys(next)[0];if(first){focusInvalid(event.currentTarget,first);return;}onSave(draft);}}>
-    <MasterField name="name" label="Nama" required maxLength={100} value={draft.name} error={errors.name} onChange={e=>setDraft({...draft,name:e.target.value})}/>
-    <MasterField name="username" label="Username" required maxLength={40} value={draft.username} error={errors.username} onChange={e=>setDraft({...draft,username:e.target.value})}/>
-    <MasterField name="email" label="Email contoh" type="email" required maxLength={254} placeholder="nama@example.com" value={draft.email} error={errors.email} onChange={e=>setDraft({...draft,email:e.target.value})}/>
-    <MasterField name="workUnit" label="Unit kerja (opsional)" maxLength={120} value={draft.workUnit} onChange={e=>setDraft({...draft,workUnit:e.target.value})}/>
-    <SelectField label="Role *" value={draft.role} onValueChange={role=>setDraft({...draft,role:role as UserDraft['role']})} options={roles.map(role=>({value:role,label:role}))}/>
-    <p className="muted-note">Gunakan identitas contoh. Status pengguna baru: Aktif sementara. Tidak ada undangan, email, atau kredensial yang dikirim.</p>
-  </MasterForm>;
-}
+type UserRecord = {
+  id: string; name: string; username: string | null; email: string; workUnit: string;
+  roleId: string; active: boolean; approvalStatus: 'PENDING' | 'APPROVED' | 'REJECTED';
+  lastLogin: string | null; createdAt: string; updatedAt: string;
+};
+type ReviewAction = { user: UserRecord; status: 'APPROVED' | 'REJECTED' };
+
+const roles: Record<string, string> = {
+  'public-viewer': 'Public Viewer', 'internal-viewer': 'Internal Viewer', operator: 'Operator',
+  validator: 'Validator', administrator: 'Administrator', 'super-admin': 'Super Admin',
+};
+const statusLabels = { PENDING: 'Menunggu aktivasi', APPROVED: 'Disetujui', REJECTED: 'Ditolak' };
 
 export default function UsersPage() {
-  const [records,setRecords]=useState(demoUsers);const [query,setQuery]=useState('');const [role,setRole]=useState('all');const [status,setStatus]=useState('all');const [sort,setSort]=useState('name');const [page,setPage]=useState(1);
-  const [editing,setEditing]=useState<DemoUser|null|undefined>();const [opener,setOpener]=useState<HTMLElement|null>(null);const [draft,setDraft]=useState<UserDraft|null>(null);const [changing,setChanging]=useState<DemoUser|null>(null);const [message,setMessage]=useState('');const serial=useRef(0);
-  const rows=records.filter(r=>matchesQuery(query,r.name,r.username,r.email,r.workUnit)&&(role==='all'||r.role===role)&&(status==='all'||r.status===status)).sort((a,b)=>sort==='role'?a.role.localeCompare(b.role)||a.name.localeCompare(b.name):a.name.localeCompare(b.name,'id')*(sort==='desc'?-1:1));
-  const currentPage=Math.min(page,Math.max(1,Math.ceil(rows.length/5)));
-  function reset(){setQuery('');setRole('all');setStatus('all');setSort('name');setPage(1);}
-  function save(){if(!draft)return;const record:DemoUser={...draft,name:draft.name.trim(),username:draft.username.trim(),email:draft.email.trim(),workUnit:draft.workUnit.trim(),id:editing?.id??`local-${++serial.current}`,status:editing?.status??'Aktif',origin:editing?'Diubah lokal':'Ditambahkan lokal'};setRecords(editing?records.map(r=>r.id===editing.id?record:r):[...records,record]);setMessage(`${record.name} ${editing?'diubah':'ditambahkan'} sementara. Tidak tersimpan ke server.`);setDraft(null);setEditing(undefined);reset();}
-  return <div className="data-page master-page system-page"><PageHeader title="Manajemen Pengguna" parent="Sistem" description="Kelola identitas contoh, role, dan status pengguna dalam prototipe." actions={<Button onClick={e=>{setOpener(e.currentTarget);setEditing(null);}}><Plus/>Tambah pengguna</Button>}/><SystemNotice/>
-    <DataFilters query={query} onQuery={value=>{setQuery(value);setPage(1);}} onReset={reset} summary={`${rows.length} pengguna contoh sesuai filter`} searchLabel="Cari pengguna" searchPlaceholder="Nama, username, email, atau unit kerja">
-      <SelectField label="Role" value={role} onValueChange={value=>{setRole(value);setPage(1);}} options={[{value:'all',label:'Semua role'},...roles.map(r=>({value:r,label:r}))]}/>
-      <SelectField label="Status" value={status} onValueChange={value=>{setStatus(value);setPage(1);}} options={[{value:'all',label:'Semua status'},{value:'Aktif',label:'Aktif'},{value:'Nonaktif',label:'Nonaktif'}]}/>
-    </DataFilters><p className="master-feedback" role="status">{message}</p>
-    <section className="data-panel"><div className="data-panel-heading"><div><h2>Daftar pengguna</h2><p>{records.length} identitas contoh · bukan akun produksi</p></div><div className="data-sort-field"><SelectField label="Urutkan" value={sort} onValueChange={v=>{setSort(v);setPage(1);}} options={[{value:'name',label:'Nama A–Z'},{value:'desc',label:'Nama Z–A'},{value:'role',label:'Role'}]}/></div></div>
-      {rows.length?<div className="table-scroll" role="region" tabIndex={0} aria-label="Tabel pengguna, dapat digulir horizontal"><table className="data-table system-user-table"><thead><tr><th scope="col">Pengguna</th><th scope="col">Role / unit kerja</th><th scope="col">Status</th><th scope="col">Asal data</th><th scope="col">Tindakan</th></tr></thead><tbody>{rows.slice((currentPage-1)*5,currentPage*5).map(r=><tr key={r.id}><td><strong className="table-primary">{r.name}</strong><span className="table-secondary">{r.username}</span><span className="table-secondary">{r.email}</span></td><td>{r.role}<span className="table-secondary">{r.workUnit||'Unit kerja belum diisi'}</span></td><td><StatusBadge tone={r.status==='Aktif'?'success':'neutral'}>{r.status}</StatusBadge></td><td><StatusBadge>{r.origin}</StatusBadge></td><td><div className="master-row-actions"><SystemDetail title={r.name} description="Profil pengguna" label={`Detail pengguna ${r.name}`}><StatusBadge>{r.origin}</StatusBadge><dl className="facts">{Object.entries({Username:r.username,Email:r.email,Role:r.role,Status:r.status,'Unit kerja':r.workUnit||'Belum diisi',NIP:'Tidak disediakan','Login terakhir':'Tidak tersedia; tidak ada autentikasi nyata'}).map(([key,value])=><div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl><section><h3 className="subheading">Reset kata sandi</h3><p className="muted-note">Belum tersedia. Reset aman, verifikasi identitas, sesi, dan pengiriman tautan harus ditangani layanan autentikasi/backend mendatang. Prototipe tidak menyimpan kata sandi.</p></section></SystemDetail><Button variant="link" aria-label={`Ubah pengguna ${r.name}`} onClick={e=>{setOpener(e.currentTarget);setEditing(r);}}>Ubah</Button><Button variant="link" aria-label={`${r.status==='Aktif'?'Nonaktifkan':'Aktifkan'} ${r.name}`} onClick={e=>{setOpener(e.currentTarget);setChanging(r);}}>{r.status==='Aktif'?'Nonaktifkan':'Aktifkan'}</Button></div></td></tr>)}</tbody></table></div>:<NoResults onReset={reset}/>}
-      <Pagination page={currentPage} total={rows.length} size={5} onPage={setPage}/></section>
-    {editing!==undefined&&<SystemDialog title={editing?'Ubah pengguna':'Tambah pengguna'} opener={opener} onClose={()=>setEditing(undefined)}><UserForm record={editing} records={records} onSave={setDraft} onCancel={()=>setEditing(undefined)}/></SystemDialog>}
-    {draft&&<SystemConfirm title={editing?'Konfirmasi perubahan pengguna?':'Tambahkan pengguna?'} description={`${draft.name} akan memakai role ${draft.role}. Tidak memberi akses nyata.`} onCancel={()=>setDraft(null)} onConfirm={save}/>}
-    {changing&&<SystemConfirm title={`${changing.status==='Aktif'?'Nonaktifkan':'Aktifkan'} ${changing.name}?`} description="Status tabel akan berubah. Tidak memutus atau membuka sesi nyata." onCancel={()=>{setChanging(null);opener?.focus();}} onConfirm={()=>{setRecords(records.map(r=>r.id===changing.id?{...r,status:r.status==='Aktif'?'Nonaktif':'Aktif',origin:'Diubah lokal'}:r));setMessage(`Status ${changing.name} diubah sementara.`);setChanging(null);opener?.focus();}}/>}
+  const [records, setRecords] = useState<UserRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('all');
+  const [page, setPage] = useState(1);
+  const [review, setReview] = useState<ReviewAction | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let current = true;
+    api<UserRecord[]>('/api/admin/users').then(data => { if (current) setRecords(data); })
+      .catch(() => { if (current) setError('Daftar pengguna belum dapat dimuat. Coba muat ulang halaman.'); })
+      .finally(() => { if (current) setLoading(false); });
+    return () => { current = false; };
+  }, []);
+
+  const rows = useMemo(() => records.filter(user => {
+    const text = `${user.name} ${user.username ?? ''} ${user.email} ${user.workUnit}`.toLowerCase();
+    return text.includes(query.trim().toLowerCase()) && (status === 'all' || (status === 'inactive' ? !user.active : user.approvalStatus === status));
+  }), [records, query, status]);
+  const currentPage = Math.min(page, Math.max(1, Math.ceil(rows.length / 10)));
+  const pendingCount = records.filter(user => user.approvalStatus === 'PENDING').length;
+
+  function reset() { setQuery(''); setStatus('all'); setPage(1); }
+  async function confirmReview() {
+    if (!review) return;
+    setBusy(true); setError('');
+    try {
+      const updated = await api<UserRecord>(`/api/admin/users/${encodeURIComponent(review.user.id)}/approval`, 'PATCH', { status: review.status });
+      setRecords(current => current.map(user => user.id === updated.id ? updated : user));
+      setMessage(`${updated.name}: ${statusLabels[updated.approvalStatus]}. Keputusan dicatat di log aktivitas.`);
+      setReview(null);
+    } catch (cause) {
+      setError(cause instanceof RequestError ? cause.message : 'Keputusan belum tersimpan. Coba kembali.');
+      setReview(null);
+    } finally { setBusy(false); }
+  }
+
+  return <div className="data-page system-page">
+    <PageHeader title="Manajemen Pengguna" parent="Sistem" description="Tinjau permintaan pendaftaran dan status akses akun." />
+    <section className="data-notice" aria-label="Alur aktivasi"><Clock3 aria-hidden="true"/><p>Pendaftar baru menunggu persetujuan. Setelah disetujui, akun aktif dengan role Public Viewer. Perubahan role tetap mengikuti hak akses dan dicatat dalam log aktivitas.</p></section>
+    <DataFilters query={query} onQuery={value => { setQuery(value); setPage(1); }} onReset={reset} summary={`${rows.length} akun · ${pendingCount} menunggu aktivasi`} searchLabel="Cari pengguna" searchPlaceholder="Nama, username, email, atau unit kerja">
+      <SelectField label="Status akun" value={status} onValueChange={value => { setStatus(value); setPage(1); }} options={[{value:'all',label:'Semua status'},{value:'PENDING',label:'Menunggu aktivasi'},{value:'APPROVED',label:'Disetujui'},{value:'REJECTED',label:'Ditolak'},{value:'inactive',label:'Nonaktif'}]} />
+    </DataFilters>
+    {message && <p className="master-feedback" role="status">{message}</p>}
+    {error && <p className="auth-form-error" role="alert">{error}</p>}
+    <section className="data-panel">
+      <div className="data-panel-heading"><div><h2>Daftar pengguna</h2><p>{pendingCount ? `${pendingCount} pendaftaran perlu ditinjau` : 'Tidak ada pendaftaran yang menunggu.'}</p></div></div>
+      {loading ? <div className="data-loading" role="status">Memuat akun…</div> : rows.length ? <div className="table-scroll" role="region" tabIndex={0} aria-label="Daftar akun, dapat digulir horizontal"><table className="data-table system-user-table"><thead><tr><th scope="col">Pengguna</th><th scope="col">Role / unit kerja</th><th scope="col">Status</th><th scope="col">Terdaftar</th><th scope="col">Tindakan</th></tr></thead><tbody>{rows.slice((currentPage-1)*10,currentPage*10).map(user => <tr key={user.id}>
+        <td><strong className="table-primary">{user.name}</strong><span className="table-secondary">{user.username || 'Username belum tersedia'}</span><span className="table-secondary">{user.email}</span></td>
+        <td>{roles[user.roleId] ?? user.roleId}<span className="table-secondary">{user.workUnit || 'Unit kerja belum diisi'}</span></td>
+        <td><StatusBadge tone={user.approvalStatus === 'PENDING' ? 'warning' : user.approvalStatus === 'REJECTED' ? 'error' : user.active ? 'success' : 'neutral'}>{user.active ? statusLabels[user.approvalStatus] : user.approvalStatus === 'PENDING' ? statusLabels.PENDING : 'Nonaktif'}</StatusBadge></td>
+        <td>{new Intl.DateTimeFormat('id-ID',{dateStyle:'medium'}).format(new Date(user.createdAt))}</td>
+        <td><div className="master-row-actions">
+          <SystemDetail title={user.name} description="Informasi akun" label={`Detail akun ${user.name}`}><StatusBadge tone={user.approvalStatus==='PENDING'?'warning':user.active?'success':'neutral'}>{user.active?statusLabels[user.approvalStatus]:'Nonaktif'}</StatusBadge><dl className="facts"><div><dt>Email</dt><dd>{user.email}</dd></div><div><dt>Username</dt><dd>{user.username||'Belum tersedia'}</dd></div><div><dt>Role</dt><dd>{roles[user.roleId]??user.roleId}</dd></div><div><dt>Unit kerja</dt><dd>{user.workUnit||'Belum diisi'}</dd></div><div><dt>Terdaftar</dt><dd>{new Intl.DateTimeFormat('id-ID',{dateStyle:'long',timeStyle:'short'}).format(new Date(user.createdAt))}</dd></div><div><dt>Login terakhir</dt><dd>{user.lastLogin?new Intl.DateTimeFormat('id-ID',{dateStyle:'long',timeStyle:'short'}).format(new Date(user.lastLogin)):'Belum pernah'}</dd></div></dl></SystemDetail>
+          {user.approvalStatus==='PENDING'&&<><Button size="sm" onClick={()=>setReview({user,status:'APPROVED'})}><Check/>Setujui</Button><Button size="sm" variant="danger" onClick={()=>setReview({user,status:'REJECTED'})}><X/>Tolak</Button></>}
+        </div></td>
+      </tr>)}</tbody></table></div> : <NoResults onReset={reset} />}
+      {!loading&&<Pagination page={currentPage} total={rows.length} size={10} onPage={setPage}/>}
+    </section>
+    {review&&<SystemConfirm title={review.status==='APPROVED'?'Aktifkan akun ini?':'Tolak pendaftaran ini?'} description={review.status==='APPROVED'?`${review.user.name} dapat masuk dengan role Public Viewer setelah disetujui.`:`Permintaan dari ${review.user.name} akan ditolak dan akun tetap tidak dapat masuk.`} note="Keputusan disimpan ke database dan log aktivitas." confirmLabel={review.status==='APPROVED'?'Setujui dan aktifkan':'Tolak pendaftaran'} busy={busy} onCancel={()=>setReview(null)} onConfirm={()=>void confirmReview()} />}
   </div>;
 }

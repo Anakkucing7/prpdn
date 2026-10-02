@@ -17,6 +17,7 @@ model User {
   displayUsername String?   @db.VarChar(40)
   workUnit        String    @default("") @db.VarChar(120)
   active          Boolean   @default(true)
+  approvalStatus  String    @default("APPROVED") @db.VarChar(16)
   roleId          String    @default("public-viewer") @db.VarChar(40)
   role            Role      @relation(fields: [roleId], references: [id], onDelete: Restrict)
   lastLogin       DateTime?

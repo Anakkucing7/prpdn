@@ -8,9 +8,9 @@ import { auditJson } from './masters';
 import { Prisma, type User } from '@/generated/prisma/client';
 import { permissionModules, roleNames, type Permissions } from '@/lib/permissions';
 
-const userSelect={id:true,name:true,username:true,email:true,workUnit:true,roleId:true,active:true,lastLogin:true,createdAt:true,updatedAt:true} as const;
+const userSelect={id:true,name:true,username:true,email:true,workUnit:true,roleId:true,active:true,approvalStatus:true,lastLogin:true,createdAt:true,updatedAt:true} as const;
 const userSchema=z.object({name:z.string().trim().min(1).max(100),username:z.string().trim().toLowerCase().regex(/^[a-z0-9._-]{3,40}$/),email:z.email().trim().toLowerCase().max(191),workUnit:z.string().trim().max(120),roleId:z.enum(Object.keys(roleNames) as [string,...string[]]),active:z.boolean(),password:z.string().min(12).max(128).optional(),updatedAt:z.iso.datetime().optional()}).strict();
-export async function listUsers(){return db().user.findMany({select:userSelect,orderBy:{name:'asc'}});}
+export async function listUsers(){return db().user.findMany({select:userSelect,orderBy:{createdAt:'desc'}});}
 export async function saveUser(id:string|undefined,payload:unknown,actor:User){
   const value=userSchema.parse(payload);
   if(!id&&!value.password)throw new HttpError(422,'Kata sandi awal minimal 12 karakter wajib diisi.');
@@ -28,6 +28,18 @@ export async function saveUser(id:string|undefined,payload:unknown,actor:User){
     const after=id?await tx.user.update({where:{id,updatedAt:before!.updatedAt},data:fields,select:userSelect}):await tx.user.create({data:{...fields,id:userId,accounts:{create:{id:randomUUID(),accountId:userId,providerId:'credential',password}}},select:userSelect});
     if(before&&(before.roleId!==after.roleId||before.active!==after.active||before.email!==after.email))await tx.session.deleteMany({where:{userId}});
     await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:id?'UPDATE':'CREATE',module:'users',entity:userId,before:before?auditJson(before):Prisma.DbNull,after:auditJson(after)}});
+    return after;
+  },{isolationLevel:'Serializable'});
+}
+export async function reviewUserRegistration(id:string,status:'APPROVED'|'REJECTED',actor:User){
+  if(!['administrator','super-admin'].includes(actor.roleId))throw new HttpError(403,'Persetujuan akun hanya dapat dilakukan Administrator atau Super Admin.');
+  return db().$transaction(async tx=>{
+    const before=await tx.user.findUnique({where:{id},select:userSelect});
+    if(!before)throw new HttpError(404,'Pendaftar tidak ditemukan.');
+    if(before.approvalStatus!=='PENDING')throw new HttpError(409,'Pendaftaran ini sudah ditinjau. Muat ulang daftar pengguna.');
+    const after=await tx.user.update({where:{id,approvalStatus:'PENDING'},data:{approvalStatus:status,active:status==='APPROVED'},select:userSelect});
+    await tx.session.deleteMany({where:{userId:id}});
+    await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:status==='APPROVED'?'APPROVE_REGISTRATION':'REJECT_REGISTRATION',module:'users',entity:id,before:auditJson(before),after:auditJson(after)}});
     return after;
   },{isolationLevel:'Serializable'});
 }

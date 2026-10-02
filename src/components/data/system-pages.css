@@ -1,4 +1,6 @@
 .system-user-table { min-width: 980px; }
+.system-page .auth-form-error { color: #b42318; font-size: 13px; line-height: 1.5; }
+.system-page .data-loading { min-height: 120px; display: grid; place-items: center; color: #58667b; font-size: 14px; }
 .system-user-table td:first-child { max-width: 250px; overflow-wrap: anywhere; }
 .system-log-table { min-width: 860px; }
 .system-role-list { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin-bottom: 24px; }

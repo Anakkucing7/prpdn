@@ -1,7 +1,7 @@
 import { authorize, sameOrigin, HttpError } from '@/server/access';
 import { body, json, apiError } from '@/server/http';
 import { listMasters, mutateMaster } from '@/server/services/masters';
-import { listUsers, saveUser, listRoles, saveRole, saveSettings, activity } from '@/server/services/system';
+import { listUsers, saveUser, reviewUserRegistration, listRoles, saveRole, saveSettings, activity } from '@/server/services/system';
 import { db } from '@/server/db';
 import { permissionModules, type PermissionModule } from '@/lib/permissions';
 
@@ -10,7 +10,8 @@ type Context={params:Promise<{resource:string;id?:string[]}>};
 async function handle(request:Request,{params}:Context){
   try{
     const {resource,id:parts}=await params;
-    if(!permissionModules.includes(resource as PermissionModule)||parts&&parts.length!==1)throw new HttpError(404,'Layanan tidak ditemukan.');
+    const approvalRoute=resource==='users'&&parts?.length===2&&parts[1]==='approval'&&request.method==='PATCH';
+    if(!permissionModules.includes(resource as PermissionModule)||parts&&parts.length!==1&&!approvalRoute)throw new HttpError(404,'Layanan tidak ditemukan.');
     const write=request.method!=='GET';
     if(write)sameOrigin(request);
     const user=await authorize(resource as PermissionModule,write?'manage':'view',request.headers);
@@ -24,6 +25,11 @@ async function handle(request:Request,{params}:Context){
       if(resource==='settings')return json(await db().systemSetting.findUniqueOrThrow({where:{id:'general'}}));
     }else{
       const input=await body(request);
+      if(approvalRoute){
+        const value=input as {status?:unknown}|null;
+        if(!value||!['APPROVED','REJECTED'].includes(String(value.status)))throw new HttpError(422,'Pilih status persetujuan yang valid.');
+        return json(await reviewUserRegistration(parts![0],value.status as 'APPROVED'|'REJECTED',user));
+      }
       if(resource==='years'||resource==='indicators'){
         if(request.method==='POST'?!!id:!id||!/^\d+$/.test(id))throw new HttpError(400,'Identitas master tidak valid.');
         return json(await mutateMaster(resource,request.method,id?Number(id):undefined,input,user));
