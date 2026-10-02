@@ -1,4 +1,9 @@
 .system-user-table { min-width: 980px; }
+.system-user-form { display: grid; gap: 14px; max-height: min(68dvh,620px); overflow-y: auto; padding: 2px 3px; }
+.system-user-form label { display: grid; gap: 6px; color: #25384e; font-size: 13px; font-weight: 550; }
+.system-user-form label small { color: #697386; font-size: 12px; font-weight: 400; }
+.system-user-form input,.system-user-form select { min-height: 42px; }
+.system-user-form [data-slot="dialog-footer"] { position: sticky; bottom: 0; padding-top: 8px; background: white; }
 .system-page .auth-form-error { color: #b42318; font-size: 13px; line-height: 1.5; }
 .system-page .data-loading { min-height: 120px; display: grid; place-items: center; color: #58667b; font-size: 14px; }
 .system-user-table td:first-child { max-width: 250px; overflow-wrap: anywhere; }

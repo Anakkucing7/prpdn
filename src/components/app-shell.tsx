@@ -11,7 +11,7 @@ import {api} from '@/lib/api-client';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
+function Navigation({ collapsed = false, onNavigate, roleId }: { collapsed?: boolean; onNavigate?: () => void; roleId?: string }) {
   const pathname = usePathname();
   const itemLink = (item: NavigationItem) => <Link key={item.slug} href={`/admin/${item.slug}`} onClick={onNavigate}
     aria-current={pathname.replace(/\/$/, "") === `/admin/${item.slug}` ? "page" : undefined} title={collapsed ? item.label : undefined} className="nav-item">
@@ -20,13 +20,13 @@ function Navigation({ collapsed = false, onNavigate }: { collapsed?: boolean; on
   return <nav aria-label="Navigasi utama" className="navigation">
     <div className="navigation-groups">{navigation.map(group => <div className="nav-group" key={group.label}>
       {group.label !== "Ringkasan" ? <p className={collapsed ? "sr-only" : "nav-group-label"}>{group.label}</p> : null}
-      {group.items.map(itemLink)}
+      {group.items.filter(item => item.slug!=='activity'||['administrator','super-admin'].includes(roleId??'')).filter(item => item.slug!=='roles'||roleId==='super-admin').map(itemLink)}
     </div>)}</div>
     <div className="navigation-bottom"><Link href="/" onClick={onNavigate} className="nav-item" title={collapsed ? "Lihat Situs Publik" : undefined}><Globe aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>Lihat Situs Publik</span></Link>{!collapsed ? <p className="sidebar-footnote">Data pembangunan daerah</p> : null}</div>
   </nav>;
 }
 
-export function AppShell({ children,profile }: { children: React.ReactNode;profile?:{name:string;role:string} }) {
+export function AppShell({ children,profile }: { children: React.ReactNode;profile?:{name:string;role:string;roleId?:string} }) {
   const router=useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -41,7 +41,7 @@ export function AppShell({ children,profile }: { children: React.ReactNode;profi
     <a href="#main-content" className="skip-link">Lewati ke konten utama</a>
     <aside className="desktop-sidebar">
       <Link href="/admin/dashboard" className="brand" aria-label="PRPDN, dashboard"><strong>{collapsed ? "P" : "PRPDN"}<span className="brand-accent" /></strong>{!collapsed ? <span>Data pembangunan daerah</span> : null}</Link>
-      <Navigation collapsed={collapsed} />
+      <Navigation collapsed={collapsed} roleId={profile?.roleId} />
     </aside>
     <div className="workspace">
       <header className="topbar">
@@ -51,7 +51,7 @@ export function AppShell({ children,profile }: { children: React.ReactNode;profi
             <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu" aria-label="Buka navigasi"><Menu /></Button></SheetTrigger>
             <SheetContent side="left" className="navigation-sheet">
               <SheetHeader><SheetTitle>PRPDN</SheetTitle><SheetDescription>Data pembangunan daerah</SheetDescription></SheetHeader>
-              <Navigation onNavigate={() => setMobileOpen(false)} />
+              <Navigation roleId={profile?.roleId} onNavigate={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>
           <span className="workspace-label">Ruang kerja administrasi</span>

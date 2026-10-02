@@ -13,7 +13,8 @@ export async function sessionUser(requestHeaders?:Headers){
 }
 export async function authorize(module:PermissionModule,permission:Permission='view',requestHeaders?:Headers){
   const user=await sessionUser(requestHeaders);
-  if(!permitted(user.role.permissions as Permissions,module,permission))throw new HttpError(403,'Anda tidak memiliki izin untuk tindakan ini.');
+  if(module==='activity'&&!['administrator','super-admin'].includes(user.roleId))throw new HttpError(403,'Log Aktivitas hanya dapat diakses Admin dan Super Admin.');
+  if(user.roleId!=='super-admin'&&!permitted(user.role.permissions as Permissions,module,permission))throw new HttpError(403,'Anda tidak memiliki izin untuk tindakan ini.');
   return user;
 }
 export function sameOrigin(request:Request){

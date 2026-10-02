@@ -26,6 +26,7 @@ const links = [
 export default function PublicShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeHref, setActiveHref] = useState('/');
   const pathname = usePathname();
   const authPage = ['/login', '/register'].includes(pathname.replace(/\/+$/, ''));
 
@@ -38,15 +39,34 @@ export default function PublicShell({ children }: { children: React.ReactNode })
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (pathname !== '/') { setActiveHref(''); return; }
+        let current = '/';
+        if (window.scrollY >= 100) for (const [href] of links.slice(1)) {
+          const target = document.getElementById(href.split('#')[1]);
+          if (target && target.getBoundingClientRect().top <= 120) current = href;
+        }
+        setActiveHref(current);
+      });
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => { window.removeEventListener('scroll', update); cancelAnimationFrame(frame); };
+  }, [pathname]);
+
   const navigation = (
     <>
       {links.map(([href, label]) => {
-        const isCurrent = (href === '/' && pathname === '/') || (href !== '/' && pathname === href);
+        const isCurrent = href === activeHref && pathname === '/';
         return (
           <Link
             key={href}
             href={href}
-            aria-current={isCurrent ? 'page' : undefined}
+            aria-current={isCurrent ? href === '/' ? 'page' : 'location' : undefined}
             onClick={() => setOpen(false)}
             className="public-nav-link"
           >

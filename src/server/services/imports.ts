@@ -12,7 +12,7 @@ import {permitted,type Permissions} from '@/lib/permissions';
 export type Actor=User&{role:{permissions:Prisma.JsonValue}};
 export function datasetPermission(actor:Actor,dataset:string,action:'view'|'manage'){
  const key=dataset==='idsd-pillar'?'idsd':dataset;
- if(!Object.hasOwn(datasets,dataset)||!permitted(actor.role.permissions as Permissions,key as 'idsd',action))throw new HttpError(403,'Izin dataset tidak mencukupi.');
+ if(!Object.hasOwn(datasets,dataset)||(actor.roleId!=='super-admin'&&!permitted(actor.role.permissions as Permissions,key as 'idsd',action)))throw new HttpError(403,'Izin dataset tidak mencukupi.');
 }
 const datasetSchema=z.enum(Object.keys(datasets) as [TransferDataset,...TransferDataset[]]);
 const mappingSchema=z.record(z.string(),z.string().max(191));
@@ -51,7 +51,7 @@ async function summary(id:string){
  return counts;
 }
 export async function batchHistory(actor:Actor,page=1){
- const allowed=Object.keys(datasets).filter(d=>permitted(actor.role.permissions as Permissions,(d==='idsd-pillar'?'idsd':d) as 'idsd','view'));
+ const allowed=actor.roleId==='super-admin'?Object.keys(datasets):Object.keys(datasets).filter(d=>permitted(actor.role.permissions as Permissions,(d==='idsd-pillar'?'idsd':d) as 'idsd','view'));
  const where={dataset:{in:allowed},...(actor.roleId!=='super-admin'?{NOT:{filename:{endsWith:'.sql'}}}:{})};
  const [batches,total]=await Promise.all([db().importBatch.findMany({where,orderBy:{createdAt:'desc'},take:15,skip:(page-1)*15,include:{creator:{select:{name:true}}}}),db().importBatch.count({where})]);
  return {rows:await Promise.all(batches.map(async b=>({...b,counts:await summary(b.id)}))),total,page,size:15};

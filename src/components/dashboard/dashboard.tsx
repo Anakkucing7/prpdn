@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SelectField, StatusBadge } from "@/components/ui-patterns";
+import { YearMultiSelect } from "@/components/data/year-multi-select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { data, format, hasValue, mapColors, mean, metricKeys, metrics, observation, type Metric } from "@/lib/dashboard";
@@ -71,6 +72,7 @@ export default function Dashboard() {
   const [ascending, setAscending] = useState(false);
   const [query, setQuery] = useState("");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [comparisonYears, setComparisonYears] = useState<number[]>([year]);
   function setFilter(key: string, value: string) {
     const params = new URLSearchParams(searchParams.toString());
     params.set(key, value);
@@ -79,10 +81,24 @@ export default function Dashboard() {
 
     window.history.pushState(null, "", `?${params}`);
   }
-  function reset() { window.history.pushState(null, "", window.location.pathname); setQuery(""); setAscending(false); setShowAll(false); }
+  function reset() { window.history.pushState(null, "", window.location.pathname); setQuery(""); setAscending(false); setShowAll(false); setComparisonYears([2024]); }
 
   const definition = metrics[metric];
   const rows = scopedValues(metric, year, period);
+  const visibleMapYears = comparisonYears.filter(value => data.years.includes(value)).slice(-3);
+  function selectMapYear(value: number) { if (visibleMapYears.includes(value)) setFilter('year',String(value)); }
+  function toggleMapYear(value: number) {
+    if (visibleMapYears.includes(value)) {
+      if (visibleMapYears.length === 1) return;
+      const next = visibleMapYears.filter(item => item !== value);
+      setComparisonYears(next);
+      if (value === year) setFilter('year',String(next.at(-1)));
+    } else if (visibleMapYears.length < 3) { setComparisonYears([...visibleMapYears, value].sort((a,b) => a-b)); setFilter('year',String(value)); }
+  }
+  const mapDescriptions = Object.fromEntries(scope.map(region => {
+    const values = visibleMapYears.map(value => `${value}: ${format(recordFor(metric, value, region.code, period)?.value)} ${definition.unit}`);
+    return [region.code, [definition.label, ...values].join('\n')];
+  }));
   const available = rows.filter(hasValue);
   const sorted = [...available].sort((a, b) => b.value - a.value || a.label.localeCompare(b.label, "id"));
   const high = sorted[0];
@@ -140,7 +156,7 @@ export default function Dashboard() {
     <PageHeader title="Dashboard" description="Pantau indikator pembangunan dan ketersediaan data wilayah." parent="Ringkasan" actions={<Methodology />} />
     <RegionLevel value={level} onChange={v => setFilter("level",v)} /><div className="mobile-filter-bar"><Button variant="outline" aria-expanded={filtersOpen} aria-controls="dashboard-filters" onClick={() => setFiltersOpen(!filtersOpen)}><SlidersHorizontal />Filter dashboard<ChevronDown className={filtersOpen ? "rotate-180" : ""} /></Button><span>{year} · {definition.label} · {selected?.label ?? `Semua ${levelLabel}`}</span></div>
     <div id="dashboard-filters" className="dashboard-filters" data-open={filtersOpen} aria-label="Filter dashboard">
-      <SelectField label="Tahun" value={String(year)} onValueChange={v => setFilter("year", v)} options={[...data.years].reverse().map(y => ({ value: String(y), label: String(y) }))} />
+      <YearMultiSelect years={[...data.years].reverse()} selected={visibleMapYears} onToggle={toggleMapYear} />
       <SelectField label="Indikator peta & peringkat" value={metric} onValueChange={v => setFilter("indicator", v)} options={metricKeys.map(k => ({ value: k, label: metrics[k].label }))} />
       <RegionalControls level={level} province={parent} kind={kind} selected={code} onChange={(field,v) => setFilter(field==='province'?'parent':field,v)} />
       <SelectField label="Periode kemiskinan" value={period} onValueChange={v => setFilter("period", v)} options={[{ value: "Maret", label: "Maret" }, { value: "September", label: "September" }]} />
@@ -157,7 +173,7 @@ export default function Dashboard() {
 
     <div className="spatial-grid">
       <Panel title={`Peta ${definition.label}`} description={`${year}${metric === "poverty" ? ` · ${period}` : ""} · Pilih wilayah untuk melihat profil`} className="map-panel" action={<StatusBadge>{available.length}/{rows.length} tersedia</StatusBadge>}>
-        <ProvinceMap rows={rows} regions={scope} selected={code} onSelect={v => setFilter("region", v)} min={min} max={max} label={definition.label} unit={definition.unit} year={year} />
+        <ProvinceMap rows={rows} regions={scope} selected={code} onSelect={v => setFilter("region", v)} min={min} max={max} label={definition.label} unit={definition.unit} year={year} comparisonYears={visibleMapYears} onMapYearChange={selectMapYear} descriptions={mapDescriptions} />
         <div className="map-legend"><span>{definition.unit}</span><div className="legend-scale"><span>{format(available.length ? min : null)}</span><div>{mapColors.map(color => <i key={color} style={{ background: color }} />)}</div><span>{format(available.length ? max : null)}</span></div><span className="no-data-key"><i />Tidak tersedia</span></div>
         <p className="map-note"><CircleHelp aria-hidden="true" />{scope.filter(r => r.boundary).length} batas {levelLabel} dari BIG Juni 2026, disederhanakan. Klik poligon untuk memilih wilayah.</p>
       </Panel>

@@ -7,6 +7,7 @@ import ActivityPage from "@/components/data/activity-page";
 import SettingsPage from "@/components/data/settings-page";
 import analytical from "@/data/analytical.json";
 import {readAnalytical} from '@/server/services/analytical-read';
+import { authorize } from '@/server/access';
 export const dynamic='force-dynamic';
 import { type AnalyticalModule } from "@/lib/analytical";
 import "@/components/data/data-pages.css";
@@ -28,9 +29,9 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
   const group = navigation.find(group => group.items.some(item => item.slug === module));
   const item = group?.items.find(item => item.slug === module);
   if (!item) notFound();
-  if (module === 'users') return <UsersPage />;
+  if (module === 'users') { const actor=await authorize('users','view'); return <UsersPage roleId={actor.roleId} currentUserId={actor.id}/>; }
   if (module === 'roles') return <RolesPage />;
-  if (module === 'activity') return <ActivityPage />;
+  if (module === 'activity') { await authorize('activity','view'); return <ActivityPage />; }
   if (module === 'settings') return <SettingsPage />;
   if (Object.hasOwn(analytical.modules, module)) {
     const key = module as AnalyticalModule;

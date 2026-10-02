@@ -19,6 +19,8 @@ export async function saveUser(id:string|undefined,payload:unknown,actor:User){
   return db().$transaction(async tx=>{
     const before=id?await tx.user.findUnique({where:{id},select:userSelect}):null;
     if(id&&!before)throw new HttpError(404,'Pengguna tidak ditemukan.');
+    if(!before&&value.roleId==='super-admin')throw new HttpError(403,'Akun Super Admin hanya dibuat melalui bootstrap satu kali.');
+    if(actor.roleId==='administrator'&&(value.roleId!=='public-viewer'||before?.roleId!=='public-viewer'&&!!before))throw new HttpError(403,'Administrator hanya dapat mengelola akun pengguna dengan role Public Viewer.');
     if(before&&value.updatedAt!==before.updatedAt.toISOString())throw new HttpError(409,'Pengguna telah berubah. Muat ulang sebelum menyimpan.');
     if(actor.roleId!=='super-admin'&&(value.roleId==='super-admin'||before?.roleId==='super-admin'))throw new HttpError(403,'Hanya Super Admin dapat mengelola akun Super Admin.');
     if(id===actor.id&&(!value.active||value.roleId!==actor.roleId))throw new HttpError(422,'Anda tidak dapat menonaktifkan atau mengubah role akun sendiri.');
@@ -31,11 +33,25 @@ export async function saveUser(id:string|undefined,payload:unknown,actor:User){
     return after;
   },{isolationLevel:'Serializable'});
 }
+export async function deleteUser(id:string,actor:User){
+  return db().$transaction(async tx=>{
+    const before=await tx.user.findUnique({where:{id},select:userSelect});
+    if(!before)throw new HttpError(404,'Pengguna tidak ditemukan.');
+    if(id===actor.id)throw new HttpError(422,'Anda tidak dapat menghapus akun sendiri.');
+    if(actor.roleId==='administrator'&&before.roleId!=='public-viewer')throw new HttpError(403,'Administrator hanya dapat menghapus akun Public Viewer.');
+    if(before.roleId==='super-admin'&&before.active&&await tx.user.count({where:{roleId:'super-admin',active:true}})<=1)throw new HttpError(409,'Minimal satu Super Admin aktif harus dipertahankan.');
+    if(await tx.importBatch.count({where:{creatorId:id}}))throw new HttpError(409,'Akun ini memiliki riwayat import. Nonaktifkan akun agar jejak audit tetap utuh.');
+    await tx.user.delete({where:{id}});
+    await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:'DELETE',module:'users',entity:id,before:auditJson(before),after:Prisma.DbNull}});
+    return {id};
+  },{isolationLevel:'Serializable'});
+}
 export async function reviewUserRegistration(id:string,status:'APPROVED'|'REJECTED',actor:User){
   if(!['administrator','super-admin'].includes(actor.roleId))throw new HttpError(403,'Persetujuan akun hanya dapat dilakukan Administrator atau Super Admin.');
   return db().$transaction(async tx=>{
     const before=await tx.user.findUnique({where:{id},select:userSelect});
     if(!before)throw new HttpError(404,'Pendaftar tidak ditemukan.');
+    if(actor.roleId==='administrator'&&before.roleId!=='public-viewer')throw new HttpError(403,'Administrator hanya dapat menyetujui pendaftaran akun pengguna.');
     if(before.approvalStatus!=='PENDING')throw new HttpError(409,'Pendaftaran ini sudah ditinjau. Muat ulang daftar pengguna.');
     const after=await tx.user.update({where:{id,approvalStatus:'PENDING'},data:{approvalStatus:status,active:status==='APPROVED'},select:userSelect});
     await tx.session.deleteMany({where:{userId:id}});

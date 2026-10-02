@@ -7,6 +7,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { SelectField } from '@/components/ui-patterns';
+import { YearMultiSelect } from '@/components/data/year-multi-select';
 import { DataFilters, NoResults, Pagination } from '@/components/data/data-controls';
 import { TrendDelta } from '@/components/trend-delta';
 import { regions, matchesQuery, levelName } from '@/lib/regions';
@@ -40,6 +41,7 @@ export default function PublicExplorer() {
   const [kind, setKind] = useState('all');
   const [metric, setMetric] = useState<Metric>('idsd');
   const [year, setYear] = useState(2024);
+  const [comparisonYears, setComparisonYears] = useState<number[]>([2024]);
   const [period, setPeriod] = useState('Maret');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string | null>(null);
@@ -49,6 +51,21 @@ export default function PublicExplorer() {
     metric === 'idsd'
       ? idsdYears
       : [...new Set(data.records.filter((r) => r.metric === metric).map((r) => r.year))].sort();
+  const mapYears = comparisonYears.filter(value => years.includes(value)).slice(-3);
+  const visibleMapYears = mapYears.length ? mapYears : years.slice(-3);
+
+  function selectMapYear(value: number) {
+    if (visibleMapYears.includes(value)) setYear(value);
+  }
+
+  function toggleMapYear(value: number) {
+    if (visibleMapYears.includes(value)) {
+      if (visibleMapYears.length === 1) return;
+      const next = visibleMapYears.filter(item => item !== value);
+      setComparisonYears(next);
+      if (value === year) setYear(next.at(-1)!);
+    } else if (visibleMapYears.length < 3) { setComparisonYears([...visibleMapYears, value].sort((a,b) => a-b)); setYear(value); }
+  }
 
   const scopedRegions = regions.filter((r) => matchesRegion(r, level, province, kind));
   const filtered = scopedRegions.filter((r) => matchesQuery(query, r.code, r.name));
@@ -67,16 +84,9 @@ export default function PublicExplorer() {
   const max = values.length ? Math.max(...values) : 0;
 
   const colors = Object.fromEntries(filtered.map((r) => [r.code, valueColor(value(r.code, year), min, max)]));
-  const descriptions = Object.fromEntries(
-    filtered.map((r) => [
-      r.code,
-      `${metrics[metric].label} ${year}: ${format(value(r.code, year))} · ${deltaText(
-        value(r.code, year),
-        value(r.code, year - 1),
-        year - 1
-      )}`,
-    ])
-  );
+  const descriptions = Object.fromEntries(filtered.map((region) => [region.code,
+    `${metrics[metric].label}\n${visibleMapYears.map(selectedYear => `${selectedYear}: ${format(value(region.code, selectedYear))} ${metrics[metric].unit}`).join('\n')}`,
+  ]));
 
   const region = filtered.find((r) => r.code === selected);
   const currentPage = Math.min(page, Math.max(1, Math.ceil(filtered.length / 10)));
@@ -100,6 +110,7 @@ export default function PublicExplorer() {
       setQuery('');
       setMetric('idsd');
       setYear(2024);
+      setComparisonYears([2024]);
       setPeriod('Maret');
     });
   }
@@ -123,6 +134,7 @@ export default function PublicExplorer() {
       setQuery('');
       setMetric('idsd');
       setYear(2024);
+      setComparisonYears(idsdYears.slice(-3));
     });
   }
 
@@ -152,6 +164,7 @@ export default function PublicExplorer() {
                     setProvince('all');
                     setMetric('idsd');
                     setYear(2024);
+                    setComparisonYears([2024]);
                   });
               }}
             />
@@ -160,25 +173,17 @@ export default function PublicExplorer() {
               value={metric}
               onValueChange={(v) => {
                 setMetric(v as Metric);
-                setYear(
-                  Math.max(
-                    ...(v === 'idsd'
-                      ? idsdYears
-                      : data.records.filter((r) => r.metric === v).map((r) => r.year))
-                  )
-                );
+                const availableYears = v === 'idsd' ? idsdYears : [...new Set(data.records.filter((r) => r.metric === v).map((r) => r.year))].sort();
+                const latestYear = Math.max(...availableYears);
+                setYear(latestYear);
+                setComparisonYears([latestYear]);
               }}
               options={(level === 'PROV' ? metricKeys : (['idsd'] as Metric[])).map((m) => ({
                 value: m,
                 label: metrics[m].name,
               }))}
             />
-            <SelectField
-              label="Tahun"
-              value={String(year)}
-              onValueChange={(v) => setYear(Number(v))}
-              options={years.map((y) => ({ value: String(y), label: String(y) }))}
-            />
+            <YearMultiSelect years={[...years].reverse()} selected={visibleMapYears} onToggle={toggleMapYear} />
             {metric === 'poverty' && (
               <SelectField
                 label="Periode"
@@ -240,6 +245,9 @@ export default function PublicExplorer() {
               onSelect={select}
               colors={colors}
               descriptions={descriptions}
+              comparisonYears={visibleMapYears}
+              mapYear={year}
+              onMapYearChange={selectMapYear}
             />
 
             <div className="public-map-legend">
@@ -277,17 +285,11 @@ export default function PublicExplorer() {
             {region ? (
               <>
                 <p className="summary-code">Kode wilayah {region.code}</p>
-                <div className="public-score">
-                  <span>{metrics[metric].label} {year}</span>
-                  <div className="score-val-row">
-                    <strong>{format(value(region.code, year))}</strong>
-                    <small>{metrics[metric].unit}</small>
-                  </div>
-                  <TrendDelta
-                    current={value(region.code, year)}
-                    previous={value(region.code, year - 1)}
-                    year={year}
-                  />
+                <div className="public-score-years" aria-label={`Nilai ${metrics[metric].label} untuk tahun yang dipilih`}>
+                  {visibleMapYears.map(selectedYear => <div className="public-score" key={selectedYear}>
+                    <span>{metrics[metric].label} {selectedYear}</span>
+                    <div className="score-val-row"><strong>{format(value(region.code, selectedYear))}</strong><small>{metrics[metric].unit}</small></div>
+                  </div>)}
                 </div>
                 <p className="summary-subtext">Bandingkan perubahan antarwaktu pada grafik dan tabel di bawah peta.</p>
                 {region.level === 'PROV' && (
@@ -306,17 +308,15 @@ export default function PublicExplorer() {
                 <p className="summary-subtext">
                   {metrics[metric].name} pada tingkat {level === 'PROV' ? 'provinsi' : 'kabupaten/kota'}.
                 </p>
-                <div className="public-score">
-                  <span>Ketersediaan nilai {year}</span>
-                  <div className="score-val-row">
-                    <strong>{values.length}</strong>
-                    <small>/ {filtered.length} wilayah</small>
-                  </div>
-                  <progress
-                    max={Math.max(1, filtered.length)}
-                    value={values.length}
-                    aria-label={`${values.length} dari ${filtered.length} wilayah memiliki nilai`}
-                  />
+                <div className="public-score-years" aria-label="Ketersediaan nilai untuk tahun yang dipilih">
+                  {visibleMapYears.map(selectedYear => {
+                    const availableCount = filtered.filter(item => value(item.code, selectedYear) !== null).length;
+                    return <div className="public-score" key={selectedYear}>
+                      <span>Ketersediaan nilai {selectedYear}</span>
+                      <div className="score-val-row"><strong>{availableCount}</strong><small>/ {filtered.length} wilayah</small></div>
+                      <progress max={Math.max(1, filtered.length)} value={availableCount} aria-label={`${availableCount} dari ${filtered.length} wilayah memiliki nilai pada ${selectedYear}`} />
+                    </div>;
+                  })}
                 </div>
                 <div className="map-selection-hint">
                   <MapPinned size={18} aria-hidden="true" />

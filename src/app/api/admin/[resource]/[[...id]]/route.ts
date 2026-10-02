@@ -1,7 +1,7 @@
 import { authorize, sameOrigin, HttpError } from '@/server/access';
 import { body, json, apiError } from '@/server/http';
 import { listMasters, mutateMaster } from '@/server/services/masters';
-import { listUsers, saveUser, reviewUserRegistration, listRoles, saveRole, saveSettings, activity } from '@/server/services/system';
+import { listUsers, saveUser, deleteUser, reviewUserRegistration, listRoles, saveRole, saveSettings, activity } from '@/server/services/system';
 import { db } from '@/server/db';
 import { permissionModules, type PermissionModule } from '@/lib/permissions';
 
@@ -24,7 +24,7 @@ async function handle(request:Request,{params}:Context){
       if(resource==='activity')return json(await activity(new URL(request.url).searchParams,user));
       if(resource==='settings')return json(await db().systemSetting.findUniqueOrThrow({where:{id:'general'}}));
     }else{
-      const input=await body(request);
+      const input=request.method==='DELETE'?undefined:await body(request);
       if(approvalRoute){
         const value=input as {status?:unknown}|null;
         if(!value||!['APPROVED','REJECTED'].includes(String(value.status)))throw new HttpError(422,'Pilih status persetujuan yang valid.');
@@ -35,6 +35,7 @@ async function handle(request:Request,{params}:Context){
         return json(await mutateMaster(resource,request.method,id?Number(id):undefined,input,user));
       }
       if(resource==='users'&&((request.method==='POST'&&!id)||(request.method==='PATCH'&&id)))return json(await saveUser(id,input,user));
+      if(resource==='users'&&request.method==='DELETE'&&id)return json(await deleteUser(id,user));
       if(resource==='roles'&&request.method==='PATCH'&&id)return json(await saveRole(id,input,user));
       if(resource==='settings'&&request.method==='PATCH'&&!id)return json(await saveSettings(input,user));
     }

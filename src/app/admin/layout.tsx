@@ -5,7 +5,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   let profile;
   try {
     const user = await sessionUser();
-    profile = { name: user.name, role: user.role.name };
+    profile = { name: user.name, role: user.role.name, roleId: user.roleId };
   } catch (error) {
     if (error instanceof HttpError && error.status === 401) redirect('/login/?next=%2Fadmin%2Fdashboard%2F');
     throw error;
