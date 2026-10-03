@@ -77,7 +77,7 @@ export async function saveRole(id:string,payload:unknown,actor:User){
     return after;
   });
 }
-const settingsSchema=z.object({name:z.string().trim().min(1).max(80),description:z.string().trim().min(1).max(200),year:z.number().int(),province:z.string().max(10),pageSize:z.union([z.literal(10),z.literal(15),z.literal(25)]),version:z.number().int().positive()}).strict();
+const settingsSchema=z.object({name:z.string().trim().min(1).max(80),description:z.string().trim().min(1).max(200),publicRegistrationOpen:z.boolean(),year:z.number().int(),province:z.string().max(10),pageSize:z.union([z.literal(10),z.literal(15),z.literal(25)]),version:z.number().int().positive()}).strict();
 export async function saveSettings(payload:unknown,actor:User){
   const value=settingsSchema.parse(payload);
   if(!await db().year.findUnique({where:{year:value.year}}))throw new HttpError(422,'Tahun tidak ada pada master.');

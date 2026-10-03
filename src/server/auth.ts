@@ -18,7 +18,7 @@ function createAuth() {
     rateLimit:{enabled:true,storage:'database',window:60,max:100,customRules:{'/sign-in/email':{window:60,max:5},'/sign-in/username':{window:60,max:5},'/sign-up/email':{window:3600,max:5}}},
     plugins:[username({minUsernameLength:3,maxUsernameLength:40,usernameValidator:value=>/^[a-zA-Z0-9._-]+$/.test(value)})],
     databaseHooks:{user:{create:{
-      before:async user=>({data:{...user,roleId:'public-viewer',active:false,approvalStatus:'PENDING'}}),
+      before:async user=>{const settings=await db().systemSetting.findUnique({where:{id:'general'},select:{publicRegistrationOpen:true}});if(!settings?.publicRegistrationOpen)throw new APIError('FORBIDDEN',{message:'Pendaftaran akun sedang ditutup.'});return {data:{...user,roleId:'public-viewer',active:false,approvalStatus:'PENDING'}};},
       after:async user=>{await db().auditLog.create({data:{actorId:user.id,actorName:user.name,action:'REGISTER',module:'auth',entity:user.id}});},
     },update:{after:async user=>{await db().auditLog.create({data:{actorId:user.id,actorName:user.name,action:'UPDATE_ACCOUNT',module:'account',entity:user.id,after:{email:user.email,username:user.username??null}}});}}},account:{update:{after:async account=>{
       if(account.providerId!=='credential')return;

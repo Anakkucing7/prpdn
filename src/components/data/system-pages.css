@@ -24,5 +24,19 @@
 .system-settings-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
 .system-settings-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .system-settings-footer p { font-size: 13px; color: #58667b; }
+.settings-registration-toggle { display: flex; align-items: center; gap: 14px; padding: 16px; border: 1px solid #dfe5ee; border-radius: 8px; background: #f8fafc; cursor: pointer; }
+.settings-registration-toggle input { width: 20px; height: 20px; accent-color: #1769c2; flex: 0 0 auto; }
+.settings-registration-toggle > span:nth-child(2) { display: grid; gap: 5px; flex: 1; }
+.settings-registration-toggle strong { font-size: 14px; color: #18263c; }
+.settings-registration-toggle small,.settings-account-stats small { color: #58667b; font-size: 12px; line-height: 1.5; }
+.settings-state-open,.settings-state-closed { border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 650; }
+.settings-state-open { background: #eaf6ef; color: #187047; }
+.settings-state-closed { background: #fceeed; color: #b42318; }
+.settings-account-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border: 1px solid #dfe5ee; border-radius: 8px; }
+.settings-account-stats > div { display: grid; align-content: start; gap: 5px; padding: 16px 18px; }
+.settings-account-stats > div + div { border-left: 1px solid #dfe5ee; }
+.settings-account-stats strong { color: #112f49; font-size: 24px; line-height: 1.1; }
+.settings-account-stats span { color: #58667b; font-size: 13px; }
+.settings-account-stats a { width: fit-content; color: #1769c2; font-size: 12px; font-weight: 600; }
 @media (max-width: 1279px) { .system-role-list { grid-template-columns: repeat(2,minmax(0,1fr)); } .system-settings-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@media (max-width: 767px) { .system-role-list,.system-settings-grid { grid-template-columns: 1fr; } .system-settings-fields { padding: 20px 16px; } .system-settings-footer { flex-direction: column; align-items: stretch; } .system-settings-footer .system-actions { flex-direction: column-reverse; } .system-page .data-filter-fields { grid-template-columns: 1fr; } }
+@media (max-width: 767px) { .system-role-list,.system-settings-grid,.settings-account-stats { grid-template-columns: 1fr; } .system-settings-fields { padding: 20px 16px; } .system-settings-footer { flex-direction: column; align-items: stretch; } .system-settings-footer .system-actions { flex-direction: column-reverse; } .system-page .data-filter-fields { grid-template-columns: 1fr; } .settings-account-stats > div + div { border-left: 0; border-top: 1px solid #dfe5ee; } }

@@ -108,6 +108,7 @@ model SystemSetting {
   id          String   @id @default("general") @db.VarChar(40)
   name        String   @default("PRPDN") @db.VarChar(80)
   description String   @default("Data pembangunan daerah") @db.VarChar(200)
+  publicRegistrationOpen Boolean @default(true)
   year        Int      @default(2024)
   province    String   @default("all") @db.VarChar(10)
   pageSize    Int      @default(15)

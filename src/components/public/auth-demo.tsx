@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { api, RequestError } from '@/lib/api-client';
 
-export default function AuthDemo() {
+export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -36,6 +36,8 @@ export default function AuthDemo() {
     } catch (cause) {
       setError(cause instanceof RequestError && cause.status === 429
         ? 'Terlalu banyak permintaan pendaftaran. Coba kembali satu jam lagi.'
+        : cause instanceof RequestError && cause.status === 403
+          ? 'Pendaftaran akun sedang ditutup oleh administrator.'
         : 'Pendaftaran belum dapat diproses. Periksa kembali data dan pastikan email serta username belum digunakan.');
     } finally {
       setBusy(false);
@@ -49,7 +51,11 @@ export default function AuthDemo() {
       <h1>Ajukan akses akun.</h1>
       <p className="auth-intro-desc">Isi data diri untuk mengajukan akses. Administrator akan memeriksa permintaan sebelum akun dapat digunakan.</p>
     </div>
-    {submitted ? <div className="public-auth-form" role="status" aria-live="polite">
+    {!registrationOpen ? <div className="public-auth-form" role="status">
+      <h2>Pendaftaran sedang ditutup</h2>
+      <p className="auth-intro-desc">Administrator sedang membatasi pembuatan akun baru. Jika Anda sudah memiliki akun, silakan masuk.</p>
+      <Button asChild className="auth-submit-btn"><Link href="/login/">Ke halaman masuk</Link></Button>
+    </div> : submitted ? <div className="public-auth-form" role="status" aria-live="polite">
       <CheckCircle2 className="register-success-icon" aria-hidden="true" />
       <h2>Permintaan terkirim</h2>
       <p className="auth-intro-desc">Akun Anda menunggu aktivasi Administrator atau Super Admin. Anda dapat masuk setelah pendaftaran disetujui.</p>

@@ -10,7 +10,7 @@ export function validateUser(draft:UserDraft, others:DemoUser[]) {
   if(!roles.includes(draft.role)) errors.role='Pilih role yang tersedia.';
   return errors;
 }
-export type SettingsDraft = { name:string; description:string; year:string; province:string; pageSize:string };
+export type SettingsDraft = { name:string; description:string; publicRegistrationOpen:boolean; year:string; province:string; pageSize:string };
 export function validateSettings(draft:SettingsDraft) {
   const errors:Partial<Record<keyof SettingsDraft,string>>={};
   if(!draft.name.trim() || draft.name.trim().length>80) errors.name='Isi nama aplikasi, maksimal 80 karakter.';

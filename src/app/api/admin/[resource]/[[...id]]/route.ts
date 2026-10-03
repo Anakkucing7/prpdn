@@ -22,7 +22,14 @@ async function handle(request:Request,{params}:Context){
       if(resource==='users')return json(await listUsers());
       if(resource==='roles')return json(await listRoles());
       if(resource==='activity')return json(await activity(new URL(request.url).searchParams,user));
-      if(resource==='settings')return json(await db().systemSetting.findUniqueOrThrow({where:{id:'general'}}));
+      if(resource==='settings'){
+        const [settings,pendingRegistrations,activeAccounts]=await Promise.all([
+          db().systemSetting.findUniqueOrThrow({where:{id:'general'}}),
+          db().user.count({where:{approvalStatus:'PENDING'}}),
+          db().user.count({where:{active:true,approvalStatus:'APPROVED'}}),
+        ]);
+        return json({...settings,pendingRegistrations,activeAccounts});
+      }
     }else{
       const input=request.method==='DELETE'?undefined:await body(request);
       if(approvalRoute){
