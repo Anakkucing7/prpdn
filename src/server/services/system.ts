@@ -29,7 +29,7 @@ export async function saveUser(id:string|undefined,payload:unknown,actor:User){
     const userId=id??randomUUID();
     const after=id?await tx.user.update({where:{id,updatedAt:before!.updatedAt},data:fields,select:userSelect}):await tx.user.create({data:{...fields,id:userId,accounts:{create:{id:randomUUID(),accountId:userId,providerId:'credential',password}}},select:userSelect});
     if(before&&(before.roleId!==after.roleId||before.active!==after.active||before.email!==after.email))await tx.session.deleteMany({where:{userId}});
-    await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:id?'UPDATE':'CREATE',module:'users',entity:userId,before:before?auditJson(before):Prisma.DbNull,after:auditJson(after)}});
+    await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:id?'UPDATE_ACCOUNT':'CREATE',module:'users',entity:userId,before:before?auditJson(before):Prisma.DbNull,after:auditJson(after)}});
     return after;
   },{isolationLevel:'ReadCommitted'});
 }
@@ -95,7 +95,7 @@ export async function activity(query:URLSearchParams,user:User){
   const restricted=!['administrator','super-admin'].includes(user.roleId);
   const q=(query.get('q')||'').slice(0,100);
   const selectedActor=query.get('actor');
-  const where:Prisma.AuditLogWhereInput={...(restricted?{actorId:user.id}:selectedActor==='system'&&user.roleId==='administrator'?{actor:{roleId:'super-admin'}}:selectedActor?{actorId:selectedActor}:{}),...(query.get('module')?{module:query.get('module')!}:{}),...(query.get('action')?{action:query.get('action')!}:{}),...(start||end?{createdAt:{gte:start,lte:end}}:{}),...(q?{OR:[{actorName:{contains:q}},{entity:{contains:q}},{action:{contains:q}},{module:{contains:q}}]}:{})};
+  const where:Prisma.AuditLogWhereInput={NOT:[{action:{in:['LOGIN','LOGOUT']}},{action:{startsWith:'ROW_'}}],...(restricted?{actorId:user.id}:selectedActor==='system'&&user.roleId==='administrator'?{actor:{roleId:'super-admin'}}:selectedActor?{actorId:selectedActor}:{}),...(query.get('module')?{module:query.get('module')!}:{}),...(query.get('action')?{action:query.get('action')!}:{}),...(start||end?{createdAt:{gte:start,lte:end}}:{}),...(q?{OR:[{actorName:{contains:q}},{entity:{contains:q}},{action:{contains:q}},{module:{contains:q}}]}:{})};
   const [rows,total]=await Promise.all([db().auditLog.findMany({where,include:{actor:{select:{roleId:true}}},orderBy:{createdAt:query.get('sort')==='oldest'?'asc':'desc'},take:size,skip:(page-1)*size}),db().auditLog.count({where})]);
   return {rows:rows.map(({actor,...row})=>user.roleId==='administrator'&&actor?.roleId==='super-admin'?{...row,actorId:'system',actorName:'Administrator sistem',entity:row.entity===row.actorId?'—':row.entity}:row),total,page,size,restricted};
 }
