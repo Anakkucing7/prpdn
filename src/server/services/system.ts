@@ -94,7 +94,8 @@ export async function activity(query:URLSearchParams,user:User){
   const start=date('start'),end=date('end');if(start&&end&&start>end)throw new HttpError(422,'Tanggal akhir harus setelah tanggal awal.');
   const restricted=!['administrator','super-admin'].includes(user.roleId);
   const q=(query.get('q')||'').slice(0,100);
-  const where:Prisma.AuditLogWhereInput={...(restricted?{actorId:user.id}:query.get('actor')?{actorId:query.get('actor')!}:{}),...(query.get('module')?{module:query.get('module')!}:{}),...(query.get('action')?{action:query.get('action')!}:{}),...(start||end?{createdAt:{gte:start,lte:end}}:{}),...(q?{OR:[{actorName:{contains:q}},{entity:{contains:q}},{action:{contains:q}},{module:{contains:q}}]}:{})};
-  const [rows,total]=await Promise.all([db().auditLog.findMany({where,orderBy:{createdAt:query.get('sort')==='oldest'?'asc':'desc'},take:size,skip:(page-1)*size}),db().auditLog.count({where})]);
-  return {rows,total,page,size,restricted};
+  const selectedActor=query.get('actor');
+  const where:Prisma.AuditLogWhereInput={...(restricted?{actorId:user.id}:selectedActor==='system'&&user.roleId==='administrator'?{actor:{roleId:'super-admin'}}:selectedActor?{actorId:selectedActor}:{}),...(query.get('module')?{module:query.get('module')!}:{}),...(query.get('action')?{action:query.get('action')!}:{}),...(start||end?{createdAt:{gte:start,lte:end}}:{}),...(q?{OR:[{actorName:{contains:q}},{entity:{contains:q}},{action:{contains:q}},{module:{contains:q}}]}:{})};
+  const [rows,total]=await Promise.all([db().auditLog.findMany({where,include:{actor:{select:{roleId:true}}},orderBy:{createdAt:query.get('sort')==='oldest'?'asc':'desc'},take:size,skip:(page-1)*size}),db().auditLog.count({where})]);
+  return {rows:rows.map(({actor,...row})=>user.roleId==='administrator'&&actor?.roleId==='super-admin'?{...row,actorId:'system',actorName:'Administrator sistem',entity:row.entity===row.actorId?'—':row.entity}:row),total,page,size,restricted};
 }
