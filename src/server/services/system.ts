@@ -31,7 +31,7 @@ export async function saveUser(id:string|undefined,payload:unknown,actor:User){
     if(before&&(before.roleId!==after.roleId||before.active!==after.active||before.email!==after.email))await tx.session.deleteMany({where:{userId}});
     await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:id?'UPDATE':'CREATE',module:'users',entity:userId,before:before?auditJson(before):Prisma.DbNull,after:auditJson(after)}});
     return after;
-  },{isolationLevel:'Serializable'});
+  },{isolationLevel:'ReadCommitted'});
 }
 export async function deleteUser(id:string,actor:User){
   return db().$transaction(async tx=>{
@@ -44,7 +44,7 @@ export async function deleteUser(id:string,actor:User){
     await tx.user.delete({where:{id}});
     await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:'DELETE',module:'users',entity:id,before:auditJson(before),after:Prisma.DbNull}});
     return {id};
-  },{isolationLevel:'Serializable'});
+  },{isolationLevel:'ReadCommitted'});
 }
 export async function reviewUserRegistration(id:string,status:'APPROVED'|'REJECTED',actor:User){
   if(!['administrator','super-admin'].includes(actor.roleId))throw new HttpError(403,'Persetujuan akun hanya dapat dilakukan Administrator atau Super Admin.');
@@ -57,7 +57,7 @@ export async function reviewUserRegistration(id:string,status:'APPROVED'|'REJECT
     await tx.session.deleteMany({where:{userId:id}});
     await tx.auditLog.create({data:{actorId:actor.id,actorName:actor.name,action:status==='APPROVED'?'APPROVE_REGISTRATION':'REJECT_REGISTRATION',module:'users',entity:id,before:auditJson(before),after:auditJson(after)}});
     return after;
-  },{isolationLevel:'Serializable'});
+  },{isolationLevel:'ReadCommitted'});
 }
 export async function listRoles(){return db().role.findMany({orderBy:{name:'asc'}});}
 export async function saveRole(id:string,payload:unknown,actor:User){
