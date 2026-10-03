@@ -8,6 +8,7 @@ import SettingsPage from "@/components/data/settings-page";
 import analytical from "@/data/analytical.json";
 import {readAnalytical} from '@/server/services/analytical-read';
 import { authorize } from '@/server/access';
+import { db } from '@/server/db';
 export const dynamic='force-dynamic';
 import { type AnalyticalModule } from "@/lib/analytical";
 import "@/components/data/data-pages.css";
@@ -35,7 +36,11 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
   if (module === 'settings') return <SettingsPage />;
   if (Object.hasOwn(analytical.modules, module)) {
     const key = module as AnalyticalModule;
-    return <AnalyticalPage key={key} module={key} data={await readAnalytical(key)} />;
+    const [data,settings]=await Promise.all([readAnalytical(key),db().systemSetting.findUniqueOrThrow({where:{id:'general'},select:{year:true,province:true,pageSize:true}})]);
+    const years=data.records.flatMap(record=>record.year===null?[]:[record.year]);
+    const year=years.includes(settings.year)?settings.year:years.length?Math.max(...years):settings.year;
+    const province=settings.province==='all'||data.records.some(record=>record.code===settings.province)?settings.province:'all';
+    return <AnalyticalPage key={key} module={key} data={data} defaults={{year,province,pageSize:settings.pageSize}} />;
   }
   notFound();
 }
