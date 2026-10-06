@@ -172,15 +172,25 @@ export default function PublicExplorer() {
               label="Indikator"
               value={metric}
               onValueChange={(v) => {
-                setMetric(v as Metric);
-                const availableYears = v === 'idsd' ? idsdYears : [...new Set(data.records.filter((r) => r.metric === v).map((r) => r.year))].sort();
+                const nextMetric = v as Metric;
+                const availableYears = nextMetric === 'idsd'
+                  ? idsdYears
+                  : [...new Set(data.records.filter((r) => r.metric === nextMetric).map((r) => r.year))].sort();
                 const latestYear = Math.max(...availableYears);
-                setYear(latestYear);
-                setComparisonYears([latestYear]);
+                change(() => {
+                  setMetric(nextMetric);
+                  if (nextMetric !== 'idsd' && level === 'KABKOTA') {
+                    setLevel('PROV');
+                    setProvince('all');
+                    setKind('all');
+                  }
+                  setYear(latestYear);
+                  setComparisonYears([latestYear]);
+                });
               }}
-              options={(level === 'PROV' ? metricKeys : (['idsd'] as Metric[])).map((m) => ({
+              options={metricKeys.map((m) => ({
                 value: m,
-                label: metrics[m].name,
+                label: `${metrics[m].name}${level === 'KABKOTA' && m !== 'idsd' ? ' · data provinsi' : ''}`,
               }))}
             />
             <YearMultiSelect years={[...years].reverse()} selected={visibleMapYears} onToggle={toggleMapYear} />
