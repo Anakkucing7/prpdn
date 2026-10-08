@@ -13,7 +13,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 
 function Navigation({ collapsed = false, onNavigate, roleId, description }: { collapsed?: boolean; onNavigate?: () => void; roleId?: string; description:string }) {
   const pathname = usePathname();
-  const itemLink = (item: NavigationItem) => <Link key={item.slug} href={`/admin/${item.slug}`} onClick={onNavigate}
+  const itemLink = (item: NavigationItem) => <Link key={item.slug} href={`/admin/${item.slug}`} prefetch={false} onClick={onNavigate}
     aria-current={pathname.replace(/\/$/, "") === `/admin/${item.slug}` ? "page" : undefined} title={collapsed ? item.label : undefined} className="nav-item">
     <item.icon aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>{item.label}</span>
   </Link>;
