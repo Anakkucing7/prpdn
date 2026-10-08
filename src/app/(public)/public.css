@@ -80,25 +80,27 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 }
 
 .public-site.is-home-page .public-header {
-  height: 110px;
-  min-height: 110px;
-  transition: height 0.25s ease, min-height 0.25s ease, background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease, box-shadow 0.25s ease;
+  height: 88px;
+  min-height: 88px;
+  transition: background 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .public-site.is-home-page .public-header.is-scrolled {
-  height: 78px;
-  min-height: 78px;
+  background: rgba(11, 39, 67, 0.97);
+  border-bottom: 0;
+  box-shadow: 0 4px 18px rgba(11, 39, 67, 0.1);
 }
+
+.public-site.is-home-page .public-header.is-top { border-bottom: 0; }
 
 .public-site.is-home-page .public-header-inner {
   max-width: 1672px;
-  padding-inline: clamp(24px, 5.2vw, 88px);
+  padding-inline: clamp(24px, 4.5vw, 70px);
 }
 
 .public-site.is-home-page .public-nav-link {
-  font-size: 15px;
-  padding: 10px 17px;
+  font-size: 13px;
+  padding: 8px 13px;
 }
 
 /* At the very top: transparent & merged with hero */
@@ -164,7 +166,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 }
 
 .public-site.is-home-page .public-brand img {
-  width: 158px;
+  width: 126px;
   padding: 0;
   background: transparent;
   border-radius: 0;
@@ -380,7 +382,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   z-index: 5;
   width: 100%;
   max-width: 1600px;
-  padding-top: clamp(180px, 22vh, 225px);
+  padding-top: clamp(160px, 20vh, 190px);
   padding-bottom: 56px;
 }
 

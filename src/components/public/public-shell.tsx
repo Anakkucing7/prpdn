@@ -88,7 +88,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
-            <Image src={homePage ? '/brin-logo-white.svg' : '/brin-logo.svg'} alt="Badan Riset dan Inovasi Nasional" width={homePage ? 158 : 94} height={homePage ? 61 : 36} priority />
+            <Image src={homePage ? '/brin-logo-white.svg' : '/brin-logo.svg'} alt="Badan Riset dan Inovasi Nasional" width={homePage ? 126 : 94} height={homePage ? 49 : 36} priority />
           </Link>
 
           <nav className="public-desktop-nav" aria-label="Navigasi publik">
@@ -167,7 +167,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                 <span className="public-brand-bar" aria-hidden="true" />
                 <strong>PRPDN</strong>
               </div>
-              <p className="footer-brand-sub">Portal Riset & Pembangunan Daerah Nasional</p>
+              <p className="footer-brand-sub">Pusat Riset Pemerintahan Dalam Negeri</p>
               <p className="footer-desc">
                 Platform terpadu indikator pembangunan daerah, Indeks Daya Saing Daerah (IDSD), dan analitika spasial Indonesia. Dirancang untuk riset kebijakan dan perencanaan berbasis bukti.
               </p>
