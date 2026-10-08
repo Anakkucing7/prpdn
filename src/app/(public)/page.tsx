@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, MapPinned, BookOpen, ChartNoAxesCombined, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PublicExplorer from '@/components/public/public-explorer';
@@ -16,7 +17,16 @@ export default function Home() {
     <>
       {/* Immersive Full-Width Hero with Photographic Indonesian Regional Development Background */}
       <section className="public-hero">
-        <div className="hero-media-layer" />
+        <div className="hero-media-layer">
+          <Image
+            src="/images/prpdn-hero-development.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hero-image"
+          />
+        </div>
         <div className="hero-gradient-layer" />
 
         <div className="public-container hero-body">
@@ -25,7 +35,7 @@ export default function Home() {
             <h1 className="hero-heading">
               Kenali daerah.
               <br />
-              Pahami perubahannya.
+              <span className="hero-heading-accent">Pahami perubahannya.</span>
             </h1>
             <p className="hero-lead">
               Indikator pembangunan terpadu dan informasi spasial Indonesia dalam satu ruang eksplorasi.

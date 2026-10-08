@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Menu, ArrowRight } from 'lucide-react';
+import { Menu, ArrowRight, Search } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,6 +29,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
   const [activeHref, setActiveHref] = useState('/');
   const pathname = usePathname();
   const authPage = ['/login', '/register'].includes(pathname.replace(/\/+$/, ''));
+  const homePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +79,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
   );
 
   return (
-    <div className="public-site">
+    <div className={`public-site ${homePage ? 'is-home-page' : ''}`}>
       <a href="#main-content" className="skip-link">
         Lewati ke konten utama
       </a>
@@ -87,7 +88,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
-            <Image src="/brin-logo.svg" alt="Badan Riset dan Inovasi Nasional" width={94} height={36} priority />
+            <Image src={homePage ? '/brin-logo-white.svg' : '/brin-logo.svg'} alt="Badan Riset dan Inovasi Nasional" width={homePage ? 158 : 94} height={homePage ? 61 : 36} priority />
           </Link>
 
           <nav className="public-desktop-nav" aria-label="Navigasi publik">
@@ -95,6 +96,11 @@ export default function PublicShell({ children }: { children: React.ReactNode })
           </nav>
 
           <div className="public-nav-actions">
+            {homePage && (
+              <Link className="public-search-link" href="#peta" aria-label="Buka pencarian wilayah">
+                <Search size={20} aria-hidden="true" />
+              </Link>
+            )}
             <Link
               className="public-signin-link"
               href="/login"
