@@ -220,7 +220,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   color: #ffffff;
 }
 
-.public-nav-link[aria-current="page"] {
+.public-nav-link[aria-current="page"],
+.public-nav-link[aria-current="location"] {
   background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
   font-weight: 600;
