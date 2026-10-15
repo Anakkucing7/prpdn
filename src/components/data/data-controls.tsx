@@ -12,7 +12,7 @@ export function DataFilters({ children, query, onQuery, onReset, summary, search
   return <section className="data-filter-section" aria-label="Pencarian dan filter">
     <div className="data-search-row"><Field><FieldLabel htmlFor={`${id}-search`}>{searchLabel}</FieldLabel><div className="data-search"><Search aria-hidden="true" /><Input id={`${id}-search`} type="search" placeholder={searchPlaceholder} value={query} onChange={e => onQuery(e.target.value)} /></div></Field><Button className="data-filter-toggle" variant="outline" aria-expanded={open} aria-controls={`${id}-filters`} onClick={() => setOpen(!open)}><SlidersHorizontal />Filter<ChevronDown className={open ? "rotate-180" : ""} /></Button></div>
     <div className="data-filter-fields" id={`${id}-filters`} data-open={open}>{children}<Button variant="ghost" onClick={onReset}><RotateCcw />Reset filter</Button></div>
-    <p className="data-filter-summary">{summary}</p>
+    <p className="data-filter-summary" role="status">{summary}</p>
   </section>;
 }
 

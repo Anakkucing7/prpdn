@@ -368,7 +368,7 @@ export default function PublicExplorer() {
             </div>
           </header>
 
-          <Chart
+          {trend.some(point => point.value !== null) ? <Chart
             label={`Tren ${metrics[metric].label}; nilai tersedia dalam tabel di bawah grafik`}
             option={{
               grid: { left: 48, right: 25, top: 30, bottom: 40 },
@@ -394,6 +394,8 @@ export default function PublicExplorer() {
               },
               yAxis: {
                 type: 'value',
+                name: metrics[metric].unit,
+                nameTextStyle: { color: '#58667b', align: 'left' },
                 splitLine: { lineStyle: { color: '#e7edf3' } },
                 axisLabel: { color: '#64748b', fontSize: 12 },
               },
@@ -408,15 +410,16 @@ export default function PublicExplorer() {
                 },
               ],
             }}
-          />
+          /> : <div className="data-empty" role="status"><Info aria-hidden="true" /><h3>Tren belum tersedia</h3><p>{region ? 'Belum ada nilai untuk wilayah ini.' : 'Tidak ada wilayah dengan data lengkap di seluruh tahun.'} Pilih wilayah atau indikator lain.</p></div>}
 
           <div className="public-table-scroll" tabIndex={0} role="region" aria-label="Nilai grafik tren">
             <table className="data-table">
+              <caption className="sr-only">Tren {metrics[metric].label}, {region?.name ?? 'rerata wilayah'}, satuan {metrics[metric].unit}</caption>
               <thead>
                 <tr>
-                  <th>Tahun</th>
-                  <th>Nilai</th>
-                  <th>Perubahan</th>
+                  <th scope="col">Tahun</th>
+                  <th scope="col">Nilai ({metrics[metric].unit})</th>
+                  <th scope="col">Perubahan tahunan</th>
                 </tr>
               </thead>
               <tbody>
@@ -457,6 +460,7 @@ export default function PublicExplorer() {
 
           {filtered.length ? (
             <>
+              <p className="public-table-hint">Geser tabel ke samping untuk melihat seluruh kolom.</p>
               <div
                 className="public-table-scroll"
                 tabIndex={0}
@@ -464,11 +468,12 @@ export default function PublicExplorer() {
                 aria-label="Tabel perbandingan wilayah"
               >
                 <table className="data-table">
+                  <caption className="sr-only">Perbandingan {metrics[metric].name} tahun {year}</caption>
                   <thead>
                     <tr>
-                      <th>Wilayah</th>
-                      <th>Nilai</th>
-                      <th>Perubahan</th>
+                      <th scope="col">Wilayah</th>
+                      <th scope="col">Nilai ({metrics[metric].unit})</th>
+                      <th scope="col">Perubahan tahunan</th>
                     </tr>
                   </thead>
                   <tbody>

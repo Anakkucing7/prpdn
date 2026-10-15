@@ -2,8 +2,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Map as LibreMap, Popup, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl';
 import type { FeatureCollection, Geometry } from 'geojson';
-import { LocateFixed, Minus, Plus } from 'lucide-react';
+import { LocateFixed, Minus, Plus, MapPinned } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import type { RegionRecord } from '@/lib/regions';
 import land from '@/data/indonesia-land.json';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -38,6 +39,7 @@ export default function RegionMap(props: RegionMapProps) {
   const colorTimers = useRef<number[]>([]);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [attempt, setAttempt] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
 
   function update(map: LibreMap, current: RegionMapProps) {
     if (!map.getSource('boundary')) return;
@@ -79,7 +81,7 @@ export default function RegionMap(props: RegionMapProps) {
 
     const nextViewKey = JSON.stringify([current.selected, shapes.map(feature => feature.properties.code), current.nationalOverview]);
     if (viewKey.current !== nextViewKey) {
-      const animate = viewKey.current !== '';
+      const animate = viewKey.current !== '' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       viewKey.current = nextViewKey;
       const bounds: [[number, number], [number, number]] = [[Infinity, Infinity], [-Infinity, -Infinity]];
       function collect(coords: unknown) {
@@ -98,15 +100,23 @@ export default function RegionMap(props: RegionMapProps) {
   useEffect(() => {
     if (!container.current) return;
     const abort = new AbortController();
+    // A replacement map has empty sources, even when the selected filters have not changed.
+    sourceKey.current = colorKey.current = viewKey.current = '';
+    function fail(error: unknown, message: string) {
+      if (abort.signal.aborted) return;
+      console.error('PRPDN map:', error);
+      setErrorMessage(message);
+      setState('error');
+    }
     let map: LibreMap;
     try { map = new LibreMap({ container: container.current, attributionControl: false, bounds: extent, minZoom: 1, maxZoom: 13, renderWorldCopies: false, scrollZoom: false, dragRotate: false, pitchWithRotate: false, style: { version: 8, sources: {}, layers: [{ id: 'water', type: 'background', paint: { 'background-color': '#f4f8fc' } }] }, locale: { 'Map.Title': 'Peta wilayah administratif' } }); }
-    catch { queueMicrotask(() => setState('error')); return; }
+    catch (error) { queueMicrotask(() => fail(error, 'Browser tidak dapat memulai peta WebGL. Coba muat ulang atau gunakan browser dengan akselerasi grafis.')); return () => abort.abort(); }
     mapRef.current = map;
     const popup = new Popup({ closeButton: false, closeOnClick: false });
     map.on('load', async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/data/region-boundaries.json`, { signal: abort.signal });
-        if (!response.ok) throw new Error('Geometry unavailable');
+        if (!response.ok) throw new Error(`Geometry unavailable: HTTP ${response.status}`);
         geometry.current = await response.json() as Boundaries;
         if (abort.signal.aborted) return;
         map.addSource('land', { type: 'geojson', data: land as FeatureCollection });
@@ -130,10 +140,15 @@ export default function RegionMap(props: RegionMapProps) {
         });
         map.getCanvas().addEventListener('mouseleave', () => popup.remove());
         update(map, latest.current); setState('ready');
-      } catch { if (!abort.signal.aborted) setState('error'); }
+      } catch (error) { fail(error, 'Batas wilayah belum berhasil dimuat. Periksa koneksi lalu coba lagi.'); }
     });
-    map.on('error', () => setState('error'));
-    const observer = new ResizeObserver(() => map.resize());
+    map.on('error', event => fail(event.error, 'Peta mengalami kendala saat menggambar wilayah. Coba lagi untuk memuat ulang peta.'));
+    map.on('webglcontextlost', () => fail(new Error('WebGL context lost'), 'Koneksi grafis browser terputus. Coba lagi untuk memulai ulang peta.'));
+    const observer = new ResizeObserver(() => {
+      map.resize();
+      viewKey.current = '';
+      update(map, latest.current);
+    });
     observer.observe(container.current);
     return () => { abort.abort(); observer.disconnect(); colorTimers.current.forEach(window.clearTimeout); popup.remove(); map.remove(); mapRef.current = null; };
   }, [attempt]);
@@ -147,7 +162,14 @@ export default function RegionMap(props: RegionMapProps) {
         {selectedYears.map(year => <Button key={year} variant={props.mapYear === year ? "default" : "outline"} size="sm" aria-pressed={props.mapYear === year} onClick={() => props.onMapYearChange?.(year)}>{year}</Button>)}
       </div>}
     </>}
-    {state !== 'ready' && <div className="region-map-state" role="status"><strong>{state === 'loading' ? 'Memuat batas resmi…' : 'Peta tidak dapat ditampilkan'}</strong><p>{state === 'error' ? 'Pilihan wilayah tetap tersedia melalui filter dan tabel.' : 'Menyiapkan batas wilayah BIG Juni 2026.'}</p>{state === 'error' && <Button variant="outline" onClick={() => { setState('loading'); setAttempt(attempt + 1); }}>Coba lagi</Button>}</div>}
+    {(state !== 'ready' || !props.regions.length) && <Empty className="region-map-state">
+      <EmptyHeader role="status" aria-live="polite">
+        <EmptyMedia><MapPinned aria-hidden="true" /></EmptyMedia>
+        <EmptyTitle>{state === 'error' ? 'Peta tidak dapat ditampilkan' : state === 'loading' ? 'Memuat batas wilayah…' : 'Tidak ada wilayah sesuai filter'}</EmptyTitle>
+        <EmptyDescription>{state === 'error' ? `${errorMessage} Data tetap tersedia melalui filter dan tabel.` : state === 'loading' ? 'Menyiapkan batas wilayah BIG Juni 2026. Filter dan tabel tetap dapat digunakan.' : 'Ubah pencarian atau reset filter untuk menampilkan wilayah.'}</EmptyDescription>
+      </EmptyHeader>
+      {state === 'error' && <Button variant="outline" onClick={() => { setState('loading'); setAttempt(value => value + 1); }}>Coba lagi</Button>}
+    </Empty>}
     <span className="region-map-attribution">Latar: Natural Earth · Batas: BIG Juni 2026, disederhanakan</span>
   </div>;
 }
