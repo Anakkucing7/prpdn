@@ -46,7 +46,7 @@ function Methodology() {
 }
 
 export function DashboardLoading() {
-  return <div role="status" aria-label="Memuat dashboard"><PageHeader title="Dashboard" description="Menyiapkan ringkasan indikator pembangunan daerah." parent="Ringkasan" /><Skeleton className="dashboard-loading-filters" /><div className="kpi-grid">{[1, 2, 3, 4].map(n => <Skeleton key={n} className="dashboard-loading-kpi" />)}</div><Skeleton className="map-loading" /></div>;
+  return <div role="status" aria-label="Memuat dashboard"><PageHeader title="Dashboard" description="Menyiapkan ringkasan indikator pembangunan daerah." parent="Ringkasan" /><div className="kpi-grid">{[1, 2, 3, 4].map(n => <Skeleton key={n} className="dashboard-loading-kpi" />)}</div><Skeleton className="dashboard-loading-filters" /><Skeleton className="map-loading" /></div>;
 }
 
 export default function Dashboard() {
@@ -154,22 +154,26 @@ export default function Dashboard() {
 
   return <div className="dashboard">
     <PageHeader title="Dashboard" description="Pantau indikator pembangunan dan ketersediaan data wilayah." parent="Ringkasan" actions={<Methodology />} />
-    <RegionLevel value={level} onChange={v => setFilter("level",v)} /><div className="mobile-filter-bar"><Button variant="outline" aria-expanded={filtersOpen} aria-controls="dashboard-filters" onClick={() => setFiltersOpen(!filtersOpen)}><SlidersHorizontal />Filter dashboard<ChevronDown className={filtersOpen ? "rotate-180" : ""} /></Button><span>{year} · {definition.label} · {selected?.label ?? `Semua ${levelLabel}`}</span></div>
-    <div id="dashboard-filters" className="dashboard-filters" data-open={filtersOpen} aria-label="Filter dashboard">
-      <YearMultiSelect years={[...data.years].reverse()} selected={visibleMapYears} onToggle={toggleMapYear} />
-      <SelectField label="Indikator peta & peringkat" value={metric} onValueChange={v => setFilter("indicator", v)} options={metricKeys.map(k => ({ value: k, label: metrics[k].label }))} />
-      <RegionalControls level={level} province={parent} kind={kind} selected={code} onChange={(field,v) => setFilter(field==='province'?'parent':field,v)} />
-      <SelectField label="Periode kemiskinan" value={period} onValueChange={v => setFilter("period", v)} options={[{ value: "Maret", label: "Maret" }, { value: "September", label: "September" }]} />
-      <Button variant="ghost" onClick={reset}><RotateCcw />Reset</Button>
-    </div>
-    <p className="dashboard-context" aria-live="polite">Tingkat {levelLabel} · {year} · {definition.name}{metric === "poverty" ? ` · ${period}` : ""}{selected ? ` · Profil ${selected.label}` : " · Seluruh Indonesia"}</p>
-    {level === "KABKOTA" && <p className="data-notice">IDSD memakai padanan kode pasti. KFD, EPPD, dan kemiskinan kabupaten/kota belum tersedia pada data dashboard; nilai tidak diturunkan dari provinsi.</p>}
     <div className="kpi-grid">
       <div className="kpi"><p>{selected ? `${definition.label} · ${selected.label}` : `Cakupan ${definition.label}`}</p><strong>{selected ? format(selectedValue) : <>{available.length}<span> / {rows.length}</span></>}</strong><small>{selected ? selectedValue == null ? "Data belum tersedia" : definition.unit : `${levelLabel} dengan nilai tersedia`}</small>{selected && <TrendDelta current={selectedValue} previous={recordFor(metric, year - 1, code, period)?.value} year={year} />}</div>
       <div className="kpi"><p>Rata-rata {levelLabel}</p><strong>{format(average)}<span>{metric === "poverty" ? "%" : ""}</span></strong><small>{available.length ? `Rerata tanpa bobot · ${available.length} ${levelLabel}` : "Belum ada nilai numerik"}</small><TrendDelta current={average} previous={previousAverage} year={year} />{!sameCoverage && <small>Cakupan pembanding berbeda/kosong.</small>}</div>
       <div className="kpi"><p>Nilai tertinggi</p><strong>{format(high?.value)}<span>{metric === "poverty" ? "%" : ""}</span></strong><small>{high?.label ?? "Data belum tersedia"}</small><TrendDelta current={high?.value} previous={high ? recordFor(metric, year - 1, high.code, period)?.value : null} year={year} /></div>
       <div className="kpi"><p>Nilai terendah</p><strong>{format(low?.value)}<span>{metric === "poverty" ? "%" : ""}</span></strong><small>{low?.label ?? "Data belum tersedia"}</small><TrendDelta current={low?.value} previous={low ? recordFor(metric, year - 1, low.code, period)?.value : null} year={year} /></div>
     </div>
+
+    <section className="dashboard-filter-section" aria-label="Filter dan cakupan dashboard">
+      <RegionLevel value={level} onChange={v => setFilter("level",v)} />
+      <div className="mobile-filter-bar"><Button variant="outline" aria-expanded={filtersOpen} aria-controls="dashboard-filters" onClick={() => setFiltersOpen(!filtersOpen)}><SlidersHorizontal />Filter dashboard<ChevronDown className={filtersOpen ? "rotate-180" : ""} /></Button><span>{year} · {definition.label} · {selected?.label ?? `Semua ${levelLabel}`}</span></div>
+      <div id="dashboard-filters" className="dashboard-filters" data-open={filtersOpen} aria-label="Filter dashboard">
+        <YearMultiSelect years={[...data.years].reverse()} selected={visibleMapYears} onToggle={toggleMapYear} />
+        <SelectField label="Indikator peta & peringkat" value={metric} onValueChange={v => setFilter("indicator", v)} options={metricKeys.map(k => ({ value: k, label: metrics[k].label }))} />
+        <RegionalControls level={level} province={parent} kind={kind} selected={code} onChange={(field,v) => setFilter(field==='province'?'parent':field,v)} />
+        <SelectField label="Periode kemiskinan" value={period} onValueChange={v => setFilter("period", v)} options={[{ value: "Maret", label: "Maret" }, { value: "September", label: "September" }]} />
+        <Button variant="ghost" onClick={reset}><RotateCcw />Reset</Button>
+      </div>
+      <p className="dashboard-context" aria-live="polite">Tingkat {levelLabel} · {year} · {definition.name}{metric === "poverty" ? ` · ${period}` : ""}{selected ? ` · Profil ${selected.label}` : " · Seluruh Indonesia"}</p>
+      {level === "KABKOTA" && <p className="data-notice">IDSD memakai padanan kode pasti. KFD, EPPD, dan kemiskinan kabupaten/kota belum tersedia pada data dashboard; nilai tidak diturunkan dari provinsi.</p>}
+    </section>
 
     <div className="spatial-grid">
       <Panel title={`Peta ${definition.label}`} description={`${year}${metric === "poverty" ? ` · ${period}` : ""} · Pilih wilayah untuk melihat profil`} className="map-panel" action={<StatusBadge>{available.length}/{rows.length} tersedia</StatusBadge>}>
