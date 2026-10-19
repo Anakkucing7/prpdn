@@ -1,10 +1,9 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, ChartNoAxesCombined, Info, X } from 'lucide-react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { ArrowDownRight, ArrowUpRight, ChartNoAxesCombined, ChevronDown, Info, Search, X } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
-import { SelectField } from '@/components/ui-patterns';
 import { Button } from '@/components/ui/button';
 import { TrendDelta } from '@/components/trend-delta';
 import { metrics, type Metric, format } from '@/lib/dashboard';
@@ -17,8 +16,53 @@ const colors = ['#1769c2', '#27805a', '#b35d25', '#7655a5', '#168b91'];
 export type ComparisonRecord = { metric: string; code: string; year: number; period: string | null; value: number };
 export type ComparisonRegion = { code: string; name: string; level: string; provinceCode: string };
 
+function SearchableSelectField({ label, value, onValueChange, options, disabled = false }: {
+  label: string; value: string; onValueChange: (value: string) => void;
+  options: { value: string; label: string }[]; disabled?: boolean;
+}) {
+  const id = useId();
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const search = useRef<HTMLInputElement>(null);
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [active, setActive] = useState(0);
+  const filtered = options.filter(option => `${option.label} ${option.value}`.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
+  const selected = options.find(option => option.value === value)?.label;
+
+  useEffect(() => { if (open) search.current?.focus(); }, [open]);
+
+  const close = (restoreFocus = false) => { setOpen(false); setQuery(''); setActive(0); if (restoreFocus) trigger.current?.focus(); };
+  const choose = (option: { value: string; label: string }) => { onValueChange(option.value); close(true); };
+  const openMenu = () => { setQuery(''); setActive(0); setOpen(true); };
+
+  return <div className="comparison-search-field" ref={root} onBlur={event => {
+    if (!root.current?.contains(event.relatedTarget as Node | null)) close();
+  }}>
+    <label htmlFor={id}>{label}</label>
+    <button ref={trigger} id={id} type="button" className="comparison-search-trigger" aria-haspopup="listbox" aria-expanded={open} aria-controls={`${id}-listbox`} disabled={disabled}
+      onClick={() => open ? close() : openMenu()} onKeyDown={event => {
+        if (['ArrowDown', 'Enter', ' '].includes(event.key)) { event.preventDefault(); if (!open) openMenu(); }
+      }}>
+      <span>{selected || 'Pilih…'}</span><ChevronDown aria-hidden="true" />
+    </button>
+    {open && <div className="comparison-search-menu">
+      <div className="comparison-search-input-wrap"><Search aria-hidden="true" /><input ref={search} type="search" role="combobox" aria-label={`Cari ${label}`} aria-autocomplete="list" aria-expanded="true" aria-controls={`${id}-listbox`} aria-activedescendant={filtered[active] ? `${id}-option-${active}` : undefined} placeholder={`Cari ${label.toLocaleLowerCase()}…`} value={query} onChange={event => { setQuery(event.target.value); setActive(0); }} onKeyDown={event => {
+        if (event.key === 'ArrowDown' && filtered.length) { event.preventDefault(); setActive(index => Math.min(index + 1, filtered.length - 1)); }
+        if (event.key === 'ArrowUp') { event.preventDefault(); setActive(index => Math.max(index - 1, 0)); }
+        if (event.key === 'Enter' && filtered[active]) { event.preventDefault(); choose(filtered[active]); }
+        if (event.key === 'Escape') { event.preventDefault(); close(true); }
+      }} /></div>
+      <div id={`${id}-listbox`} className="comparison-search-options" role="listbox" aria-label={label}>
+        {filtered.length ? filtered.map((option, index) => <div key={option.value} id={`${id}-option-${index}`} role="option" aria-selected={option.value === value} data-active={index === active || undefined} onMouseMove={() => setActive(index)} onMouseDown={event => event.preventDefault()} onClick={() => choose(option)}>{option.label}</div>) : <p className="comparison-search-empty">Tidak ada pilihan yang cocok.</p>}
+      </div>
+    </div>}
+  </div>;
+}
+
 export default function ComparisonPage({ records, regions }: { records: ComparisonRecord[]; regions: ComparisonRegion[] }) {
-  const [metric, setMetric] = useState<Metric>('idsd');
+  const [selectedMetrics, setSelectedMetrics] = useState<Metric[]>(['idsd']);
+  const [addMetricChoice, setAddMetricChoice] = useState<Metric | ''>('');
   const [level, setLevel] = useState('PROV');
   const [province, setProvince] = useState('');
   const [period, setPeriod] = useState('September');
@@ -26,80 +70,90 @@ export default function ComparisonPage({ records, regions }: { records: Comparis
   const [addCode, setAddCode] = useState('');
   const [fromYear, setFromYear] = useState('');
   const [toYear, setToYear] = useState('');
-  const definition = metrics[metric];
-  const hasMetricData = (code: string) => records.some(record => record.metric === metric && record.code === code && (metric !== 'poverty' || record.period === period));
-  const provinces = regions.filter(region => region.level === 'PROV' && regions.some(child => child.level === 'KABKOTA' && child.provinceCode === region.code && hasMetricData(child.code)));
-  const levelRegions = regions.filter(region => region.level === level && (level === 'PROV' || Boolean(province && region.provinceCode === province)) && hasMetricData(region.code));
-  const plottedRegions = selectedCodes.flatMap(code => {
-    const region = levelRegions.find(item => item.code === code);
-    return region ? [{ region, values: [] as (number | null)[] }] : [];
-  });
-  const availableYears = [...new Set(records.filter(record => record.metric === metric && levelRegions.some(region => region.code === record.code) && (metric !== 'poverty' || record.period === period)).map(record => record.year))].sort((a, b) => a - b);
-  const years = availableYears.filter(year => (!fromYear || year >= Number(fromYear)) && (!toYear || year <= Number(toYear)));
-  const valueAt = (code: string, year: number) => {
-    const matches = records.filter(record => record.metric === metric && record.code === code && record.year === year && (metric !== 'poverty' || record.period === period));
-    return matches.length === 1 ? matches[0].value : null;
+  const hasMetricData = (metric: Metric, code: string) => records.some(record => record.metric === metric && record.code === code && (metric !== 'poverty' || record.period === period));
+  const hasDataInScope = (metric: Metric, scope: string, provinceCode = '') => regions.some(region => region.level === scope && (scope === 'PROV' || !provinceCode || region.provinceCode === provinceCode) && hasMetricData(metric, region.code));
+  const metricsInScope = metricOptions.filter(metric => hasDataInScope(metric, level, province));
+  const scopeRegions = regions.filter(region => region.level === level && (level === 'PROV' || Boolean(province && region.provinceCode === province)));
+  const availableToAdd = scopeRegions.filter(region => !selectedCodes.includes(region.code) && selectedMetrics.some(metric => hasMetricData(metric, region.code)));
+  const addCandidate = availableToAdd.find(region => region.code === addCode) ?? availableToAdd[0];
+  const provinces = regions.filter(region => region.level === 'PROV' && regions.some(child => child.level === 'KABKOTA' && child.provinceCode === region.code && metricsInScope.some(metric => hasMetricData(metric, child.code))));
+  const availableYearsByMetric = Object.fromEntries(selectedMetrics.map(metric => [metric, [...new Set(records.filter(record => record.metric === metric && scopeRegions.some(region => region.code === record.code) && (metric !== 'poverty' || record.period === period)).map(record => record.year))].sort((a, b) => a - b)])) as Partial<Record<Metric, number[]>>;
+  const availableYears = [...new Set(selectedMetrics.flatMap(metric => availableYearsByMetric[metric] ?? []))].sort((a, b) => a - b);
+  const yearInRange = (year: number) => (!fromYear || year >= Number(fromYear)) && (!toYear || year <= Number(toYear));
+  const changeLevel = (next: string) => {
+    setLevel(next); setProvince(''); setSelectedMetrics(['idsd']); setSelectedCodes([]); setAddCode(''); setFromYear(''); setToYear('');
   };
-  plottedRegions.forEach(item => { item.values = years.map(year => valueAt(item.region.code, year)); });
-  const availableToAdd = levelRegions.filter(region => !selectedCodes.includes(region.code));
-  const candidate = availableToAdd.find(region => region.code === addCode) ?? availableToAdd[0];
-  const changes = plottedRegions.map(item => {
-    const first = item.values.find(value => value !== null) ?? null;
-    const last = [...item.values].reverse().find(value => value !== null) ?? null;
-    return { code: item.region.code, value: first !== null && last !== null ? last - first : null };
-  });
-  const chart: EChartsOption = {
-    color: colors,
-    grid: { left: 56, right: 28, top: 24, bottom: 44 },
-    tooltip: { trigger: 'axis', confine: true, renderMode: 'richText', formatter: params => {
-      const items = Array.isArray(params) ? params : [params];
-      const index = items[0]?.dataIndex ?? -1;
-      return [`${years[index] ?? ''}`, ...items.map(item => `${item.marker ?? ''}${item.seriesName}: ${format(typeof item.value === 'number' ? item.value : null)} ${definition.unit}`)].join('\n');
-    } },
-    xAxis: { type: 'category', data: years.map(String), axisLine: { lineStyle: { color: '#d9e1ea' } }, axisTick: { show: false }, axisLabel: { color: '#697386' }, boundaryGap: false },
-    yAxis: { type: 'value', scale: true, splitLine: { lineStyle: { color: '#edf0f5' } }, axisLabel: { color: '#697386' } },
-    series: plottedRegions.map((item, index) => ({ name: item.region.name, type: 'line', data: item.values, connectNulls: false, symbol: 'circle', symbolSize: 7, lineStyle: { color: colors[index % colors.length], width: 2.5 }, itemStyle: { color: colors[index % colors.length], borderColor: '#fff', borderWidth: 2 } })),
+  const changeProvince = (next: string) => {
+    setProvince(next);
+    setSelectedMetrics(current => {
+      const available = current.filter(metric => hasDataInScope(metric, 'KABKOTA', next));
+      return available.length ? available : ['idsd'];
+    });
+    setSelectedCodes([]); setAddCode(''); setFromYear(''); setToYear('');
   };
-  const setMetricAndDefaults = (next: Metric) => {
-    setMetric(next);
-    const nextPeriod = next === 'poverty' ? period : 'September';
-    const nextRegions = regions.filter(region => region.level === level && (level === 'PROV' || Boolean(province && region.provinceCode === province)) && records.some(record => record.metric === next && record.code === region.code && (next !== 'poverty' || record.period === nextPeriod)));
-    setSelectedCodes(nextRegions.slice(0, 3).map(region => region.code));
-    setFromYear(''); setToYear('');
-  };
-  const setPeriodAndDefaults = (next: string) => {
-    setPeriod(next);
-    const nextRegions = regions.filter(region => region.level === level && (level === 'PROV' || Boolean(province && region.provinceCode === province)) && records.some(record => record.metric === metric && record.code === region.code && record.period === next));
-    setSelectedCodes(nextRegions.slice(0, 3).map(region => region.code));
-    setFromYear(''); setToYear('');
-  };
-  const changeLevel = (next: string) => { setLevel(next); setProvince(''); setSelectedCodes([]); setAddCode(''); setFromYear(''); setToYear(''); };
-  const changeProvince = (next: string) => { setProvince(next); setSelectedCodes([]); setAddCode(''); setFromYear(''); setToYear(''); };
   const reset = () => {
-    setMetric('idsd'); setLevel('PROV'); setProvince(''); setPeriod('September');
+    setSelectedMetrics(['idsd']); setLevel('PROV'); setProvince(''); setPeriod('September');
     setSelectedCodes(regions.filter(region => region.level === 'PROV' && records.some(record => record.metric === 'idsd' && record.code === region.code)).slice(0, 3).map(region => region.code));
     setAddCode(''); setFromYear(''); setToYear('');
   };
 
+  const charts = selectedMetrics.map(metric => {
+    const definition = metrics[metric];
+    const years = (availableYearsByMetric[metric] ?? []).filter(yearInRange);
+    const plottedRegions = selectedCodes.flatMap(code => {
+      const region = scopeRegions.find(item => item.code === code);
+      return region ? [{ region, values: years.map(year => {
+        const matches = records.filter(record => record.metric === metric && record.code === code && record.year === year && (metric !== 'poverty' || record.period === period));
+        return matches.length === 1 ? matches[0].value : null;
+      }) }] : [];
+    });
+    const chart: EChartsOption = {
+      color: colors,
+      grid: { left: 56, right: 28, top: 24, bottom: 44 },
+      tooltip: { trigger: 'axis', confine: true, renderMode: 'richText', formatter: params => {
+        const items = Array.isArray(params) ? params : [params];
+        const index = items[0]?.dataIndex ?? -1;
+        return [`${years[index] ?? ''}`, ...items.map(item => `${item.marker ?? ''}${item.seriesName}: ${format(typeof item.value === 'number' ? item.value : null)} ${definition.unit}`)].join('\n');
+      } },
+      xAxis: { type: 'category', data: years.map(String), axisLine: { lineStyle: { color: '#d9e1ea' } }, axisTick: { show: false }, axisLabel: { color: '#697386' }, boundaryGap: false },
+      yAxis: { type: 'value', scale: true, splitLine: { lineStyle: { color: '#edf0f5' } }, axisLabel: { color: '#697386' } },
+      series: plottedRegions.map(item => {
+        const color = colors[selectedCodes.indexOf(item.region.code) % colors.length];
+        return { name: item.region.name, type: 'line', data: item.values, connectNulls: false, symbol: 'circle', symbolSize: 7, lineStyle: { color, width: 2.5 }, itemStyle: { color, borderColor: '#fff', borderWidth: 2 } };
+      }),
+    };
+    const firstValue = (values: (number | null)[]) => values.find(value => value !== null) ?? null;
+    const lastValue = (values: (number | null)[]) => [...values].reverse().find(value => value !== null) ?? null;
+    return { metric, definition, years, plottedRegions, chart, hasValues: plottedRegions.some(item => item.values.some(value => value !== null)), changeFor: (values: (number | null)[]) => {
+      const first = firstValue(values), last = lastValue(values);
+      return first !== null && last !== null ? last - first : null;
+    } };
+  });
+
+  const addMetricOptions = metricsInScope.filter(metric => !selectedMetrics.includes(metric));
+  const addMetric = addMetricOptions.includes(addMetricChoice as Metric) ? addMetricChoice : addMetricOptions[0] ?? '';
   return <div className="comparison-page">
     <PageHeader title="Perbandingan Data" parent="Ringkasan" description="Bandingkan perkembangan indikator antarwilayah pada rentang tahun yang tersedia." />
     <section className="comparison-controls" aria-label="Pengaturan perbandingan data">
-      <SelectField label="Parameter" value={metric} onValueChange={value => setMetricAndDefaults(value as Metric)} options={metricOptions.map(key => ({ value: key, label: metrics[key].name }))} />
+      <div className="comparison-metric-picker"><SearchableSelectField label="Tambah parameter" value={addMetric} onValueChange={value => setAddMetricChoice(value as Metric)} options={addMetricOptions.map(key => ({ value: key, label: metrics[key].name }))} disabled={!addMetricOptions.length} />
+        <Button variant="outline" disabled={!addMetric} onClick={() => { if (addMetric) { setSelectedMetrics(current => current.includes(addMetric) ? current : [...current, addMetric]); setAddMetricChoice(''); setFromYear(''); setToYear(''); } }}>Tambah</Button>
+      </div>
       <div className="comparison-field comparison-level"><span>Tingkat wilayah</span><div role="group" aria-label="Tingkat wilayah"><Button size="sm" variant={level === 'PROV' ? 'default' : 'outline'} aria-pressed={level === 'PROV'} onClick={() => changeLevel('PROV')}>Provinsi</Button><Button size="sm" variant={level === 'KABKOTA' ? 'default' : 'outline'} aria-pressed={level === 'KABKOTA'} onClick={() => changeLevel('KABKOTA')}>Kabupaten/Kota</Button></div></div>
-      {level === 'KABKOTA' && <SelectField label="Provinsi" value={province || 'none'} onValueChange={value => changeProvince(value === 'none' ? '' : value)} options={[{ value: 'none', label: 'Pilih provinsi' }, ...provinces.map(item => ({ value: item.code, label: item.name }))]} />}
-      {metric === 'poverty' && <SelectField label="Periode" value={period} onValueChange={setPeriodAndDefaults} options={[{ value: 'Maret', label: 'Maret' }, { value: 'September', label: 'September' }]} />}
-      <div className="comparison-region-picker"><SelectField label={level === 'PROV' ? 'Tambah wilayah pembanding' : 'Tambah kabupaten/kota'} value={candidate?.code ?? ''} onValueChange={setAddCode} options={availableToAdd.map(item => ({ value: item.code, label: item.name }))} disabled={!availableToAdd.length} /><Button variant="outline" onClick={() => candidate && setSelectedCodes(current => current.length < 5 ? [...current, candidate.code] : current)} disabled={!candidate || selectedCodes.length >= 5}>Tambah</Button></div>
-      <div className="comparison-year-controls"><div className="comparison-year-range"><SelectField label="Dari tahun" value={fromYear || String(availableYears[0] ?? '')} onValueChange={value => { setFromYear(value); if (toYear && Number(value) > Number(toYear)) setToYear(value); }} options={availableYears.map(year => ({ value: String(year), label: String(year) }))} disabled={!availableYears.length} /><SelectField label="Sampai tahun" value={toYear || String(availableYears.at(-1) ?? '')} onValueChange={value => { setToYear(value); if (fromYear && Number(value) < Number(fromYear)) setFromYear(value); }} options={availableYears.map(year => ({ value: String(year), label: String(year) }))} disabled={!availableYears.length} /></div><Button className="comparison-reset" variant="ghost" onClick={reset}>Atur ulang</Button></div>
+      {level === 'KABKOTA' && <SearchableSelectField label="Provinsi" value={province || 'none'} onValueChange={value => changeProvince(value === 'none' ? '' : value)} options={[{ value: 'none', label: 'Pilih provinsi' }, ...provinces.map(item => ({ value: item.code, label: item.name }))]} />}
+      {selectedMetrics.includes('poverty') && <SearchableSelectField label="Periode" value={period} onValueChange={value => { setPeriod(value); setFromYear(''); setToYear(''); }} options={[{ value: 'Maret', label: 'Maret' }, { value: 'September', label: 'September' }]} />}
+      <div className="comparison-region-picker"><SearchableSelectField label={level === 'PROV' ? 'Tambah wilayah pembanding' : 'Tambah kabupaten/kota'} value={addCandidate?.code ?? ''} onValueChange={setAddCode} options={availableToAdd.map(item => ({ value: item.code, label: item.name }))} disabled={!availableToAdd.length || selectedCodes.length >= 5} /><Button variant="outline" onClick={() => addCandidate && setSelectedCodes(current => current.length < 5 ? [...current, addCandidate.code] : current)} disabled={!addCandidate || selectedCodes.length >= 5}>Tambah</Button></div>
+      <div className="comparison-year-controls"><div className="comparison-year-range"><SearchableSelectField label="Dari tahun" value={fromYear || String(availableYears[0] ?? '')} onValueChange={value => { setFromYear(value); if (toYear && Number(value) > Number(toYear)) setToYear(value); }} options={availableYears.map(year => ({ value: String(year), label: String(year) }))} disabled={!availableYears.length} /><SearchableSelectField label="Sampai tahun" value={toYear || String(availableYears.at(-1) ?? '')} onValueChange={value => { setToYear(value); if (fromYear && Number(value) < Number(fromYear)) setFromYear(value); }} options={availableYears.map(year => ({ value: String(year), label: String(year) }))} disabled={!availableYears.length} /></div><Button className="comparison-reset" variant="ghost" onClick={reset}>Atur ulang</Button></div>
+      <div className="comparison-metric-chips" aria-label="Parameter aktif">{selectedMetrics.map(metric => <span className="comparison-metric-chip" key={metric}>{metrics[metric].name}<button type="button" aria-label={`Hapus parameter ${metrics[metric].name}`} title={selectedMetrics.length === 1 ? 'Minimal satu parameter harus dipilih' : undefined} disabled={selectedMetrics.length === 1} onClick={() => { setSelectedMetrics(current => current.filter(item => item !== metric)); setFromYear(''); setToYear(''); }}><X size={14} /></button></span>)}</div>
     </section>
-    <div className="comparison-selection" aria-live="polite"><div><strong>{selectedCodes.length} dari 5 wilayah</strong><span>Pilih sampai lima wilayah untuk dibandingkan pada satu grafik.</span></div><div className="comparison-chips">{plottedRegions.map((item, index) => <span className="comparison-chip" key={item.region.code}><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{item.region.name}<button type="button" aria-label={`Hapus ${item.region.name}`} onClick={() => setSelectedCodes(codes => codes.filter(code => code !== item.region.code))}><X size={14} /></button></span>)}</div></div>
-    <p className="comparison-context" aria-live="polite">{definition.label} · {years[0] ?? '—'}–{years.at(-1) ?? '—'}{metric === 'poverty' ? ` · ${period}` : ''}</p>
-    <section className="comparison-panel" aria-labelledby="comparison-chart-title">
-      <header><div><p className="comparison-eyebrow"><ChartNoAxesCombined aria-hidden="true" /> Analisis historis</p><h2 id="comparison-chart-title">{definition.label} menurut wilayah</h2><p>{definition.name} · {definition.unit} · berdasarkan observasi yang tersedia</p></div></header>
-      {plottedRegions.length && years.length && plottedRegions.some(item => item.values.some(value => value !== null)) ? <Chart option={chart} label={`Grafik perbandingan ${definition.label} pada ${plottedRegions.length} wilayah dari ${years[0]} sampai ${years.at(-1)}`} /> : <div className="comparison-empty"><Info aria-hidden="true"/><div><strong>{level === 'KABKOTA' && !province ? 'Pilih provinsi untuk melihat kabupaten/kota' : 'Data belum tersedia untuk pilihan ini'}</strong><p>Grafik hanya menampilkan observasi yang tersedia pada sumber data.</p></div></div>}
-      <div className="comparison-series-list" aria-label="Perubahan tiap wilayah">{plottedRegions.map((item, index) => { const change = changes.find(value => value.code === item.region.code)?.value ?? null; return <div className="comparison-series-item" key={item.region.code}><span className="comparison-series-name"><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{item.region.name}</span>{change !== null && <span className="comparison-change" data-direction={change > 0 ? 'up' : change < 0 ? 'down' : 'flat'}>{change > 0 ? <ArrowUpRight /> : change < 0 ? <ArrowDownRight /> : null}<strong>{change > 0 ? '+' : ''}{format(change)}</strong><span>perubahan</span></span>}</div>; })}</div>
-      <details className="comparison-data"><summary>Lihat angka per tahun</summary><div className="comparison-table-scroll" tabIndex={0} role="region" aria-label="Nilai tiap wilayah per tahun, dapat digulir horizontal"><table><thead><tr><th scope="col">Tahun</th>{plottedRegions.map((item, index) => <th scope="col" key={item.region.code}><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{item.region.name}</th>)}</tr></thead><tbody>{years.map((year, yearIndex) => <tr key={year}><th scope="row">{year}{metric === 'poverty' ? ` · ${period}` : ''}</th>{plottedRegions.map(item => { const priorIndex = years.indexOf(year - 1); return <td key={item.region.code}><span>{format(item.values[yearIndex])}</span><TrendDelta current={item.values[yearIndex]} previous={priorIndex >= 0 ? item.values[priorIndex] : null} year={year} /></td>; })}</tr>)}</tbody></table></div></details>
+    <div className="comparison-selection" aria-live="polite"><div><strong>{selectedCodes.length} dari 5 wilayah</strong><span>Pilih sampai lima wilayah untuk dibandingkan pada grafik.</span></div><div className="comparison-chips">{selectedCodes.flatMap((code, index) => { const region = scopeRegions.find(item => item.code === code); return region ? <span className="comparison-chip" key={code}><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{region.name}<button type="button" aria-label={`Hapus ${region.name}`} onClick={() => setSelectedCodes(codes => codes.filter(item => item !== code))}><X size={14} /></button></span> : []; })}</div></div>
+    <p className="comparison-context" aria-live="polite">{selectedMetrics.map(metric => metrics[metric].label).join(' · ')} · {availableYears.filter(yearInRange)[0] ?? '—'}–{availableYears.filter(yearInRange).at(-1) ?? '—'}{selectedMetrics.includes('poverty') ? ` · ${period}` : ''}</p>
+    {charts.map(({ metric, definition, years, plottedRegions, chart, hasValues, changeFor }) => <section className="comparison-panel" aria-labelledby={`comparison-chart-title-${metric}`} key={metric}>
+      <header><div><p className="comparison-eyebrow"><ChartNoAxesCombined aria-hidden="true" /> Analisis historis</p><h2 id={`comparison-chart-title-${metric}`}>{definition.label} menurut wilayah</h2><p>{definition.name} · {definition.unit} · berdasarkan observasi yang tersedia</p></div></header>
+      {plottedRegions.length && years.length && hasValues ? <Chart option={chart} label={`Grafik perbandingan ${definition.label} pada ${plottedRegions.length} wilayah dari ${years[0]} sampai ${years.at(-1)}`} /> : <div className="comparison-empty"><Info aria-hidden="true"/><div><strong>{level === 'KABKOTA' && !province ? 'Pilih provinsi untuk melihat kabupaten/kota' : 'Data belum tersedia untuk pilihan ini'}</strong><p>Grafik hanya menampilkan observasi yang tersedia pada sumber data.</p></div></div>}
+      <div className="comparison-series-list" aria-label={`Perubahan ${definition.label} tiap wilayah`}>{plottedRegions.map(({ region, values }) => { const change = changeFor(values); const index = selectedCodes.indexOf(region.code); return <div className="comparison-series-item" key={region.code}><span className="comparison-series-name"><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{region.name}</span>{change !== null && <span className="comparison-change" data-direction={change > 0 ? 'up' : change < 0 ? 'down' : 'flat'}>{change > 0 ? <ArrowUpRight /> : change < 0 ? <ArrowDownRight /> : null}<strong>{change > 0 ? '+' : ''}{format(change)}</strong><span>perubahan</span></span>}</div>; })}</div>
+      <details className="comparison-data"><summary>Lihat angka per tahun</summary><div className="comparison-table-scroll" tabIndex={0} role="region" aria-label={`Nilai ${definition.label} tiap wilayah per tahun, dapat digulir horizontal`}><table><thead><tr><th scope="col">Tahun</th>{plottedRegions.map(({ region }) => { const index = selectedCodes.indexOf(region.code); return <th scope="col" key={region.code}><i style={{ backgroundColor: colors[index % colors.length] }} aria-hidden="true" />{region.name}</th>; })}</tr></thead><tbody>{years.map((year, yearIndex) => <tr key={year}><th scope="row">{year}{metric === 'poverty' ? ` · ${period}` : ''}</th>{plottedRegions.map(({ region, values }) => { const priorIndex = years.indexOf(year - 1); return <td key={region.code}><span>{format(values[yearIndex])}</span><TrendDelta current={values[yearIndex]} previous={priorIndex >= 0 ? values[priorIndex] : null} year={year} /></td>; })}</tr>)}</tbody></table></div></details>
       <footer><span><i aria-hidden="true" /> Nilai {definition.label}</span><p>Perubahan menunjukkan arah dan besar selisih; tidak menyatakan hasil baik atau buruk.</p></footer>
-    </section>
+    </section>)}
     <section className="comparison-period-note"><Info aria-hidden="true"/><p>Sumber menyediakan data tahunan; data kemiskinan juga dibedakan menurut periode Maret dan September. Tanggal harian tidak tersedia.</p></section>
   </div>;
 }
