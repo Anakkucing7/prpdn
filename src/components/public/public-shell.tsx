@@ -51,12 +51,16 @@ export default function PublicShell({ children }: { children: React.ReactNode })
           const target = document.getElementById(href.split('#')[1]);
           if (target && target.getBoundingClientRect().top <= 120) current = href;
         }
+        if (window.scrollY > 100 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+          current = links.at(-1)![0];
+        }
         setActiveHref(current);
       });
     };
     window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
     update();
-    return () => { window.removeEventListener('scroll', update); cancelAnimationFrame(frame); };
+    return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update); cancelAnimationFrame(frame); };
   }, [pathname]);
 
   const navigation = (
@@ -84,11 +88,12 @@ export default function PublicShell({ children }: { children: React.ReactNode })
         Lewati ke konten utama
       </a>
 
-      {/* Sticky Navigation: Transparent at Top, Semi-Transparent Navy with Blur on Scroll */}
+      {/* The home header retains its navy surface while scrolling. */}
       <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
             <Image src={homePage ? '/brin-logo-white.svg' : '/brin-logo.svg'} alt="Badan Riset dan Inovasi Nasional" width={homePage ? 126 : 94} height={homePage ? 49 : 36} priority />
+            {homePage && <span className="public-home-brand-copy"><strong>PRPDN</strong><small>Data pembangunan daerah</small></span>}
           </Link>
 
           <nav className="public-desktop-nav" aria-label="Navigasi publik">
@@ -126,7 +131,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                   <Menu size={18} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="navigation-sheet">
+              <SheetContent side="right" className={`navigation-sheet ${homePage ? 'public-home-sheet' : ''}`}>
                 <SheetHeader>
                   <SheetTitle>PRPDN</SheetTitle>
                   <SheetDescription>Portal Data Pembangunan Daerah</SheetDescription>
@@ -178,7 +183,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
             </div>
 
             <div className="footer-col-links">
-              <h4>Navigasi Halaman</h4>
+              <h2>Navigasi Halaman</h2>
               <ul>
                 <li><Link href="/">Beranda</Link></li>
                 <li><Link href="/#data">Data & Indikator</Link></li>
@@ -189,7 +194,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
             </div>
 
             <div className="footer-col-sources">
-              <h4>Rujukan & Tautan</h4>
+              <h2>Rujukan & Tautan</h2>
               <ul>
                 <li>
                   <a

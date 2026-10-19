@@ -4,10 +4,11 @@ import { ArrowRight, MapPinned, BookOpen, ChartNoAxesCombined, ExternalLink } fr
 import { Button } from '@/components/ui/button';
 import PublicExplorer from '@/components/public/public-explorer';
 import { CountUp } from '@/components/public/count-up';
+import { HeroPanorama } from '@/components/public/hero-panorama';
 import { spatialReference } from '@/lib/regions';
 
 export const metadata = {
-  title: 'Data Pembangunan Daerah · PRPDN',
+  title: 'Data Pembangunan Daerah',
   description:
     'Portal informasi pembangunan daerah dan analitika spasial 514 kabupaten/kota se-Indonesia. Platform riset kebijakan dan perencanaan wilayah berbasis data empiris.',
 };
@@ -15,31 +16,18 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-      {/* Immersive Full-Width Hero with Photographic Indonesian Regional Development Background */}
-      <section className="public-hero">
-        <div className="hero-media-layer">
-          <Image
-            src="/images/prpdn-hero-development.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-image"
-          />
-        </div>
-        <div className="hero-gradient-layer" />
-
+      <section className="public-hero" aria-labelledby="hero-title">
         <div className="public-container hero-body">
           <div className="hero-content">
-            <p className="hero-eyebrow">Portal Informasi Pembangunan Daerah</p>
-            <h1 className="hero-heading">
-              Kenali daerah.
-              <br />
-              <span className="hero-heading-accent">Pahami perubahannya.</span>
+            <p className="hero-eyebrow"><span aria-hidden="true" />Portal informasi pembangunan daerah</p>
+            <h1 className="hero-heading" id="hero-title">
+              <span>Kenali daerah.</span>{' '}
+              <em>Pahami</em>{' '}
+              <span className="hero-heading-accent">perubahannya.</span>
             </h1>
             <p className="hero-lead">
-              Indikator pembangunan terpadu dan informasi spasial Indonesia dalam satu ruang eksplorasi.
-              Dirancang untuk riset kebijakan, perencanaan wilayah, dan keputusan berbasis data empiris.
+              Indikator pembangunan dan informasi spasial Indonesia untuk riset kebijakan,
+              perencanaan wilayah, dan keputusan berbasis data empiris.
             </p>
 
             <div className="hero-actions">
@@ -58,19 +46,45 @@ export default function Home() {
               </Button>
             </div>
 
-            <div className="hero-data-context">
-              <ChartNoAxesCombined size={16} aria-hidden="true" />
-              <div>
-                <span>Data indikator <strong>2022–2024</strong></span>
-                <small>Tahun mengikuti ketersediaan setiap indikator resmi</small>
-              </div>
+            <p className="hero-institution">Pusat Riset Pemerintahan Dalam Negeri<br />Badan Riset dan Inovasi Nasional</p>
+          </div>
+
+          <div className="hero-visual-column">
+            <div className="hero-visual-heading">
+              <span>Perspektif wilayah</span>
+              <span>Indonesia / cakupan nasional</span>
             </div>
+            <HeroPanorama>
+              <div className="hero-image-window">
+                <Image
+                  src="/images/prpdn-hero-development.jpg"
+                  alt=""
+                  fill
+                  preload
+                  sizes="(max-width: 900px) 100vw, (max-width: 1360px) 45vw, 560px"
+                  className="hero-image"
+                />
+                <div className="hero-image-grid" aria-hidden="true" />
+                <span className="hero-image-label">Wilayah · Infrastruktur · Pembangunan</span>
+              </div>
+              <figcaption>
+                <div className="hero-data-context">
+                  <ChartNoAxesCombined size={19} aria-hidden="true" />
+                  <div>
+                    <span>Data indikator <strong>2022–2024</strong></span>
+                    <small>Tahun mengikuti ketersediaan setiap indikator resmi</small>
+                  </div>
+                </div>
+                <Link href="#peta" className="hero-visual-link" aria-label="Jelajahi wilayah pada peta"><ArrowRight size={20} aria-hidden="true" /></Link>
+              </figcaption>
+            </HeroPanorama>
+            <div className="hero-visual-footnote"><span aria-hidden="true">+</span><span>Riset kebijakan dalam konteks spasial</span><span aria-hidden="true">+</span></div>
           </div>
         </div>
 
-        {/* National Statistics Integrated into Bottom of Hero */}
         <div className="hero-stats-band">
           <div className="public-container">
+            <p className="stats-caption">Cakupan administratif Indonesia</p>
             <div className="hero-stats-grid" role="region" aria-label="Cakupan administratif Indonesia">
               <div className="hero-stat-col">
                 <div className="stat-num-row">
@@ -108,16 +122,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Main Exploration Workspace */}
       <div className="public-container">
         <PublicExplorer />
 
-        {/* Institutional Methodology & About Section */}
         <section className="public-about" id="tentang">
           <div className="about-intro">
             <div className="about-intro-badge">
               <BookOpen size={17} aria-hidden="true" />
-              <span>METODOLOGI & INTEGRITAS DATA</span>
+              <span>Metodologi & integritas data</span>
             </div>
             <h2>Data yang terbuka untuk dipahami.</h2>
             <p>
@@ -127,21 +139,21 @@ export default function Home() {
 
           <div className="about-grid">
             <div className="about-card">
-              <h3>Sumber Indikator</h3>
+              <h3>Sumber indikator</h3>
               <p>
                 Nilai indikator berasal dari dataset resmi (Dataset Dashboard 040526.xlsx). Tahun indikator mengikuti ketersediaan instansi penyedia data asal, bukan tahun pembaruan batas kartografi. Nilai kosong berarti belum tersedia dan tidak dianggap nol.
               </p>
             </div>
 
             <div className="about-card">
-              <h3>Konteks Spasial & Batas BIG</h3>
+              <h3>Konteks spasial & batas BIG</h3>
               <p>
                 Batas wilayah merujuk pada data spasial Badan Informasi Geospasial (BIG) per Juni 2026. Geometri disederhanakan secara topologis untuk performa visualisasi web interaktif, bukan untuk penetapan batas hukum agraria mutlak.
               </p>
             </div>
 
             <div className="about-card">
-              <h3>Pemekaran Wilayah & Tren</h3>
+              <h3>Pemekaran wilayah & tren</h3>
               <p>
                 Pembentukan Daerah Otonom Baru (DOB) seperti di Papua membatasi ketersediaan data historis jangka panjang. Perbandingan antarwilayah harus memperhatikan tahun penetapan wilayah dan konsistensi deret waktu.
               </p>

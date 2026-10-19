@@ -2,7 +2,7 @@
 
 import { RegionLevel, RegionalControls } from '@/components/data/regional-controls';
 import { matchesRegion } from '@/lib/regional-filter';
-import { MapPinned, ArrowUpRight, Info, RotateCcw } from 'lucide-react';
+import { MapPinned, ArrowUpRight, Info, RotateCcw, SlidersHorizontal, Check } from 'lucide-react';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
@@ -153,6 +153,10 @@ export default function PublicExplorer() {
       {/* Main Exploration Workspace */}
       <div className="exploration-workspace" id="peta">
         <div className="explore-controls">
+          <div className="explore-toolbar-heading">
+            <div><SlidersHorizontal size={16} aria-hidden="true" /><h3>Atur tampilan data</h3></div>
+            <a href="#perbandingan">Lihat tren & perbandingan <ArrowUpRight size={14} aria-hidden="true" /></a>
+          </div>
           <div className="explore-primary">
             <RegionLevel
               value={level}
@@ -236,6 +240,7 @@ export default function PublicExplorer() {
           <section className="data-panel public-map-panel">
             <header className="data-panel-heading">
               <div>
+                <p className="public-panel-kicker">Peta indikator</p>
                 <h3>{metrics[metric].name}</h3>
                 <p>
                   {year} · {level === 'PROV' ? 'Provinsi' : 'Kabupaten/Kota'} · klik batas untuk memilih wilayah
@@ -262,6 +267,7 @@ export default function PublicExplorer() {
 
             <div className="public-map-legend">
               <div className="public-color-scale">
+                <span className="public-legend-label">Nilai ({metrics[metric].unit})</span>
                 <span>{format(values.length ? min : null)}</span>
                 <div aria-hidden="true">
                   {mapColors.map((c) => (
@@ -277,6 +283,7 @@ export default function PublicExplorer() {
                 Tidak tersedia
               </span>
             </div>
+            <p className="public-map-guidance">Warna lebih gelap menunjukkan nilai lebih tinggi. Pilih wilayah pada peta atau tabel untuk membaca profilnya.</p>
           </section>
 
           <aside className="public-region-summary" aria-live="polite">
@@ -355,9 +362,10 @@ export default function PublicExplorer() {
 
       {/* Analytics & Comparison Grid */}
       <div className="public-analysis" id="perbandingan">
-        <section className="data-panel">
+        <section className="data-panel public-trend-panel">
           <header className="data-panel-heading">
             <div>
+              <p className="public-panel-kicker">Analisis antarwaktu</p>
               <h3>Tren {metrics[metric].label}</h3>
               <p>
                 {region?.name ??
@@ -368,14 +376,22 @@ export default function PublicExplorer() {
             </div>
           </header>
 
+          <div className="public-trend-content">
           {trend.some(point => point.value !== null) ? <Chart
-            label={`Tren ${metrics[metric].label}; nilai tersedia dalam tabel di bawah grafik`}
+            label={`Tren ${metrics[metric].label}; nilai tersedia pada tabel tren`}
             option={{
-              grid: { left: 48, right: 25, top: 30, bottom: 40 },
+              animationDuration: 300,
+              animationDurationUpdate: 200,
+              grid: { left: 56, right: 28, top: 38, bottom: 38 },
               tooltip: {
                 trigger: 'axis',
                 confine: true,
                 renderMode: 'richText',
+                backgroundColor: '#071b34',
+                borderWidth: 0,
+                textStyle: { color: '#f8fafd', fontSize: 13, lineHeight: 22 },
+                padding: [12, 16],
+                axisPointer: { type: 'line', lineStyle: { color: '#8aa6bf', type: 'solid' } },
                 formatter: (params) => {
                   const p = Array.isArray(params) ? params[0] : params;
                   const point = trend[p.dataIndex];
@@ -390,23 +406,26 @@ export default function PublicExplorer() {
                 type: 'category',
                 data: years.map(String),
                 axisLine: { lineStyle: { color: '#cbd7e3' } },
-                axisLabel: { color: '#58667b', fontSize: 12 },
+                axisLabel: { color: '#4f6378', fontSize: 13, hideOverlap: true, margin: 14 },
+                axisTick: { show: false },
               },
               yAxis: {
                 type: 'value',
                 name: metrics[metric].unit,
-                nameTextStyle: { color: '#58667b', align: 'left' },
-                splitLine: { lineStyle: { color: '#e7edf3' } },
-                axisLabel: { color: '#64748b', fontSize: 12 },
+                nameTextStyle: { color: '#4f6378', fontSize: 13, align: 'left' },
+                splitLine: { lineStyle: { color: '#e4ecf4' } },
+                axisLabel: { color: '#4f6378', fontSize: 13 },
               },
               series: [
                 {
                   type: 'line',
                   data: trend.map((t) => t.value),
                   connectNulls: false,
-                  symbolSize: 7,
-                  lineStyle: { color: '#1769c2', width: 2.5 },
-                  itemStyle: { color: '#1769c2' },
+                  symbol: 'circle',
+                  symbolSize: 5,
+                  lineStyle: { color: '#255c89', width: 3 },
+                  itemStyle: { color: '#255c89', borderColor: '#fff', borderWidth: 1 },
+                  areaStyle: { color: '#e4ecf4', opacity: 0.5 },
                 },
               ],
             }}
@@ -439,14 +458,16 @@ export default function PublicExplorer() {
               </tbody>
             </table>
           </div>
+          </div>
           <p className="public-panel-note">
             Rerata menggunakan wilayah yang memiliki nilai di seluruh tahun yang ditampilkan. Delta membandingkan tahun sebelumnya pada periode yang sama; pemekaran dapat membatasi kesetaraan data.
           </p>
         </section>
 
-        <section className="data-panel">
+        <section className="data-panel public-comparison-panel">
           <header className="data-panel-heading">
             <div>
+              <p className="public-panel-kicker">Analisis antarwilayah</p>
               <h3>Perbandingan wilayah</h3>
               <p>{metrics[metric].label} {year} · pilih wilayah untuk melihat profil</p>
             </div>
@@ -460,12 +481,13 @@ export default function PublicExplorer() {
 
           {filtered.length ? (
             <>
-              <p className="public-table-hint">Geser tabel ke samping untuk melihat seluruh kolom.</p>
+              <p className="public-table-hint" id="public-comparison-help">Geser tabel ke samping untuk melihat seluruh kolom. Pilih nama wilayah untuk memperbarui profil dan grafik.</p>
               <div
                 className="public-table-scroll"
                 tabIndex={0}
                 role="region"
                 aria-label="Tabel perbandingan wilayah"
+                aria-describedby="public-comparison-help"
               >
                 <table className="data-table">
                   <caption className="sr-only">Perbandingan {metrics[metric].name} tahun {year}</caption>
@@ -488,6 +510,7 @@ export default function PublicExplorer() {
                               aria-pressed={r.code === selected}
                             >
                               {r.name}
+                              {r.code === selected && <Check size={14} aria-hidden="true" />}
                             </button>
                             <small>{r.code}</small>
                           </td>

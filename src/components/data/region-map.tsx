@@ -69,7 +69,7 @@ export default function RegionMap(props: RegionMapProps) {
         const groupSize = Math.max(1, Math.ceil(ordered.length / 10));
         for (let start = 0; start < ordered.length; start += groupSize) {
           const group = ordered.slice(start, start + groupSize);
-          const timer = window.setTimeout(() => group.forEach(feature => map.setFeatureState({ source: 'boundary', id: feature.properties.code }, { color: current.colors?.[feature.properties.code] ?? '#a2c8e5' })), Math.floor(start / groupSize) * 42);
+          const timer = window.setTimeout(() => group.forEach(feature => map.setFeatureState({ source: 'boundary', id: feature.properties.code }, { color: current.colors?.[feature.properties.code] ?? '#a2c8e5' })), Math.floor(start / groupSize) * 10);
           colorTimers.current.push(timer);
         }
       } else {
@@ -92,7 +92,7 @@ export default function RegionMap(props: RegionMapProps) {
       const focused = current.selected ? shapes.filter(feature => feature.properties.code === current.selected) : shapes;
       for (const feature of focused) if ('coordinates' in feature.geometry) collect(feature.geometry.coordinates);
       if (!Number.isFinite(bounds[0][0])) current.regions.filter(region => !current.selected || region.code === current.selected).forEach(region => { if (region.longitude !== null && region.latitude !== null) collect([region.longitude, region.latitude]); });
-      map.fitBounds(current.nationalOverview || !Number.isFinite(bounds[0][0]) ? extent : bounds, { padding: { top: yearSelection(current) ? 78 : 52, bottom: 40, left: 45, right: 30 }, maxZoom: current.selected ? 11 : 8, duration: animate ? 680 : 0 });
+      map.fitBounds(current.nationalOverview || !Number.isFinite(bounds[0][0]) ? extent : bounds, { padding: { top: yearSelection(current) ? 78 : 52, bottom: 40, left: 45, right: 30 }, maxZoom: current.selected ? 11 : 8, duration: animate ? 300 : 0 });
     }
   }
 
@@ -122,7 +122,7 @@ export default function RegionMap(props: RegionMapProps) {
         map.addSource('land', { type: 'geojson', data: land as FeatureCollection });
         map.addLayer({ id: 'land', source: 'land', type: 'fill', paint: { 'fill-color': '#e5e9ed', 'fill-outline-color': '#c7d2dc' } });
         map.addSource('boundary', { type: 'geojson', promoteId: 'code', data: { type: 'FeatureCollection', features: [] } });
-        map.addLayer({ id: 'boundary', source: 'boundary', type: 'fill', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], ['get', 'color']], 'fill-color-transition': { duration: 380, delay: 0 }, 'fill-opacity': 0.85 } });
+        map.addLayer({ id: 'boundary', source: 'boundary', type: 'fill', paint: { 'fill-color': ['coalesce', ['feature-state', 'color'], ['get', 'color']], 'fill-color-transition': { duration: 250, delay: 0 }, 'fill-opacity': 0.85 } });
         map.addLayer({ id: 'outline', source: 'boundary', type: 'line', paint: { 'line-color': ['case', ['get', 'selected'], '#0b2743', '#ffffff'], 'line-width': ['case', ['get', 'selected'], 2.5, 0.8] } });
         map.addSource('regions', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
         map.addLayer({ id: 'points', source: 'regions', type: 'circle', paint: { 'circle-color': '#1769c2', 'circle-radius': ['case', ['get', 'selected'], 7, 5], 'circle-stroke-width': 1.5, 'circle-stroke-color': 'white' } });
