@@ -56,16 +56,17 @@
 .comparison-eyebrow svg { width: 15px; height: 15px; }
 .comparison-panel .analytics-chart,.comparison-chart-loading { width: calc(100% - 24px); height: 390px; margin: 0 12px; }
 .comparison-chart-loading { display: grid; place-items: center; color: #697386; }
-.comparison-series-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
-.comparison-series-item { display: flex; align-items: center; gap: 14px; min-width: 170px; border: 1px solid #e4e8f0; border-radius: 5px; padding: 8px 10px; }
-.comparison-series-name { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; color: #334155; font-size: 12px; }
-.comparison-series-name i { width: 15px; height: 3px; }
-.comparison-change { display: grid; grid-template-columns: auto auto; column-gap: 3px; align-items: center; color: #58667b; font-variant-numeric: tabular-nums; }
-.comparison-change svg { width: 14px; height: 14px; }
-.comparison-change strong { font-size: 12px; }
-.comparison-change span { grid-column: 1 / -1; font-size: 10px; }
-.comparison-change[data-direction="up"] { color: #237547; }
-.comparison-change[data-direction="down"] { color: #b33b3b; }
+.comparison-chart-keys { display: flex; flex-wrap: wrap; gap: 14px 26px; border-top: 1px solid #edf0f5; padding: 12px 20px 16px; }
+.comparison-chart-keys > div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.comparison-chart-keys strong { color: #58667b; font-size: 11px; font-weight: 600; }
+.comparison-chart-keys span { display: inline-flex; align-items: center; gap: 6px; color: #334155; font-size: 11px; }
+.comparison-chart-keys i { position: relative; width: 22px; height: 3px; background: #1769c2; }
+.comparison-chart-keys i[data-style="dashed"] { background: repeating-linear-gradient(to right, #1769c2 0 5px, transparent 5px 8px); }
+.comparison-chart-keys i[data-style="dotted"] { background: repeating-linear-gradient(to right, #1769c2 0 2px, transparent 2px 5px); }
+.comparison-chart-keys i[data-style]::after { position: absolute; top: -2px; left: 8px; width: 7px; height: 7px; border: 1px solid #fff; border-radius: 50%; background: #1769c2; content: ""; }
+.comparison-chart-keys i[data-symbol="rect"]::after { border-radius: 0; }
+.comparison-chart-keys i[data-symbol="triangle"]::after { clip-path: polygon(50% 0, 0 100%, 100% 100%); border: 0; border-radius: 0; }
+.comparison-chart-keys i[data-symbol="diamond"]::after { border-radius: 0; transform: rotate(45deg); }
 .comparison-panel > footer { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid #edf0f5; padding: 12px 20px; color: #697386; font-size: 11px; }
 .comparison-panel > footer span { display: flex; align-items: center; gap: 7px; color: #475569; }
 .comparison-panel > footer span i { width: 15px; height: 3px; background: var(--comparison-blue); }
@@ -80,6 +81,7 @@
 .comparison-data table { width: 100%; min-width: 520px; border-collapse: collapse; font-size: 12px; }
 .comparison-data th,.comparison-data td { padding: 10px 16px; border-top: 1px solid #edf0f5; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .comparison-data th { position: sticky; top: 0; background: #f9fafc; color: #697386; font-size: 11px; font-weight: 550; }
+.comparison-data thead th small { display: block; margin-top: 4px; color: #58667b; font-size: 10px; font-weight: 400; }
 .comparison-data th:first-child,.comparison-data td:first-child { position: sticky; left: 0; z-index: 1; background: #fff; text-align: left; }
 .comparison-data thead th:first-child { z-index: 2; background: #f9fafc; }
 .comparison-data th i { display: inline-block; margin-right: 7px; }
@@ -98,8 +100,7 @@
   .comparison-panel > header { align-items: flex-start; padding: 16px; }
   .comparison-panel h2 { font-size: 17px; }
   .comparison-panel .analytics-chart,.comparison-chart-loading { height: 290px; }
-  .comparison-series-list { padding-inline: 14px; }
-  .comparison-series-item { flex: 1 1 100%; }
+  .comparison-chart-keys { padding-inline: 14px; }
   .comparison-panel > footer { flex-direction: column; padding: 12px 16px; }
   .comparison-data summary { padding-inline: 16px; }
   .comparison-data td,.comparison-data th { padding-inline: 12px; }
