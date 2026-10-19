@@ -63,10 +63,7 @@
 .comparison-chart-keys i { position: relative; width: 22px; height: 3px; background: #1769c2; }
 .comparison-chart-keys i[data-style="dashed"] { background: repeating-linear-gradient(to right, #1769c2 0 5px, transparent 5px 8px); }
 .comparison-chart-keys i[data-style="dotted"] { background: repeating-linear-gradient(to right, #1769c2 0 2px, transparent 2px 5px); }
-.comparison-chart-keys i[data-style]::after { position: absolute; top: -2px; left: 8px; width: 7px; height: 7px; border: 1px solid #fff; border-radius: 50%; background: #1769c2; content: ""; }
-.comparison-chart-keys i[data-symbol="rect"]::after { border-radius: 0; }
-.comparison-chart-keys i[data-symbol="triangle"]::after { clip-path: polygon(50% 0, 0 100%, 100% 100%); border: 0; border-radius: 0; }
-.comparison-chart-keys i[data-symbol="diamond"]::after { border-radius: 0; transform: rotate(45deg); }
+.comparison-chart-keys i[data-style="dashdot"] { background: repeating-linear-gradient(to right, #1769c2 0 6px, transparent 6px 9px, #1769c2 9px 11px, transparent 11px 14px); }
 .comparison-panel > footer { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid #edf0f5; padding: 12px 20px; color: #697386; font-size: 11px; }
 .comparison-panel > footer span { display: flex; align-items: center; gap: 7px; color: #475569; }
 .comparison-panel > footer span i { width: 15px; height: 3px; background: var(--comparison-blue); }
