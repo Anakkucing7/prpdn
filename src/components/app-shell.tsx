@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import './internal-shell.css';
 import { usePathname,useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Globe } from "lucide-react";
@@ -40,7 +42,10 @@ export function AppShell({ children,profile,branding={name:'PRPDN',description:'
   return <div className={cn("app-shell", collapsed && "sidebar-collapsed")}>
     <a href="#main-content" className="skip-link">Lewati ke konten utama</a>
     <aside className="desktop-sidebar">
-      <Link href="/admin/dashboard" className="brand" aria-label={`${branding.name}, dashboard`} title={branding.name}><strong>{collapsed ? branding.name.slice(0,1) : branding.name}<span className="brand-accent" /></strong>{!collapsed ? <span>{branding.description}</span> : null}</Link>
+      <Link href="/admin/dashboard" className="brand" aria-label={`${branding.name}, dashboard`} title={branding.name}>
+        <Image className="internal-brin-logo" src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={44} />
+        <strong>{collapsed ? branding.name.slice(0,1) : branding.name}<span className="brand-accent" /></strong>{!collapsed ? <span>{branding.description}</span> : null}
+      </Link>
       <Navigation collapsed={collapsed} roleId={profile?.roleId} description={branding.description} />
     </aside>
     <div className="workspace">
@@ -49,15 +54,15 @@ export function AppShell({ children,profile,branding={name:'PRPDN',description:'
           <Button variant="ghost" size="icon" className="desktop-collapse" aria-label={collapsed ? "Perluas navigasi" : "Ringkas navigasi"} title={collapsed ? "Perluas navigasi" : "Ringkas navigasi"} aria-expanded={!collapsed} onClick={() => setCollapsed(!collapsed)}>{collapsed ? <PanelLeftOpen /> : <PanelLeftClose />}</Button>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu" aria-label="Buka navigasi"><Menu /></Button></SheetTrigger>
-            <SheetContent side="left" className="navigation-sheet">
-              <SheetHeader><SheetTitle>{branding.name}</SheetTitle><SheetDescription>{branding.description}</SheetDescription></SheetHeader>
+            <SheetContent side="left" className="navigation-sheet internal-navigation-sheet">
+              <SheetHeader><Image src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={44} /><SheetTitle>{branding.name}</SheetTitle><SheetDescription>{branding.description}</SheetDescription></SheetHeader>
               <Navigation roleId={profile?.roleId} description={branding.description} onNavigate={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>
-          <span className="workspace-label">Ruang kerja administrasi</span>
+          <div className="workspace-heading"><span className="workspace-label">Ruang kerja administrasi</span><span className="workspace-subtitle">Riset & data pembangunan daerah</span></div>
         </div>
         <div className="topbar-end">
-          <Dialog><DialogTrigger asChild><Button variant="ghost" className="profile-button" aria-label="Informasi akun"><span className="avatar">{profile?.name.slice(0,2).toUpperCase()||'P'}</span><span className="profile-name">{profile?.name||'Belum masuk'}</span><ChevronDown data-icon="inline-end" /></Button></DialogTrigger>
+          <Dialog><DialogTrigger asChild><Button variant="ghost" className="profile-button" aria-label="Informasi akun"><span className="avatar">{profile?.name.slice(0,2).toUpperCase()||'P'}</span><span className="profile-copy"><span className="profile-name">{profile?.name||'Belum masuk'}</span>{profile && <small>{profile.role}</small>}</span><ChevronDown data-icon="inline-end" /></Button></DialogTrigger>
             <DialogContent><DialogHeader><DialogTitle>Akun PRPDN</DialogTitle><DialogDescription>{profile?'Sesi akun yang sedang aktif.':'Masuk untuk menggunakan layanan administrasi.'}</DialogDescription></DialogHeader>{profile?<><dl className="facts"><div><dt>Nama</dt><dd>{profile.name}</dd></div><div><dt>Peran</dt><dd>{profile.role}</dd></div></dl><Button variant="outline" onClick={async()=>{try{await api('/api/auth/sign-out','POST',{});router.replace('/login/');router.refresh();}catch{setAccountError('Tidak dapat keluar. Coba kembali.');}}}>Keluar</Button>{accountError&&<p role="alert">{accountError}</p>}</>:<Button asChild><Link href="/login/">Masuk</Link></Button>}</DialogContent>
           </Dialog>
         </div>

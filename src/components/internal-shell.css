@@ -1,0 +1,49 @@
+/* Scope the institutional treatment to internal navigation, not management content. */
+.app-shell { --navy: #071b34; --primary: #255c89; --sidebar-width: 264px; background: #f8fafd; }
+.app-shell.sidebar-collapsed { --sidebar-width: 80px; }
+.app-shell .desktop-sidebar { background: #071b34; border-right: 1px solid #28405b; }
+.app-shell .brand { min-height: 168px; padding: 24px 26px; border-bottom: 1px solid #28405b; gap: 5px; }
+.internal-brin-logo { width: 112px; height: 44px; object-fit: contain; margin-bottom: 16px; }
+.app-shell .brand strong { font-size: 22px; letter-spacing: .02em; }
+.app-shell .brand > span { font-size: 12px; color: #b5c7d9; }
+.app-shell .navigation { padding: 22px 14px 18px; }
+.app-shell .navigation-groups, .internal-navigation-sheet .navigation-groups { gap: 22px; }
+.app-shell .nav-group-label, .internal-navigation-sheet .nav-group-label { font-size: 12px; color: #a4bdd4; margin: 0 12px 8px; }
+.app-shell .nav-item, .internal-navigation-sheet .nav-item { min-height: 44px; padding: 10px 12px; font-size: 13px; border-radius: 4px; color: #d7e3ef; gap: 12px; transition: background-color 180ms, color 180ms; }
+.app-shell .nav-item:hover, .internal-navigation-sheet .nav-item:hover { background: #102d50; color: white; }
+.app-shell .nav-item[aria-current="page"], .internal-navigation-sheet .nav-item[aria-current="page"] { background: #1b3d60; color: white; font-weight: 650; }
+.app-shell .nav-item[aria-current="page"]::before, .internal-navigation-sheet .nav-item[aria-current="page"]::before { background: #afcee7; width: 3px; }
+.app-shell .sidebar-footnote, .internal-navigation-sheet .sidebar-footnote { font-size: 12px; color: #a4bdd4; line-height: 1.6; }
+.app-shell .navigation-bottom { padding-top: 24px; margin-top: 24px; border-top: 1px solid #28405b; }
+.app-shell .topbar { height: 80px; padding-inline: 24px 32px; border-color: #d5e0eb; gap: 16px; }
+.workspace-heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.app-shell .workspace-label { color: #071b34; font-size: 14px; }
+.workspace-subtitle { font-size: 12px; color: #52677c; }
+.app-shell .profile-button { border: 1px solid #d5e0eb; border-radius: 6px; padding: 7px 12px; min-height: 48px; }
+.app-shell .avatar { width: 34px; height: 34px; background: #e4ecf4; border: 0; color: #102d50; font-weight: 650; }
+.profile-copy { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1px; }
+.profile-copy small { font-size: 11px; font-weight: 400; color: #52677c; }
+.app-shell .profile-name { color: #102d50; font-size: 13px; }
+.app-shell .page-footer { font-size: 12px; border-top: 1px solid #d5e0eb; margin-top: 32px; padding-top: 18px; color: #52677c; }
+.app-shell.sidebar-collapsed .brand { min-height: 104px; padding: 24px; }
+.sidebar-collapsed .internal-brin-logo { display: none; }
+.app-shell.sidebar-collapsed .nav-item { padding-inline: 0; }
+.internal-navigation-sheet[data-slot="sheet-content"] { background: #071b34; width: 304px; }
+.internal-navigation-sheet [data-slot="sheet-header"] { border-bottom: 1px solid #28405b; gap: 8px; padding-block: 28px; }
+.internal-navigation-sheet [data-slot="sheet-title"] { font-size: 22px; }
+.internal-navigation-sheet .navigation { padding-top: 22px; }
+.internal-navigation-sheet > button { color: white; }
+.app-shell :focus-visible, .internal-navigation-sheet :focus-visible { outline: 2px solid #255c89; outline-offset: 3px; box-shadow: 0 0 0 2px white; }
+.app-shell .desktop-sidebar :focus-visible, .internal-navigation-sheet :focus-visible { outline-color: #afcee7; box-shadow: none; }
+@media (max-width: 1279px) { .app-shell .topbar { padding-inline: 20px; } }
+@media (max-width: 767px) {
+  .app-shell .topbar { height: 72px; padding-inline: 12px; }
+  .app-shell .topbar-start { gap: 8px; }
+  .app-shell .workspace-label { font-size: 13px; }
+  .workspace-subtitle { font-size: 11px; }
+  .app-shell .profile-copy, .app-shell .profile-button > svg { display: none; }
+  .app-shell .profile-button { padding: 5px; border: 0; }
+}
+@media (max-width: 359px) { .workspace-subtitle { display: none; } }
+@media (prefers-reduced-motion: reduce) { .app-shell *, .internal-navigation-sheet * { animation-duration: 0s !important; transition-duration: 0s !important; } }
+@media (forced-colors: active) { .app-shell .nav-item[aria-current="page"], .internal-navigation-sheet .nav-item[aria-current="page"] { outline: 1px solid Highlight; } }

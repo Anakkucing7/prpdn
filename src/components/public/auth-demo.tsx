@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import "./auth-presentation.css";
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -47,9 +49,9 @@ export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) 
   return <section className="public-auth">
     <div className="public-auth-intro">
       <Link href="/" className="auth-back-link"><ArrowLeft size={16} /><span>Kembali ke beranda</span></Link>
-      <p className="public-eyebrow">Akses PRPDN</p>
+      <Image className="auth-brand" loading="eager" src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={126} height={49}/><p className="public-eyebrow">Akses PRPDN</p>
       <h1>Ajukan akses akun.</h1>
-      <p className="auth-intro-desc">Isi data diri untuk mengajukan akses. Administrator akan memeriksa permintaan sebelum akun dapat digunakan.</p>
+      <p className="auth-intro-desc">Isi data diri untuk mengajukan akses. Administrator akan memeriksa permintaan sebelum akun dapat digunakan.</p><p className="auth-institution">Pusat Riset Pemerintahan Dalam Negeri<br/>Badan Riset dan Inovasi Nasional</p>
     </div>
     {!registrationOpen ? <div className="public-auth-form" role="status">
       <h2>Pendaftaran sedang ditutup</h2>
@@ -60,7 +62,7 @@ export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) 
       <h2>Permintaan terkirim</h2>
       <p className="auth-intro-desc">Akun Anda menunggu aktivasi Administrator atau Super Admin. Anda dapat masuk setelah pendaftaran disetujui.</p>
       <Button asChild className="auth-submit-btn"><Link href="/login/">Ke halaman masuk</Link></Button>
-    </div> : <form className="public-auth-form" onSubmit={submit}>
+    </div> : <form className="public-auth-form" aria-busy={busy} onSubmit={submit}>
       <h2>Formulir pendaftaran</h2>
       <div className="public-demo-notice"><Info size={18} aria-hidden="true" /><div><strong>Akun menunggu persetujuan</strong><p>Permintaan tidak langsung mendapat akses. Administrator akan meninjau dan mengaktifkan akun.</p></div></div>
       <label className="auth-field"><span>Nama lengkap *</span><Input name="name" required minLength={2} maxLength={100} autoComplete="name" disabled={busy} /></label>

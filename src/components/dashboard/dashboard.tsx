@@ -124,7 +124,7 @@ export default function Dashboard() {
   const yMean = mean(scatter.map(r => r.y)) ?? 0;
   const denominator = Math.sqrt(scatter.reduce((s, r) => s + (r.x - xMean) ** 2, 0) * scatter.reduce((s, r) => s + (r.y - yMean) ** 2, 0));
   const correlation = scatter.length > 1 && denominator > 0 ? scatter.reduce((s, r) => s + (r.x - xMean) * (r.y - yMean), 0) / denominator : null;
-  const axes = { axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: "#697386", fontSize: 12 }, splitLine: { lineStyle: { color: "#edf0f5" } } };
+  const axes = { axisLine: { show: false }, axisTick: { show: false }, axisLabel: { color: "#52677c", fontSize: 13 }, splitLine: { lineStyle: { color: "#edf0f5" } } };
   const trendOption: EChartsOption = {
     grid: { left: 40, right: 18, top: 24, bottom: 32 },
     tooltip: { trigger: "axis", confine: true, renderMode: "richText", formatter: params => {
@@ -136,9 +136,9 @@ export default function Dashboard() {
     } },
     xAxis: { ...axes, type: "category", data: data.years.map(String), boundaryGap: true },
     yAxis: { ...axes, type: "value", min: 0, max: 5, interval: 1 },
-    series: [{ name: `Rerata ${cohort.length} ${levelLabel}`, type: "line", data: trend.map(r => r.average), symbolSize: 7, lineStyle: { width: 2, type: selected ? "dashed" : "solid" }, itemStyle: { color: selected ? "#91a8ba" : "#1769c2" },
+    series: [{ name: `Rerata ${cohort.length} ${levelLabel}`, type: "line", data: trend.map(r => r.average), symbolSize: 7, lineStyle: { width: 2, type: selected ? "dashed" : "solid" }, itemStyle: { color: selected ? "#91a8ba" : "#255c89" },
       markLine: { silent: true, symbol: "none", label: { show: false }, lineStyle: { color: "#b8c8d8", type: "dotted" }, data: [{ xAxis: String(year) }] } },
-      ...(selected ? [{ name: selected.label, type: "line" as const, data: trend.map(r => r.selected), symbolSize: 8, connectNulls: false, itemStyle: { color: "#1769c2" }, lineStyle: { width: 3 } }] : [])],
+      ...(selected ? [{ name: selected.label, type: "line" as const, data: trend.map(r => r.selected), symbolSize: 8, connectNulls: false, itemStyle: { color: "#255c89" }, lineStyle: { width: 3 } }] : [])],
   };
   const scatterOption: EChartsOption = {
     grid: { left: 48, right: 20, top: 24, bottom: 46 },
@@ -149,12 +149,12 @@ export default function Dashboard() {
     } },
     xAxis: { ...axes, type: "value", name: "KFD (rasio)", nameLocation: "middle", nameGap: 30, min: 0 },
     yAxis: { ...axes, type: "value", name: "Kemiskinan (%)", nameTextStyle: { align: "left" }, min: 0 },
-    series: [{ type: "scatter", symbolSize: 9, data: scatter.map(r => ({ value: [r.x, r.y], itemStyle: { color: r.code === code ? "#0b2743" : "#458abd", opacity: r.code === code ? 1 : 0.75, borderColor: "#fff", borderWidth: 1 } })) }],
+    series: [{ type: "scatter", symbolSize: 9, data: scatter.map(r => ({ value: [r.x, r.y], itemStyle: { color: r.code === code ? "#071b34" : "#458abd", opacity: r.code === code ? 1 : 0.75, borderColor: "#fff", borderWidth: 1 } })) }],
   };
 
   return <div className="dashboard">
-    <PageHeader title="Dashboard" description="Pantau indikator pembangunan dan ketersediaan data wilayah." parent="Ringkasan" actions={<Methodology />} />
-    <div className="kpi-grid">
+    <PageHeader title="Dashboard penelitian" description="Tinjau indikator pembangunan, pola antarwilayah, dan ketersediaan data." parent="Ringkasan" actions={<Methodology />} />
+    <div className="kpi-grid" role="group" aria-label="Ringkasan indikator terpilih">
       <div className="kpi"><p>{selected ? `${definition.label} · ${selected.label}` : `Cakupan ${definition.label}`}</p><strong>{selected ? format(selectedValue) : <>{available.length}<span> / {rows.length}</span></>}</strong><small>{selected ? selectedValue == null ? "Data belum tersedia" : definition.unit : `${levelLabel} dengan nilai tersedia`}</small>{selected && <TrendDelta current={selectedValue} previous={recordFor(metric, year - 1, code, period)?.value} year={year} />}</div>
       <div className="kpi"><p>Rata-rata {levelLabel}</p><strong>{format(average)}<span>{metric === "poverty" ? "%" : ""}</span></strong><small>{available.length ? `Rerata tanpa bobot · ${available.length} ${levelLabel}` : "Belum ada nilai numerik"}</small><TrendDelta current={average} previous={previousAverage} year={year} />{!sameCoverage && <small>Cakupan pembanding berbeda/kosong.</small>}</div>
       <div className="kpi"><p>Nilai tertinggi</p><strong>{format(high?.value)}<span>{metric === "poverty" ? "%" : ""}</span></strong><small>{high?.label ?? "Data belum tersedia"}</small><TrendDelta current={high?.value} previous={high ? recordFor(metric, year - 1, high.code, period)?.value : null} year={year} /></div>
@@ -162,6 +162,7 @@ export default function Dashboard() {
     </div>
 
     <section className="dashboard-filter-section" aria-label="Filter dan cakupan dashboard">
+      <div className="dashboard-filter-heading"><SlidersHorizontal size={17} aria-hidden="true" /><h2>Ruang lingkup analisis</h2><span>Atur indikator dan wilayah</span></div>
       <RegionLevel value={level} onChange={v => setFilter("level",v)} />
       <div className="mobile-filter-bar"><Button variant="outline" aria-expanded={filtersOpen} aria-controls="dashboard-filters" onClick={() => setFiltersOpen(!filtersOpen)}><SlidersHorizontal />Filter dashboard<ChevronDown className={filtersOpen ? "rotate-180" : ""} /></Button><span>{year} · {definition.label} · {selected?.label ?? `Semua ${levelLabel}`}</span></div>
       <div id="dashboard-filters" className="dashboard-filters" data-open={filtersOpen} aria-label="Filter dashboard">
