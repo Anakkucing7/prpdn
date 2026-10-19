@@ -62,7 +62,7 @@
 .comparison-chart-keys span { display: inline-flex; align-items: center; gap: 6px; color: #334155; font-size: 11px; }
 .comparison-chart-keys i { position: relative; width: 22px; height: 3px; background: #1769c2; }
 .comparison-chart-keys i[data-style="dashed"] { background: repeating-linear-gradient(to right, #1769c2 0 5px, transparent 5px 8px); }
-.comparison-chart-keys i[data-style="dotted"] { background: repeating-linear-gradient(to right, #1769c2 0 2px, transparent 2px 5px); }
+.comparison-chart-keys i[data-style="longdash"] { background: repeating-linear-gradient(to right, #1769c2 0 10px, transparent 10px 14px); }
 .comparison-chart-keys i[data-style="dashdot"] { background: repeating-linear-gradient(to right, #1769c2 0 6px, transparent 6px 9px, #1769c2 9px 11px, transparent 11px 14px); }
 .comparison-panel > footer { display: flex; justify-content: space-between; gap: 14px; border-top: 1px solid #edf0f5; padding: 12px 20px; color: #697386; font-size: 11px; }
 .comparison-panel > footer span { display: flex; align-items: center; gap: 7px; color: #475569; }

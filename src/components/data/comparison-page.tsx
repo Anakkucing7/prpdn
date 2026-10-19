@@ -99,9 +99,9 @@ export default function ComparisonPage({ records, regions }: { records: Comparis
   };
 
   const years = availableYears.filter(yearInRange);
-  const lineStyles: Record<Metric, { type: 'solid' | 'dashed' | 'dotted' | number[]; legend: 'solid' | 'dashed' | 'dotted' | 'dashdot' }> = {
+  const lineStyles: Record<Metric, { type: 'solid' | 'dashed' | number[]; legend: 'solid' | 'dashed' | 'longdash' | 'dashdot' }> = {
     idsd: { type: 'solid', legend: 'solid' }, kfd: { type: 'dashed', legend: 'dashed' },
-    eppd: { type: 'dotted', legend: 'dotted' }, poverty: { type: [8, 3, 2, 3], legend: 'dashdot' },
+    eppd: { type: [12, 5], legend: 'longdash' }, poverty: { type: [8, 3, 2, 3], legend: 'dashdot' },
   };
   const plottedSeries = selectedMetrics.flatMap(metric => selectedCodes.flatMap(code => {
     const region = scopeRegions.find(item => item.code === code);
