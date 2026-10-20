@@ -5,6 +5,7 @@ import UsersPage from "@/components/data/users-page";
 import RolesPage from "@/components/data/roles-page";
 import ActivityPage from "@/components/data/activity-page";
 import SettingsPage from "@/components/data/settings-page";
+import ExportPage from "@/components/data/export-page";
 import analytical from "@/data/analytical.json";
 import {readAnalytical} from '@/server/services/analytical-read';
 import { authorize } from '@/server/access';
@@ -30,6 +31,7 @@ export default async function ModulePage({ params }: { params: Promise<{ module:
   const group = navigation.find(group => group.items.some(item => item.slug === module));
   const item = group?.items.find(item => item.slug === module);
   if (!item) notFound();
+  if (module === 'export') return <ExportPage />;
   if (module === 'users') { const actor=await authorize('users','view'); return <UsersPage roleId={actor.roleId} currentUserId={actor.id}/>; }
   if (module === 'roles') return <RolesPage />;
   if (module === 'activity') { await authorize('activity','view'); return <ActivityPage />; }

@@ -1,4 +1,4 @@
-import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, Download, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
 
 export type NavigationItem = { slug: string; label: string; icon: LucideIcon; phase: number };
 export const navigation: { label: string; items: NavigationItem[] }[] = [
@@ -20,6 +20,7 @@ export const navigation: { label: string; items: NavigationItem[] }[] = [
   ] },
   { label: "Pengelolaan Data", items: [
     { slug: "import", label: "Import Data", icon: Upload, phase: 5 },
+    { slug: "export", label: "Ekspor Data", icon: Download, phase: 5 },
     { slug: "validation", label: "Validasi Data", icon: ClipboardCheck, phase: 5 },
   ] },
   { label: "Sistem", items: [
