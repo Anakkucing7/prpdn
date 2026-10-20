@@ -62,10 +62,77 @@
 .workflow-history li span { color: #697386; }
 .workflow-context { margin: 16px 0; }
 .workflow-feedback { padding: 12px 20px; font-size: 13px; color: #187047; }
+/* Import/export workflows share the institutional management palette. */
+.workflow-page .workflow-steps { gap: 0; border: 1px solid #cbd9e6; border-radius: 6px; background: white; overflow: hidden; }
+.workflow-page .workflow-steps li { padding: 18px; border: 0; border-bottom: 3px solid transparent; color: #52677c; font-size: 13px; line-height: 1.6; }
+.workflow-page .workflow-steps li + li { border-left: 1px solid #e4ecf4; }
+.workflow-page .workflow-steps li[aria-current] { background: #f0f5fa; color: #102d50; border-bottom-color: #255c89; }
+.workflow-page .workflow-steps li > span { min-width: 28px; border-color: #7c8fa3; }
+.workflow-page .workflow-upload { align-items: flex-start; border-color: #7c8fa3; background: #f8fafd; border-radius: 6px; padding: 26px; }
+.workflow-page .workflow-upload[data-selected="true"] { border-style: solid; border-left: 3px solid #255c89; }
+.workflow-page .workflow-upload > svg { color: #255c89; margin-top: 3px; }
+.workflow-page .workflow-upload h3 { color: #102d50; font-size: 18px; overflow-wrap: anywhere; }
+.workflow-page .workflow-upload p { color: #52677c; line-height: 1.8; max-width: 78ch; }
+.workflow-file-status { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 13px; color: #52677c; }
+.workflow-file-button { transition: background-color 180ms; }
+.workflow-file-button:hover { background: #102d50; }
+.workflow-file-button[aria-disabled="true"] { cursor: wait; }
+.workflow-processing { display: flex; gap: 14px; align-items: flex-start; border: 1px solid #afc3d5; border-left: 3px solid #255c89; border-radius: 4px; padding: 18px; background: #f0f5fa; color: #102d50; margin-block: 20px; }
+.workflow-processing > svg { flex-shrink: 0; margin-top: 3px; }
+.workflow-processing strong { font-size: 14px; }
+.workflow-processing p { color: #52677c; font-size: 13px; margin-top: 5px; line-height: 1.7; }
+.workflow-error strong { display: block; font-weight: 650; }
+.workflow-error p { margin-top: 6px; overflow-wrap: anywhere; }
+.workflow-error small { display: block; margin-top: 10px; font-size: 12px; line-height: 1.7; }
+.workflow-page .workflow-summary { border-color: #cbd9e6; border-radius: 6px; }
+.workflow-page .workflow-summary dd { color: #102d50; font-size: 32px; }
+.workflow-page .workflow-summary dt { color: #52677c; }
+.workflow-findings { list-style: none; padding: 0; display: grid; gap: 10px; margin: 0; }
+.workflow-findings li { display: grid; gap: 4px; padding: 10px 12px; border-left: 3px solid #b42332; background: #fff0f1; color: #922333; font-size: 13px; line-height: 1.6; }
+.workflow-findings li[data-severity="WARNING"] { border-color: #8b5a0d; background: #fff6e7; color: #76500d; }
+.workflow-findings strong { font-size: 12px; font-weight: 650; }
+.workflow-findings span { overflow-wrap: anywhere; }
+.workflow-row-valid { color: #187047; font-size: 13px; }
+.workflow-row-number { font-variant-numeric: tabular-nums; font-weight: 650; color: #102d50; }
+.workflow-table .workflow-issue { min-width: 280px; max-width: 360px; }
+.workflow-detail .detail-body { gap: 22px; }
+.workflow-detail .transfer-field { font-size: 14px; color: #102d50; gap: 9px; }
+.workflow-detail .transfer-field :is(input,textarea) { min-height: 44px; border-color: #7c8fa3; font-size: 15px; }
+.workflow-detail .transfer-field small { color: #52677c; font-size: 12px; line-height: 1.7; }
+.workflow-detail .workflow-actions { align-items: stretch; }
+.workflow-detail .workflow-actions .ui-button { min-height: 44px; }
+.workflow-detail summary { min-height: 44px; padding-block: 12px; color: #255c89; cursor: pointer; }
+.workflow-confirm { border-top: 1px solid #cbd9e6; margin-top: 24px; }
+.workflow-confirm p { max-width: 68ch; }
+[data-slot="dialog-content"].workflow-export-dialog { --primary: #255c89; width: min(600px,calc(100vw - 32px)); max-width: 600px; border: 1px solid #afc3d5; padding: 28px; border-radius: 8px; gap: 20px; color: #102d50; }
+.workflow-export-dialog [data-slot="dialog-title"] { font-size: 24px; line-height: 1.4; letter-spacing: -.02em; }
+.workflow-export-dialog [data-slot="dialog-description"] { color: #52677c; font-size: 14px; line-height: 1.7; }
+.workflow-export-scope { background: #f0f5fa; padding: 18px; border: 1px solid #d5e0eb; border-radius: 4px; }
+.workflow-export-scope h3 { font-size: 13px; font-weight: 650; margin-bottom: 6px; }
+.workflow-export-scope p { font-size: 14px; line-height: 1.6; }
+.workflow-export-scope dl { display: grid; gap: 6px; margin-top: 12px; font-size: 13px; }
+.workflow-export-scope dl > div { display: grid; grid-template-columns: minmax(100px,.7fr) minmax(0,1fr); gap: 12px; }
+.workflow-export-scope dt { color: #52677c; }
+.workflow-export-scope dd { overflow-wrap: anywhere; }
+.workflow-export-note { color: #52677c; font-size: 13px; line-height: 1.75; }
+.workflow-export-feedback { font-size: 13px; color: #187047; line-height: 1.7; }
+.workflow-export-feedback:empty { display: none; }
+.workflow-export-dialog [data-slot="select-trigger"] { min-height: 44px; border-color: #7c8fa3; }
+.workflow-export-dialog [data-slot="dialog-footer"] { padding-top: 18px; border-top: 1px solid #d5e0eb; gap: 12px; }
+.workflow-export-dialog .ui-button { min-height: 44px; }
+.workflow-export-dialog .workflow-error { margin: 0; }
+.workflow-export-dialog :focus-visible, .workflow-detail :focus-visible { outline: 2px solid #255c89; outline-offset: 3px; box-shadow: 0 0 0 2px white; }
+@media (prefers-reduced-motion: reduce) { .workflow-processing .animate-spin, .workflow-export-dialog .animate-spin { animation: none; } .workflow-export-dialog *, .workflow-detail * { transition-duration: 0s !important; animation-duration: 0s !important; } }
 @media (max-width: 1023px) {
   .workflow-filters, .workflow-steps { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 @media (max-width: 767px) {
+  .workflow-page .workflow-steps li { padding: 14px 12px; }
+  .workflow-page .workflow-upload { padding: 18px; }
+  .workflow-file-status { flex-basis: 100%; }
+  .workflow-detail .transfer-field :is(input,textarea) { font-size: 16px; }
+  [data-slot="dialog-content"].workflow-export-dialog { padding: 20px; }
+  .workflow-export-dialog [data-slot="dialog-footer"] { flex-direction: column-reverse; align-items: stretch; }
   .workflow-steps { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
   .workflow-steps li { align-items: flex-start; }
   .workflow-config, .workflow-mapping { grid-template-columns: 1fr; }
