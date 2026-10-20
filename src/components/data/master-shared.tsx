@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useRef } from "react";
-import { Info } from "lucide-react";
+import { Info, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
@@ -16,9 +16,9 @@ export function OriginBadge({ origin }: { origin: DemoOrigin }) {
 export function DemoNotice() {
   return <div className="data-notice"><Info aria-hidden="true" /><p>Perubahan pada halaman ini hanya tersimpan sementara di browser. Muat ulang atau berpindah halaman untuk kembali ke data workbook. Perubahan tidak tersimpan ke server.</p></div>;
 }
-export function MasterField({ label, error, required, ...props }: React.ComponentProps<typeof Input> & { label: string; error?: string }) {
+export function MasterField({ label, error, hint, required, ...props }: React.ComponentProps<typeof Input> & { label: string; error?: string; hint?: string }) {
   const id = useId();
-  return <Field data-invalid={!!error}><FieldLabel htmlFor={id}>{label}{required && <span className="required"> *</span>}</FieldLabel><Input {...props} id={id} required={required} aria-invalid={!!error} aria-describedby={error ? `${id}-error` : undefined} />{error && <FieldError id={`${id}-error`}>{error}</FieldError>}</Field>;
+  return <Field data-invalid={!!error}><FieldLabel htmlFor={id}>{label}{required && <span className="required"> *</span>}</FieldLabel><Input {...props} id={id} required={required} aria-invalid={!!error} aria-describedby={[hint && `${id}-hint`,error && `${id}-error`].filter(Boolean).join(' ') || undefined} />{hint && <p className="master-field-hint" id={`${id}-hint`}>{hint}</p>}{error && <FieldError id={`${id}-error`}>{error}</FieldError>}</Field>;
 }
 export function MasterDialog({ title, onClose, opener, children }: { title: string; onClose: () => void; opener: HTMLElement | null; children: React.ReactNode }) {
   return <Dialog open onOpenChange={open => { if (!open) onClose(); }}><DialogContent className="master-dialog" onCloseAutoFocus={event => { event.preventDefault(); if (opener?.isConnected) opener.focus(); else document.getElementById("master-table-title")?.focus(); }}><DialogHeader><DialogTitle>{title}</DialogTitle><DialogDescription>Perubahan hanya berlaku sementara di halaman ini. Workbook tidak diubah. Field bertanda * wajib diisi.</DialogDescription></DialogHeader>{children}</DialogContent></Dialog>;
@@ -31,5 +31,5 @@ export function focusInvalid(form: HTMLFormElement, key: string | undefined) {
 }
 export function MasterDelete({ label, onDelete }: { label: string; onDelete: () => void }) {
   const confirmed = useRef(false);
-  return <AlertDialog onOpenChange={open => { if (open) confirmed.current = false; }}><AlertDialogTrigger asChild><Button variant="link" className="master-delete" aria-label={`Hapus ${label}`}>Hapus</Button></AlertDialogTrigger><AlertDialogContent onCloseAutoFocus={event => { if (confirmed.current) { event.preventDefault(); document.getElementById("master-table-title")?.focus(); } }}><AlertDialogHeader><AlertDialogTitle>Hapus data sementara?</AlertDialogTitle><AlertDialogDescription>“{label}” akan dihapus dari daftar sementara. Workbook dan data di halaman lain tetap utuh.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Batal</AlertDialogCancel><AlertDialogAction variant="destructive" onClick={() => { confirmed.current = true; onDelete(); }}>Hapus</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>;
+  return <AlertDialog onOpenChange={open => { if (open) confirmed.current = false; }}><AlertDialogTrigger asChild><Button variant="link" className="master-delete" aria-label={`Hapus ${label}`}>Hapus</Button></AlertDialogTrigger><AlertDialogContent className="management-confirm" data-destructive="true" onCloseAutoFocus={event => { if (confirmed.current) { event.preventDefault(); document.getElementById("master-table-title")?.focus(); } }}><AlertDialogHeader><TriangleAlert className="management-confirm-icon" aria-hidden="true"/><AlertDialogTitle>Hapus data sementara?</AlertDialogTitle><AlertDialogDescription>“{label}” akan dihapus dari daftar sementara. Workbook dan data di halaman lain tetap utuh.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Batal</AlertDialogCancel><AlertDialogAction variant="destructive" onClick={() => { confirmed.current = true; onDelete(); }}>Hapus</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>;
 }

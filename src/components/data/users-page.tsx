@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, Clock3, Pencil, Plus, Trash2, X } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
@@ -38,6 +38,7 @@ export default function UsersPage({roleId,currentUserId}:{roleId:string;currentU
   const [busy, setBusy] = useState(false);
   const [formTarget, setFormTarget] = useState<UserRecord|null|undefined>(undefined);
   const [draft, setDraft] = useState<UserDraft>(emptyDraft);
+  const formOpener=useRef<HTMLElement|null>(null);
   const [deleteTarget, setDeleteTarget] = useState<UserRecord|null>(null);
   const canManageAdministrators=roleId==='super-admin';
 
@@ -57,7 +58,7 @@ export default function UsersPage({roleId,currentUserId}:{roleId:string;currentU
   const pendingCount = records.filter(user => user.approvalStatus === 'PENDING').length;
 
   function reset() { setQuery(''); setStatus('all'); setPage(1); }
-  function openForm(user:UserRecord|null){setFormTarget(user);setDraft(user?{name:user.name,username:user.username??'',email:user.email,workUnit:user.workUnit,roleId:user.roleId,active:user.active,password:''}:{...emptyDraft});setError('');}
+  function openForm(user:UserRecord|null){formOpener.current=document.activeElement as HTMLElement;setFormTarget(user);setDraft(user?{name:user.name,username:user.username??'',email:user.email,workUnit:user.workUnit,roleId:user.roleId,active:user.active,password:''}:{...emptyDraft});setError('');}
   async function saveAccount(event:React.FormEvent<HTMLFormElement>){event.preventDefault();setBusy(true);setError('');try{const result=await api<UserRecord>(formTarget?`/api/admin/users/${encodeURIComponent(formTarget.id)}`:'/api/admin/users',formTarget?'PATCH':'POST',{...draft,...(draft.password?{}:{password:undefined}),...(formTarget?{updatedAt:formTarget.updatedAt}:{})});setRecords(current=>formTarget?current.map(user=>user.id===result.id?result:user):[result,...current]);setMessage(`Akun ${result.username??result.name} berhasil ${formTarget?'diperbarui':'dibuat'}.`);setFormTarget(undefined);}catch(cause){setError(cause instanceof RequestError?cause.message:'Perubahan akun belum tersimpan.');}finally{setBusy(false);}}
   async function deleteAccount(){if(!deleteTarget)return;setBusy(true);setError('');try{await api(`/api/admin/users/${encodeURIComponent(deleteTarget.id)}`,'DELETE');setRecords(current=>current.filter(user=>user.id!==deleteTarget.id));setMessage(`Akun ${deleteTarget.username??deleteTarget.name} dihapus; jejak audit tetap dipertahankan.`);setDeleteTarget(null);}catch(cause){setError(cause instanceof RequestError?cause.message:'Akun belum dapat dihapus. Nonaktifkan jika memiliki riwayat.');setDeleteTarget(null);}finally{setBusy(false);}}
   async function confirmReview() {
@@ -74,17 +75,17 @@ export default function UsersPage({roleId,currentUserId}:{roleId:string;currentU
     } finally { setBusy(false); }
   }
 
-  return <div className="data-page system-page">
+  return <div className="data-page system-page users-page">
     <PageHeader title="Manajemen Pengguna" parent="Sistem" description="Tinjau permintaan pendaftaran dan status akses akun." />
     <section className="data-notice" aria-label="Alur aktivasi"><Clock3 aria-hidden="true"/><p>Pendaftar baru menunggu persetujuan. Setelah disetujui, akun aktif dengan role Public Viewer. Perubahan role tetap mengikuti hak akses dan dicatat dalam log aktivitas.</p></section>
-    <DataFilters query={query} onQuery={value => { setQuery(value); setPage(1); }} onReset={reset} summary={`${rows.length} akun · ${pendingCount} menunggu aktivasi`} searchLabel="Cari pengguna" searchPlaceholder="Nama, username, email, atau unit kerja">
+    <DataFilters activeFilters={[...(query.trim()?[`Pencarian: ${query.trim()}`]:[]),...(status!=='all'?[status==='inactive'?'Nonaktif':statusLabels[status as keyof typeof statusLabels]]:[])]} query={query} onQuery={value => { setQuery(value); setPage(1); }} onReset={reset} summary={`${rows.length} akun · ${pendingCount} menunggu aktivasi`} searchLabel="Cari pengguna" searchPlaceholder="Nama, username, email, atau unit kerja">
       <SelectField label="Status akun" value={status} onValueChange={value => { setStatus(value); setPage(1); }} options={[{value:'all',label:'Semua status'},{value:'PENDING',label:'Menunggu aktivasi'},{value:'APPROVED',label:'Disetujui'},{value:'REJECTED',label:'Ditolak'},{value:'inactive',label:'Nonaktif'}]} />
     </DataFilters>
     {message && <p className="master-feedback" role="status">{message}</p>}
     {error && <p className="auth-form-error" role="alert">{error}</p>}
-    <section className="data-panel">
+    <section className="data-panel" aria-busy={loading}>
       <div className="data-panel-heading"><div><h2>Daftar pengguna</h2><p>{pendingCount ? `${pendingCount} pendaftaran perlu ditinjau` : 'Tidak ada pendaftaran yang menunggu.'}</p></div><Button onClick={()=>openForm(null)}><Plus/>Tambah akun</Button></div>
-      {loading ? <div className="data-loading" role="status">Memuat akun…</div> : rows.length ? <div className="table-scroll" role="region" tabIndex={0} aria-label="Daftar akun, dapat digulir horizontal"><table className="data-table system-user-table"><thead><tr><th scope="col">Pengguna</th><th scope="col">Role / unit kerja</th><th scope="col">Status</th><th scope="col">Terdaftar</th><th scope="col">Tindakan</th></tr></thead><tbody>{rows.slice((currentPage-1)*10,currentPage*10).map(user => <tr key={user.id}>
+      {loading ? <div className="data-loading" role="status">Memuat akun…</div> : rows.length ? <div className="table-scroll" role="region" tabIndex={0} aria-label="Daftar akun, dapat digulir horizontal"><table className="data-table system-user-table"><caption className="sr-only">Daftar pengguna, peran, dan status akun PRPDN</caption><thead><tr><th scope="col">Pengguna</th><th scope="col">Role / unit kerja</th><th scope="col">Status</th><th scope="col">Terdaftar</th><th scope="col">Tindakan</th></tr></thead><tbody>{rows.slice((currentPage-1)*10,currentPage*10).map(user => <tr key={user.id}>
         <td><strong className="table-primary">{user.name}</strong><span className="table-secondary">{user.username || 'Username belum tersedia'}</span><span className="table-secondary">{user.email}</span></td>
         <td>{roles[user.roleId] ?? user.roleId}<span className="table-secondary">{user.workUnit || 'Unit kerja belum diisi'}</span></td>
         <td><StatusBadge tone={user.approvalStatus === 'PENDING' ? 'warning' : user.approvalStatus === 'REJECTED' ? 'error' : user.active ? 'success' : 'neutral'}>{user.active ? statusLabels[user.approvalStatus] : user.approvalStatus === 'PENDING' ? statusLabels.PENDING : 'Nonaktif'}</StatusBadge></td>
@@ -95,19 +96,19 @@ export default function UsersPage({roleId,currentUserId}:{roleId:string;currentU
           {(canManageAdministrators||user.roleId==='public-viewer')&&<Button size="sm" variant="outline" onClick={()=>openForm(user)} aria-label={`Ubah akun ${user.name}`}><Pencil/>Ubah</Button>}
           {(canManageAdministrators||user.roleId==='public-viewer')&&user.id!==currentUserId&&<Button size="sm" variant="danger" onClick={()=>setDeleteTarget(user)} aria-label={`Hapus akun ${user.name}`}><Trash2/>Hapus</Button>}
         </div></td>
-      </tr>)}</tbody></table></div> : <NoResults onReset={reset} />}
+      </tr>)}</tbody></table></div> : error ? <div className="data-empty"><h3>Daftar pengguna belum tersedia</h3><p>Muat ulang halaman untuk mencoba mengambil data kembali.</p><Button variant="outline" onClick={()=>window.location.reload()}>Muat ulang halaman</Button></div> : <NoResults onReset={reset} />}
       {!loading&&<Pagination page={currentPage} total={rows.length} size={10} onPage={setPage}/>}
     </section>
-    {review&&<SystemConfirm title={review.status==='APPROVED'?'Aktifkan akun ini?':'Tolak pendaftaran ini?'} description={review.status==='APPROVED'?`${review.user.name} dapat masuk dengan role Public Viewer setelah disetujui.`:`Permintaan dari ${review.user.name} akan ditolak dan akun tetap tidak dapat masuk.`} note="Keputusan disimpan ke database dan log aktivitas." confirmLabel={review.status==='APPROVED'?'Setujui dan aktifkan':'Tolak pendaftaran'} busy={busy} onCancel={()=>setReview(null)} onConfirm={()=>void confirmReview()} />}
-    {formTarget!==undefined&&<Dialog open onOpenChange={open=>{if(!open&&!busy)setFormTarget(undefined);}}><DialogContent className="master-dialog"><DialogHeader><DialogTitle>{formTarget?'Ubah akun':'Tambah akun'}</DialogTitle><DialogDescription>{canManageAdministrators?'Super Admin dapat mengelola akun Admin dan pengguna.':'Admin hanya dapat mengelola akun Public Viewer.'} Perubahan dicatat dalam log aktivitas.</DialogDescription></DialogHeader><form className="system-user-form" onSubmit={event=>void saveAccount(event)}>
+    {review&&<SystemConfirm destructive={review.status==='REJECTED'} title={review.status==='APPROVED'?'Aktifkan akun ini?':'Tolak pendaftaran ini?'} description={review.status==='APPROVED'?`${review.user.name} dapat masuk dengan role Public Viewer setelah disetujui.`:`Permintaan dari ${review.user.name} akan ditolak dan akun tetap tidak dapat masuk.`} note="Keputusan disimpan ke database dan log aktivitas." confirmLabel={review.status==='APPROVED'?'Setujui dan aktifkan':'Tolak pendaftaran'} busy={busy} onCancel={()=>setReview(null)} onConfirm={()=>void confirmReview()} />}
+    {formTarget!==undefined&&<Dialog open onOpenChange={open=>{if(!open&&!busy)setFormTarget(undefined);}}><DialogContent className="master-dialog" onCloseAutoFocus={event=>{event.preventDefault();if(formOpener.current?.isConnected)formOpener.current.focus();else document.getElementById("page-title")?.focus();}}><DialogHeader><DialogTitle>{formTarget?'Ubah akun':'Tambah akun'}</DialogTitle><DialogDescription>{canManageAdministrators?'Super Admin dapat mengelola akun Admin dan pengguna.':'Admin hanya dapat mengelola akun Public Viewer.'} Perubahan dicatat dalam log aktivitas.</DialogDescription></DialogHeader><form className="system-user-form" aria-busy={busy} onSubmit={event=>void saveAccount(event)}>
       <label>Nama lengkap *<Input required maxLength={100} value={draft.name} onChange={event=>setDraft({...draft,name:event.target.value})}/></label>
-      <label>Username *<Input required minLength={3} maxLength={40} pattern="[A-Za-z0-9._-]+" autoComplete="username" value={draft.username} onChange={event=>setDraft({...draft,username:event.target.value})}/></label>
+      <label>Username *<Input aria-describedby="user-username-hint" required minLength={3} maxLength={40} pattern="[A-Za-z0-9._-]+" autoComplete="username" value={draft.username} onChange={event=>setDraft({...draft,username:event.target.value})}/><small id="user-username-hint">3–40 karakter: huruf, angka, titik, garis bawah, atau tanda hubung.</small></label>
       <label>Email *<Input type="email" required maxLength={191} autoComplete="email" value={draft.email} onChange={event=>setDraft({...draft,email:event.target.value})}/></label>
       <label>Unit kerja<Input maxLength={120} value={draft.workUnit} onChange={event=>setDraft({...draft,workUnit:event.target.value})}/></label>
       <label>Role *<select className="system-native-select" value={draft.roleId} onChange={event=>setDraft({...draft,roleId:event.target.value})} disabled={!canManageAdministrators||draft.roleId==='super-admin'}>{[...(canManageAdministrators?['public-viewer','internal-viewer','operator','validator','administrator']:['public-viewer']),...(draft.roleId==='super-admin'?['super-admin']:[])].map(value=><option key={value} value={value}>{roles[value]}</option>)}</select></label>
       {formTarget?<label>Status akun<select className="system-native-select" value={draft.active?'active':'inactive'} onChange={event=>setDraft({...draft,active:event.target.value==='active'})} disabled={formTarget.id===currentUserId}><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select></label>:<label>Kata sandi awal *<Input type="password" required minLength={12} maxLength={128} autoComplete="new-password" value={draft.password} onChange={event=>setDraft({...draft,password:event.target.value})}/><small>Minimal 12 karakter. Kata sandi tidak dapat dilihat kembali.</small></label>}
       {error&&<p className="auth-form-error" role="alert">{error}</p>}<DialogFooter><Button type="button" variant="outline" disabled={busy} onClick={()=>setFormTarget(undefined)}>Batal</Button><Button type="submit" disabled={busy}>{busy?'Menyimpan…':'Simpan akun'}</Button></DialogFooter>
     </form></DialogContent></Dialog>}
-    {deleteTarget&&<SystemConfirm title="Hapus akun ini?" description={`${deleteTarget.name} tidak dapat lagi masuk ke PRPDN. Riwayat import harus dipertahankan dengan menonaktifkan akun.`} note="Tindakan dihapus dari daftar akun dan dicatat dalam audit." confirmLabel="Hapus akun" busy={busy} onCancel={()=>setDeleteTarget(null)} onConfirm={()=>void deleteAccount()}/>}
+    {deleteTarget&&<SystemConfirm destructive title="Hapus akun ini?" description={`${deleteTarget.name} tidak dapat lagi masuk ke PRPDN. Riwayat import harus dipertahankan dengan menonaktifkan akun.`} note="Tindakan dihapus dari daftar akun dan dicatat dalam audit." confirmLabel="Hapus akun" busy={busy} onCancel={()=>setDeleteTarget(null)} onConfirm={()=>void deleteAccount()}/>}
   </div>;
 }

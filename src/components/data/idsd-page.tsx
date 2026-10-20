@@ -50,7 +50,7 @@ export default function IdsdPage({data:fixture}:{data:IdsdData}) {
   const notes = filtered.filter(r => r.match !== "code" || r.value === 0 || !r.sourceLevel).length;
 
   return <div className="data-page"><PageHeader title="Data IDSD" parent="Kelola Data" description="Telusuri skor Indeks Daya Saing Daerah beserta sumber dan profil 12 pilar." actions={<ExportControl dataset="idsd" filters={{year,level,province,region:district,q:query,sort}}/>}/>
-    <DataFilters query={query} onQuery={value => change(() => setQuery(value))} onReset={reset} summary={`${year} · ${level === "PROV" ? "Provinsi" : "Kabupaten / kota"} · ${province === "all" ? "Seluruh Indonesia" : regionByCode.get(province)?.name}`}>
+    <DataFilters activeFilters={[...(query.trim()?[`Pencarian: ${query.trim()}`]:[]),...(province!=="all"?[regionByCode.get(province)?.name??province]:[])]} query={query} onQuery={value => change(() => setQuery(value))} onReset={reset} summary={`${year} · ${level === "PROV" ? "Provinsi" : "Kabupaten / kota"} · ${province === "all" ? "Seluruh Indonesia" : regionByCode.get(province)?.name}`}>
       <SelectField label="Tahun" value={year} onValueChange={value => change(() => setYear(value))} options={[...fixture.years].reverse().map(y => ({ value: String(y), label: `${y}${fixture.records.some(r => r.year === y) ? "" : " · belum ada data"}` }))} />
       <SelectField label="Level wilayah" value={level} onValueChange={value => change(() => { setLevel(value); setDistrict("all"); })} options={[{ value: "PROV", label: "Provinsi" }, { value: "KABKOTA", label: "Kabupaten / kota" }]} />
       <SelectField label="Provinsi" value={province} onValueChange={value => change(() => { setProvince(value); setDistrict("all"); })} options={provinceOptions} />

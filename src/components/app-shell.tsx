@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import './internal-shell.css';
+import './management-ui.css';
 import { usePathname,useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Globe } from "lucide-react";
