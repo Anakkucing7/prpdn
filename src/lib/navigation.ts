@@ -1,4 +1,5 @@
 import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, Download, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
+import { permitted, type PermissionModule, type Permissions } from './permissions';
 
 export type NavigationItem = { slug: string; label: string; icon: LucideIcon; phase: number };
 export const navigation: { label: string; items: NavigationItem[] }[] = [
@@ -30,3 +31,13 @@ export const navigation: { label: string; items: NavigationItem[] }[] = [
     { slug: "settings", label: "Pengaturan", icon: Settings, phase: 6 },
   ] },
 ];
+
+export function navigationForPermissions(roleId?: string, permissions: Permissions = {}) {
+  return navigation.map(group => ({ ...group, items: group.items.filter(item => {
+    if (roleId === 'super-admin') return true;
+    if (item.slug === 'roles') return false;
+    if (item.slug === 'activity' && roleId !== 'administrator') return false;
+    if (item.slug === 'export') return roleId !== 'public-viewer' && (['idsd', 'kfd', 'poverty', 'eppd', 'rpjmd'] as const).some(dataset => permitted(permissions, dataset));
+    return permitted(permissions, item.slug as PermissionModule);
+  }) })).filter(group => group.items.length > 0);
+}

@@ -7,30 +7,33 @@ import './management-ui.css';
 import { usePathname,useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ChevronDown, Menu, PanelLeftClose, PanelLeftOpen, Globe } from "lucide-react";
-import { navigation, type NavigationItem } from "@/lib/navigation";
+import { navigationForPermissions, type NavigationItem } from "@/lib/navigation";
+import type { Permissions } from '@/lib/permissions';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {api} from '@/lib/api-client';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-function Navigation({ collapsed = false, onNavigate, roleId, description }: { collapsed?: boolean; onNavigate?: () => void; roleId?: string; description:string }) {
+function Navigation({ collapsed = false, onNavigate, groups, description }: { collapsed?: boolean; onNavigate?: () => void; groups: ReturnType<typeof navigationForPermissions>; description:string }) {
   const pathname = usePathname();
   const itemLink = (item: NavigationItem) => <Link key={item.slug} href={`/admin/${item.slug}`} prefetch={false} onClick={onNavigate}
     aria-current={pathname.replace(/\/$/, "") === `/admin/${item.slug}` ? "page" : undefined} title={collapsed ? item.label : undefined} className="nav-item">
     <item.icon aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>{item.label}</span>
   </Link>;
   return <nav aria-label="Navigasi utama" className="navigation">
-    <div className="navigation-groups">{navigation.map(group => <div className="nav-group" key={group.label}>
+    <div className="navigation-groups">{groups.map(group => <div className="nav-group" key={group.label}>
       {group.label !== "Ringkasan" ? <p className={collapsed ? "sr-only" : "nav-group-label"}>{group.label}</p> : null}
-      {group.items.filter(item => item.slug!=='activity'||['administrator','super-admin'].includes(roleId??'')).filter(item => item.slug!=='roles'||roleId==='super-admin').map(itemLink)}
+      {group.items.map(itemLink)}
     </div>)}</div>
     <div className="navigation-bottom"><Link href="/" onClick={onNavigate} className="nav-item" title={collapsed ? "Lihat Situs Publik" : undefined}><Globe aria-hidden="true" /><span className={collapsed ? "sr-only" : "nav-label"}>Lihat Situs Publik</span></Link>{!collapsed ? <p className="sidebar-footnote">{description}</p> : null}</div>
   </nav>;
 }
 
-export function AppShell({ children,profile,branding={name:'PRPDN',description:'Data pembangunan daerah'} }: { children: React.ReactNode;profile?:{name:string;role:string;roleId?:string};branding?:{name:string;description:string} }) {
+export function AppShell({ children,profile,branding={name:'PRPDN',description:'Data pembangunan daerah'} }: { children: React.ReactNode;profile?:{name:string;role:string;roleId?:string;permissions?:Permissions};branding?:{name:string;description:string} }) {
   const router=useRouter();
+  const groups = navigationForPermissions(profile?.roleId, profile?.permissions);
+  const homeHref = groups[0]?.items[0] ? `/admin/${groups[0].items[0].slug}` : '/';
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountError,setAccountError]=useState('');
@@ -43,11 +46,11 @@ export function AppShell({ children,profile,branding={name:'PRPDN',description:'
   return <div className={cn("app-shell", collapsed && "sidebar-collapsed")}>
     <a href="#main-content" className="skip-link">Lewati ke konten utama</a>
     <aside className="desktop-sidebar">
-      <Link href="/admin/dashboard" className="brand" aria-label={`${branding.name}, dashboard`} title={branding.name}>
+      <Link href={homeHref} className="brand" aria-label={`${branding.name}, ${groups[0]?.items[0]?.label ?? 'situs publik'}`} title={branding.name}>
         <Image className="internal-brin-logo" src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={44} />
         <strong>{collapsed ? branding.name.slice(0,1) : branding.name}<span className="brand-accent" /></strong>{!collapsed ? <span>{branding.description}</span> : null}
       </Link>
-      <Navigation collapsed={collapsed} roleId={profile?.roleId} description={branding.description} />
+      <Navigation collapsed={collapsed} groups={groups} description={branding.description} />
     </aside>
     <div className="workspace">
       <header className="topbar">
@@ -57,7 +60,7 @@ export function AppShell({ children,profile,branding={name:'PRPDN',description:'
             <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu" aria-label="Buka navigasi"><Menu /></Button></SheetTrigger>
             <SheetContent side="left" className="navigation-sheet internal-navigation-sheet">
               <SheetHeader><Image src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={43} /><SheetTitle>{branding.name}</SheetTitle><SheetDescription>{branding.description}</SheetDescription></SheetHeader>
-              <Navigation roleId={profile?.roleId} description={branding.description} onNavigate={() => setMobileOpen(false)} />
+              <Navigation groups={groups} description={branding.description} onNavigate={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>
           <div className="workspace-heading"><span className="workspace-label">Ruang kerja administrasi</span><span className="workspace-subtitle">Riset & data pembangunan daerah</span></div>
