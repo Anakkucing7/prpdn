@@ -4,6 +4,12 @@ export type Permission = 'view' | 'manage' | 'approve';
 export type Permissions = Partial<Record<PermissionModule, Permission[]>>;
 export const roleNames = { 'public-viewer':'Public Viewer', 'internal-viewer':'Internal Viewer', operator:'Operator', validator:'Validator', administrator:'Administrator', 'super-admin':'Super Admin' } as const;
 export type RoleId = keyof typeof roleNames;
+export function effectivePermissions(roleId: string | undefined, permissions: Permissions): Permissions {
+  // Older stored roles predate the comparison module; preserve explicit denials.
+  return roleId === 'administrator' && !Object.hasOwn(permissions, 'comparison')
+    ? { ...permissions, comparison: ['view'] }
+    : permissions;
+}
 export function initialPermissions(role:RoleId):Permissions {
   if(role==='public-viewer') return {};
   const result:Permissions={};

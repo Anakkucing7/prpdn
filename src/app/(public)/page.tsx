@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { NewsHome } from '@/components/news/news-home';
 import Image from 'next/image';
 import { ArrowRight, MapPinned, BookOpen, ChartNoAxesCombined, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -124,6 +126,7 @@ export default function Home() {
 
       <div className="public-container">
         <PublicExplorer />
+        <Suspense fallback={<section className="news-loading" aria-label="Berita riset" role="status">Memuat berita riset…</section>}><NewsHome /></Suspense>
 
         <section className="public-about" id="tentang">
           <div className="about-intro">

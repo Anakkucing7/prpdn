@@ -1,5 +1,5 @@
-import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, Download, ClipboardCheck, ShieldCheck, History, Settings, type LucideIcon } from "lucide-react";
-import { permitted, type PermissionModule, type Permissions } from './permissions';
+import { LayoutDashboard, ChartNoAxesCombined, Map, FileChartColumn, Landmark, Users, ClipboardList, Target, ListTree, CalendarDays, Upload, Download, ClipboardCheck, ShieldCheck, History, Settings, Newspaper, type LucideIcon } from "lucide-react";
+import { effectivePermissions, permitted, type PermissionModule, type Permissions } from './permissions';
 
 export type NavigationItem = { slug: string; label: string; icon: LucideIcon; phase: number };
 export const navigation: { label: string; items: NavigationItem[] }[] = [
@@ -25,6 +25,7 @@ export const navigation: { label: string; items: NavigationItem[] }[] = [
     { slug: "validation", label: "Validasi Data", icon: ClipboardCheck, phase: 5 },
   ] },
   { label: "Sistem", items: [
+    { slug: "news", label: "News CMS", icon: Newspaper, phase: 6 },
     { slug: "users", label: "Manajemen Pengguna", icon: Users, phase: 6 },
     { slug: "roles", label: "Role & Hak Akses", icon: ShieldCheck, phase: 6 },
     { slug: "activity", label: "Log Aktivitas", icon: History, phase: 6 },
@@ -33,8 +34,10 @@ export const navigation: { label: string; items: NavigationItem[] }[] = [
 ];
 
 export function navigationForPermissions(roleId?: string, permissions: Permissions = {}) {
+  permissions = effectivePermissions(roleId, permissions);
   return navigation.map(group => ({ ...group, items: group.items.filter(item => {
     if (roleId === 'super-admin') return true;
+    if (item.slug === 'news') return roleId === 'administrator';
     if (item.slug === 'roles') return false;
     if (item.slug === 'activity' && roleId !== 'administrator') return false;
     if (item.slug === 'export') return roleId !== 'public-viewer' && (['idsd', 'kfd', 'poverty', 'eppd', 'rpjmd'] as const).some(dataset => permitted(permissions, dataset));

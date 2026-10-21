@@ -2,7 +2,7 @@ import 'server-only';
 import { headers } from 'next/headers';
 import { auth } from './auth';
 import { db } from './db';
-import { permitted, type Permission, type PermissionModule, type Permissions } from '@/lib/permissions';
+import { effectivePermissions, permitted, type Permission, type PermissionModule, type Permissions } from '@/lib/permissions';
 export class HttpError extends Error { constructor(public status:number,message:string){super(message);} }
 export async function sessionUser(requestHeaders?:Headers){
   const session=await auth().api.getSession({headers:requestHeaders??await headers()});
@@ -14,7 +14,7 @@ export async function sessionUser(requestHeaders?:Headers){
 export async function authorize(module:PermissionModule,permission:Permission='view',requestHeaders?:Headers){
   const user=await sessionUser(requestHeaders);
   if(module==='activity'&&!['administrator','super-admin'].includes(user.roleId))throw new HttpError(403,'Log Aktivitas hanya dapat diakses Admin dan Super Admin.');
-  if(user.roleId!=='super-admin'&&!permitted(user.role.permissions as Permissions,module,permission))throw new HttpError(403,'Anda tidak memiliki izin untuk tindakan ini.');
+  if(user.roleId!=='super-admin'&&!permitted(effectivePermissions(user.roleId,user.role.permissions as Permissions),module,permission))throw new HttpError(403,'Anda tidak memiliki izin untuk tindakan ini.');
   return user;
 }
 export function sameOrigin(request:Request){

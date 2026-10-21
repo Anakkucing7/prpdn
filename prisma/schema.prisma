@@ -7,6 +7,43 @@ datasource db {
   provider = "mysql"
 }
 
+model NewsSource {
+  id                 String        @id @db.VarChar(40)
+  name               String        @db.VarChar(120)
+  homepageUrl        String        @db.VarChar(768)
+  feedUrl            String?       @db.VarChar(768)
+  permissionNote     String        @db.Text
+  syncEnabled        Boolean       @default(false)
+  catalogInitialized Boolean       @default(false)
+  version            Int           @default(1)
+  updatedAt          DateTime      @updatedAt
+  articles           NewsArticle[]
+}
+
+model NewsArticle {
+  id                String     @id @default(cuid()) @db.VarChar(191)
+  canonicalUrl      String     @unique @db.VarChar(768)
+  sourceId          String     @default("brin") @db.VarChar(40)
+  source            NewsSource @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  title             String     @db.VarChar(300)
+  excerpt           String     @db.VarChar(600)
+  category          String     @db.VarChar(80)
+  imageUrl          String     @db.VarChar(1024)
+  imageAlt          String     @db.VarChar(300)
+  attribution       String     @db.VarChar(120)
+  publishedAt       DateTime
+  status            String     @default("DRAFT") @db.VarChar(16)
+  featured          Boolean    @default(false)
+  editorialOverride Boolean    @default(true)
+  originalMetadata  Json?
+  editorId          String     @db.VarChar(191)
+  version           Int        @default(1)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  @@index([status, featured, publishedAt])
+  @@index([sourceId])
+}
+
 model User {
   id              String    @id @default(cuid()) @db.VarChar(191)
   name            String    @db.VarChar(100)

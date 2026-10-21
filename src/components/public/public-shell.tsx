@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Menu, ArrowRight, Search } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { authClient } from '@/lib/auth-client';
 import {
   Sheet,
   SheetTrigger,
@@ -20,10 +21,14 @@ const links = [
   ['/#data', 'Data & Indikator'],
   ['/#peta', 'Peta Interaktif'],
   ['/#perbandingan', 'Analisis Wilayah'],
+  ['/news/', 'News'],
   ['/#tentang', 'Tentang Data'],
 ];
 
 export default function PublicShell({ children }: { children: React.ReactNode }) {
+  const { data: session, isPending, error: sessionError } = authClient.useSession();
+  const account = session?.user;
+  const checkingSession = isPending && !account;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState('/');
@@ -47,7 +52,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       frame = requestAnimationFrame(() => {
         if (pathname !== '/') { setActiveHref(''); return; }
         let current = '/';
-        if (window.scrollY >= 100) for (const [href] of links.slice(1)) {
+        if (window.scrollY >= 100) for (const [href] of links.slice(1).filter(([href]) => href.includes('#'))) {
           const target = document.getElementById(href.split('#')[1]);
           if (target && target.getBoundingClientRect().top <= 120) current = href;
         }
@@ -66,12 +71,12 @@ export default function PublicShell({ children }: { children: React.ReactNode })
   const navigation = (
     <>
       {links.map(([href, label]) => {
-        const isCurrent = href === activeHref && pathname === '/';
+        const isCurrent = href === '/news/' ? pathname.replace(/\/+$/, '') === '/news' : href === activeHref && pathname === '/';
         return (
           <Link
             key={href}
             href={href}
-            aria-current={isCurrent ? href === '/' ? 'page' : 'location' : undefined}
+            aria-current={isCurrent ? href === '/' || href === '/news/' ? 'page' : 'location' : undefined}
             onClick={() => setOpen(false)}
             className="public-nav-link"
           >
@@ -89,7 +94,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
       </a>
 
       {/* The home header retains its navy surface while scrolling. */}
-      <header className={`public-header ${authPage ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
+      <header className={`public-header ${authPage || pathname.startsWith('/news') ? 'is-auth-page' : scrolled ? 'is-scrolled' : 'is-top'}`}>
         <div className="public-container public-header-inner">
           <Link className="public-brand" href="/" aria-label="PRPDN Beranda">
             <Image src={homePage ? '/brin-logo-white.svg' : '/brin-logo.svg'} alt="Badan Riset dan Inovasi Nasional" width={homePage ? 126 : 94} height={homePage ? 49 : 36} priority />
@@ -106,19 +111,19 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                 <Search size={20} aria-hidden="true" />
               </Link>
             )}
-            <Link
+            {checkingSession ? <span className="public-signin-link" role="status">Memeriksa sesi…</span> : <Link
               className="public-signin-link"
-              href="/login"
+              href={account || sessionError ? '/admin/' : '/login'}
               aria-current={pathname === '/login' ? 'page' : undefined}
             >
-              Masuk
-            </Link>
-            <Button asChild size="sm" className="public-register-btn">
-              <Link href="/register">
-                <span>Daftar</span>
-                <ArrowRight size={14} />
+              {account ? 'Akun saya' : sessionError ? 'Periksa sesi akun' : 'Masuk'}
+            </Link>}
+            {!checkingSession && !sessionError && <Button asChild size="sm" className="public-register-btn">
+              <Link href={account ? '/admin/' : '/register'}>
+                <span>{account ? 'Ruang kerja' : 'Daftar'}</span>
+                <ArrowRight size={14} aria-hidden="true" />
               </Link>
-            </Button>
+            </Button>}
 
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
@@ -139,19 +144,19 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                 <nav className="public-mobile-nav" aria-label="Navigasi publik seluler">
                   {navigation}
                   <div className="mobile-nav-separator" />
-                  <Link
+                  {checkingSession ? <span className="mobile-auth-link" role="status">Memeriksa sesi…</span> : <Link
                     className="mobile-auth-link"
-                    href="/login"
+                    href={account || sessionError ? '/admin/' : '/login'}
                     onClick={() => setOpen(false)}
                   >
-                    Masuk
-                  </Link>
-                  <Button asChild className="mobile-register-btn" onClick={() => setOpen(false)}>
-                    <Link href="/register">
-                      <span>Daftar</span>
-                      <ArrowRight size={14} />
+                    {account ? 'Akun saya' : sessionError ? 'Periksa sesi akun' : 'Masuk'}
+                  </Link>}
+                  {!checkingSession && !sessionError && <Button asChild className="mobile-register-btn" onClick={() => setOpen(false)}>
+                    <Link href={account ? '/admin/' : '/register'}>
+                      <span>{account ? 'Ruang kerja' : 'Daftar'}</span>
+                      <ArrowRight size={14} aria-hidden="true" />
                     </Link>
-                  </Button>
+                  </Button>}
                 </nav>
               </SheetContent>
             </Sheet>
@@ -190,6 +195,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                 <li><Link href="/#peta">Peta Interaktif</Link></li>
                 <li><Link href="/#perbandingan">Analisis Wilayah</Link></li>
                 <li><Link href="/#tentang">Tentang Data & Rujukan</Link></li>
+                <li><Link href="/news/">News</Link></li>
               </ul>
             </div>
 
@@ -214,8 +220,8 @@ export default function PublicShell({ children }: { children: React.ReactNode })
                     Referensi Wilayah Kemendagri ↗
                   </a>
                 </li>
-                <li><Link href="/login">Masuk Pengelola</Link></li>
-                <li><Link href="/register">Daftar Akun</Link></li>
+                <li><Link href={account || checkingSession || sessionError ? '/admin/' : '/login'}>{account ? 'Ruang kerja' : checkingSession ? 'Portal Pengelola' : sessionError ? 'Periksa sesi akun' : 'Masuk Pengelola'}</Link></li>
+                {!account && !checkingSession && !sessionError && <li><Link href="/register">Daftar Akun</Link></li>}
               </ul>
             </div>
           </div>
@@ -227,7 +233,7 @@ export default function PublicShell({ children }: { children: React.ReactNode })
               <span>·</span>
               <Link href="/#tentang">Ketentuan Spasial</Link>
               <span>·</span>
-              <Link href="/login">Portal Pengelola</Link>
+              <Link href={account || sessionError ? '/admin/' : '/login'}>Portal Pengelola</Link>
             </div>
           </div>
         </div>

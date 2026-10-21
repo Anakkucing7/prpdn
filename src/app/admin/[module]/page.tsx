@@ -18,7 +18,7 @@ import "@/components/data/master-pages.css";
 import "@/components/data/system-pages.css";
 
 export function generateStaticParams() {
-  return navigation.flatMap(group => group.items.filter(item => !["dashboard", "regions", "idsd", "indicators", "years", "import", "validation"].includes(item.slug)).map(item => ({ module: item.slug })));
+  return navigation.flatMap(group => group.items.filter(item => !["dashboard", "regions", "idsd", "indicators", "years", "import", "validation", "news"].includes(item.slug)).map(item => ({ module: item.slug })));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ module: string }> }) {
