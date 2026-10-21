@@ -4,9 +4,9 @@ import "./auth-presentation.css";
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, CheckCircle2, Info } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Info, LoaderCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { AuthField } from './auth-field';
 import { api, RequestError } from '@/lib/api-client';
 
 export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) {
@@ -16,10 +16,13 @@ export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) 
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (busy) return;
     const form = new FormData(event.currentTarget);
     const password = String(form.get('password'));
     if (password !== String(form.get('confirmPassword'))) {
       setError('Konfirmasi kata sandi belum sama.');
+      const confirmation = event.currentTarget.elements.namedItem('confirmPassword');
+      if (confirmation instanceof HTMLInputElement) confirmation.focus();
       return;
     }
     setBusy(true);
@@ -65,14 +68,14 @@ export default function AuthDemo({registrationOpen}:{registrationOpen:boolean}) 
     </div> : <form className="public-auth-form" aria-busy={busy} onSubmit={submit}>
       <h2>Formulir pendaftaran</h2>
       <div className="public-demo-notice"><Info size={18} aria-hidden="true" /><div><strong>Akun menunggu persetujuan</strong><p>Permintaan tidak langsung mendapat akses. Administrator akan meninjau dan mengaktifkan akun.</p></div></div>
-      <label className="auth-field"><span>Nama lengkap *</span><Input name="name" required minLength={2} maxLength={100} autoComplete="name" disabled={busy} /></label>
-      <label className="auth-field"><span>Username *</span><Input name="username" required minLength={3} maxLength={40} pattern="[a-zA-Z0-9._-]+" autoComplete="username" disabled={busy} /><small>3–40 karakter: huruf, angka, titik, garis bawah, atau tanda hubung.</small></label>
-      <label className="auth-field"><span>Email *</span><Input name="email" type="email" required maxLength={191} autoComplete="email" disabled={busy} /></label>
-      <label className="auth-field"><span>Instansi / unit kerja</span><Input name="workUnit" maxLength={120} autoComplete="organization" disabled={busy} /></label>
-      <label className="auth-field"><span>Kata sandi * (minimal 12 karakter)</span><Input name="password" type="password" required minLength={12} maxLength={128} autoComplete="new-password" disabled={busy} /></label>
-      <label className="auth-field"><span>Konfirmasi kata sandi *</span><Input name="confirmPassword" type="password" required minLength={12} maxLength={128} autoComplete="new-password" disabled={busy} /></label>
+      <AuthField label="Nama lengkap" name="name" required minLength={2} maxLength={100} autoComplete="name" disabled={busy} />
+      <AuthField label="Username" name="username" required minLength={3} maxLength={40} pattern={'[a-zA-Z0-9._\\-]+'} autoComplete="username" disabled={busy} hint="3–40 karakter: huruf, angka, titik, garis bawah, atau tanda hubung." />
+      <AuthField label="Email" name="email" type="email" required maxLength={191} autoComplete="email" disabled={busy} />
+      <AuthField label="Instansi / unit kerja" name="workUnit" maxLength={120} autoComplete="organization" disabled={busy} />
+      <AuthField label="Kata sandi" name="password" type="password" required minLength={12} maxLength={128} autoComplete="new-password" disabled={busy} hint="12–128 karakter. Gunakan kata sandi yang unik untuk akun ini." strength />
+      <AuthField label="Konfirmasi kata sandi" name="confirmPassword" type="password" required minLength={12} maxLength={128} autoComplete="new-password" disabled={busy} hint="Masukkan kembali kata sandi yang sama." />
       {error && <p className="auth-form-error" role="alert">{error}</p>}
-      <Button type="submit" disabled={busy} className="auth-submit-btn">{busy ? 'Mengirim permintaan…' : 'Kirim pendaftaran'}<ArrowRight size={16} /></Button>
+      <Button type="submit" disabled={busy} className="auth-submit-btn">{busy ? <LoaderCircle className="auth-loading-icon" size={18} aria-hidden="true" /> : <ArrowRight size={18} aria-hidden="true" />}<span aria-live="polite">{busy ? 'Mengirim permintaan…' : 'Kirim pendaftaran'}</span></Button>
       <div className="auth-toggle-row"><span>Sudah memiliki akun?</span> <Link href="/login/">Masuk</Link></div>
     </form>}
   </section>;

@@ -18,6 +18,29 @@
 .public-site .public-auth-form .auth-field small, .public-site .public-auth-form .muted-note { color: #52677c; font-size: 12px; line-height: 1.7; }
 .public-site .public-auth-form .auth-toggle-row { border-top: 1px solid #d5e0eb; padding-top: 20px; font-size: 14px; }
 .public-site .public-auth-intro :focus-visible { outline: 2px solid #afcee7; outline-offset: 3px; }
+.public-site .auth-input-wrap { position: relative; min-width: 0; }
+.public-site .auth-input-wrap:has(.auth-password-toggle) input { padding-right: 54px; }
+.public-site .auth-password-toggle { position: absolute; right: 2px; top: 2px; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 3px; color: #255c89; background: transparent; cursor: pointer; transition: background-color 180ms; }
+.public-site .auth-password-toggle:hover { background: #e4ecf4; }
+.public-site .auth-password-toggle:focus-visible { outline: 2px solid #255c89; outline-offset: -3px; }
+.public-site .auth-password-toggle:disabled { opacity: .5; cursor: wait; }
+.public-site .public-auth-form .auth-field { display: grid; }
+.public-site .public-auth-form .auth-field label { font-weight: 600; }
+.public-site .public-auth-form .auth-field small { font-size: 13px; }
+.public-site .public-auth-form .auth-inline-error { color: #a11d2d; }
+.public-site .public-auth-form input:user-invalid, .public-site .public-auth-form input[aria-invalid="true"] { border-color: #a11d2d; }
+.public-site .auth-strength { display: grid; gap: 6px; }
+.public-site .auth-strength-bars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.public-site .auth-strength-bars span { height: 4px; background: #d5e0eb; border-radius: 2px; transition: background-color 180ms; }
+.public-site .auth-strength-bars span[data-filled="true"] { background: #255c89; }
+.public-site .public-auth-form .auth-submit-btn { width: 100%; gap: 10px; background: #071b34; }
+.public-site .public-auth-form .auth-submit-btn:hover:not(:disabled) { background: #102d50; }
+.public-site .public-auth-form .auth-submit-btn:disabled { opacity: .8; cursor: wait; }
+@media (prefers-reduced-motion: no-preference) {
+  .public-site .auth-loading-icon { animation: auth-spin 900ms linear infinite; }
+  .public-site .auth-submit-btn:active:not(:disabled) { transform: translateY(1px); }
+}
+@keyframes auth-spin { to { transform: rotate(360deg); } }
 @media (max-width: 1199px) { .public-site .public-auth { margin-inline: 24px; } }
 @media (max-width: 767px) {
   .public-site .public-auth { grid-template-columns: minmax(0,1fr); margin: 88px 16px 40px; }
