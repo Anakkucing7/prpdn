@@ -56,7 +56,7 @@ export function AppShell({ children,profile,branding={name:'PRPDN',description:'
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild><Button variant="ghost" size="icon" className="mobile-menu" aria-label="Buka navigasi"><Menu /></Button></SheetTrigger>
             <SheetContent side="left" className="navigation-sheet internal-navigation-sheet">
-              <SheetHeader><Image src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={44} /><SheetTitle>{branding.name}</SheetTitle><SheetDescription>{branding.description}</SheetDescription></SheetHeader>
+              <SheetHeader><Image src="/brin-logo-white.svg" alt="Badan Riset dan Inovasi Nasional" width={112} height={43} /><SheetTitle>{branding.name}</SheetTitle><SheetDescription>{branding.description}</SheetDescription></SheetHeader>
               <Navigation roleId={profile?.roleId} description={branding.description} onNavigate={() => setMobileOpen(false)} />
             </SheetContent>
           </Sheet>

@@ -141,6 +141,8 @@
   .data-notice { padding: 12px; }
 }
 @media (max-width: 359px) {
+  .region-map-years { flex-wrap: wrap; }
+  .region-map-years > span { flex-basis: 100%; }
   .data-search-row { flex-wrap: wrap; }
   .data-search-row > [data-slot="field"] { flex-basis: 100%; }
   .data-filter-fields { grid-template-columns: 1fr; }

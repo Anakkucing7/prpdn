@@ -1779,6 +1779,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   .public-site .year-multi-select label { min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .public-site *, .public-site *::before, .public-site *::after,
   .navigation-sheet:has(.public-mobile-nav), .navigation-sheet:has(.public-mobile-nav) *, .navigation-sheet:has(.public-mobile-nav)::before {
     animation: none !important;
